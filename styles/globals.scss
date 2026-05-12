@@ -1,0 +1,48 @@
+@use 'variables' as *;
+
+@font-face {
+  font-family: 'AttireDisplay';
+  src: url('/fonts/AttireDisplayScript-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: $ivory;
+  color: $charcoal;
+  font-family: $font-body;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: $muted-gold;
+  color: $charcoal;
+}
+
+input,
+button {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+}
