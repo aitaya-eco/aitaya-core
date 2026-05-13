@@ -1,0 +1,392 @@
+@use "../../../styles/variables" as *;
+@use "sass:color"; 
+
+// ─── Page wrapper ─────────────────────────────────────────────────────────────
+.page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: $ivory;
+  overflow: hidden;
+}
+
+// ─── Radial vignette glow (center lighter) ────────────────────────────────────
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse 125% 60% at 50% 50%,
+    rgba($ivory, 0) 0%,
+    rgba(color.adjust($ivory, $lightness: -8%), 0.65)
+  );
+}
+
+// ─── Textured grain overlay ───────────────────────────────────────────────────
+.backgroundImage {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.12;
+  height: auto;
+  object-fit: cover;
+  // inset: -50%;
+  @media (max-width: 480px) {
+    background-color: #b94040;
+  }
+}
+
+// ─── Decorative corner circles ────────────────────────────────────────────────
+.cornerCircles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+
+  span {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    border: 5px solid rgba($charcoal, 0.1);
+
+    &:nth-child(1) {
+      // top-left outer
+      width: 150px;
+      height: 150px;
+      top: -60px;
+      left: -60px;
+    }
+    &:nth-child(2) {
+      // top-left inner
+      width: 100px;
+      height: 100px;
+      top: -40px;
+      left: -40px;
+    }
+    &:nth-child(3) {
+      // top-right outer
+      width: 250px;
+      height: 250px;
+      top: -100px;
+      right: -100px;
+    }
+    &:nth-child(4) {
+      // top-right inner
+      width: 150px;
+      height: 150px;
+      top: -50px;
+      right: -50px;
+    }
+    &:nth-child(5) {
+      // bottom-left outer
+      width: 250px;
+      height: 250px;
+      bottom: -100px;
+      left: -100px;
+    }
+    &:nth-child(6) {
+      // bottom-left inner
+      width: 150px;
+      height: 150px;
+      bottom: -50px;
+      left: -50px;
+    }
+    &:nth-child(7) {
+      // bottom-right outer
+      width: 150px;
+      height: 150px;
+      bottom: -60px;
+      right: -60px;
+    }
+    &:nth-child(8) {
+      // bottom-right inner
+      width: 100px;
+      height: 100px;
+      bottom: -40px;
+      right: -40px;
+    }
+  }
+}
+
+// ─── Content card ─────────────────────────────────────────────────────────────
+.card {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 1000px;
+  padding: 3rem 2.5rem;
+  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @media (max-width: 480px) {
+    padding: 2.5rem 1.5rem;
+    max-width: 100%;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ─── Logo block ───────────────────────────────────────────────────────────────
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.25rem;
+  animation: fadeUp 0.9s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .primaryLogoImage {
+    width: 30rem;
+    height: auto;
+  }
+
+  .secondaryLogoImage {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .primaryLogoImage {
+      display: none !important;
+    }
+    .secondaryLogoImage {
+      display: block !important;
+      width: 17.5rem;
+      height: auto;
+    }
+  }
+}
+
+// ─── Headline group ───────────────────────────────────────────────────────────
+.headline {
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.9s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tagline {
+  font-family: $font-body;
+  font-size: clamp(1.35rem, 2.5vw, 2.27rem);
+  font-weight: 400;
+  color: $charcoal;
+  letter-spacing: 0.01em;
+  margin-bottom: -0.35rem;
+}
+
+.displayHeading {
+  font-family: $font-display;
+  font-size: clamp(3rem, 4.5vw, 5rem);
+  color: $charcoal;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  font-weight: normal;
+  margin-bottom: -20px;
+}
+
+// ─── Body copy ────────────────────────────────────────────────────────────────
+.body {
+  font-family: $font-body;
+  font-size: clamp(0.9rem, 1.8vw, 1.5rem);
+  font-weight: 400;
+  // line-height: 1.75;
+  color: rgba($charcoal, 0.7);
+  max-width: 870px;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.9s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+// ─── Form ─────────────────────────────────────────────────────────────────────
+.form {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  animation: fadeUp 0.9s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba($charcoal, 0.35);
+  padding: 0.6rem 0;
+  font-family: $font-body;
+  font-size: 1rem;
+  font-weight: 300;
+  color: $charcoal;
+  text-align: center;
+  letter-spacing: 0.02em;
+  transition: border-color 0.3s ease;
+
+  &::placeholder {
+    color: rgba($charcoal, 0.45);
+    font-style: italic;
+  }
+
+  &:focus {
+    border-bottom-color: $charcoal;
+  }
+
+  &.inputError {
+    border-bottom-color: #b94040;
+  }
+}
+
+.inputLine {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: $charcoal;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .input:focus ~ & {
+    width: 100%;
+  }
+}
+
+// ─── Submit button ────────────────────────────────────────────────────────────
+.button {
+  width: 100%;
+  background: $muted-gold;
+  color: $charcoal;
+  font-family: $font-body;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 1rem 2rem;
+  border-radius: 7px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba($charcoal, 0);
+    transition: background 0.25s ease;
+  }
+
+  &:hover:not(:disabled) {
+    background: color.adjust($muted-gold, $lightness: -6%);
+    box-shadow: 0 4px 24px rgba($muted-gold, 0.4);
+    transform: translateY(-1px);
+
+    &::before {
+      background: rgba($charcoal, 0.04);
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.buttonText {
+  position: relative;
+  z-index: 1;
+}
+
+.buttonSpinner {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba($charcoal, 0.3);
+  border-top-color: $charcoal;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ─── Feedback messages ────────────────────────────────────────────────────────
+.message {
+  margin-top: 1.1rem;
+  font-family: $font-body;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  transition: opacity 0.3s ease;
+  animation: fadeUp 0.4s ease both;
+
+  &.success {
+    color: $emerald;
+    font-style: italic;
+  }
+
+  &.error {
+    color: #b94040;
+  }
+}
+
+// ─── Success state ────────────────────────────────────────────────────────────
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.successIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid $emerald;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $emerald;
+  font-size: 1.2rem;
+}
+
+.successText {
+  font-family: $font-display;
+  font-size: 1.5rem;
+  color: $emerald;
+  letter-spacing: 0.04em;
+}
+
+.successSub {
+  font-family: $font-body;
+  font-size: 0.9rem;
+  color: rgba($charcoal, 0.6);
+  font-style: italic;
+}
