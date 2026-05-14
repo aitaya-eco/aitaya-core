@@ -5,7 +5,7 @@ import styles from "./WaitlistPage.module.scss";
 import Image from "next/image";
 import PrimaryLogo from "../../../public/PNGs/attire_primary_logo.png";
 import SecondaryLogo from "../../../public/PNGs/attire_secondary_logo.png";
-import Background from "../../../public/PNGs/paper.png";
+import Background from "../../../components/Background";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -46,20 +46,7 @@ export default function WaitlistPage() {
 
   return (
     <main className={styles.page}>
-      
-      {/* Background Texture (Reusing your texture logic) */}
-      <Image
-        className={styles.backgroundImage}
-        src={Background}
-        alt="Background Texture"
-        priority
-      />
-
-      {/* Decorative grain texture */}
-      <div className={styles.grain} aria-hidden="true" />
-
-      {/* Radial vignette */}
-      <div className={styles.vignette} aria-hidden="true" />
+      <Background/>
 
       {/* Corner circle ornaments */}
       <div className={styles.cornerCircles} aria-hidden="true">

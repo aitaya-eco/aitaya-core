@@ -1,46 +1,54 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.scss";
-import DesktopLogo from "../../public/PNGs/attire_primary_logo.png"; // Using your SVGR setup
-import Background from "../../public/PNGs/paper.png";
-import WaitlistPage from "./waitlist/page";
+import DesktopLogo from "../../public/PNGs/attire_primary_logo.png";
+import Background from "../../components/Background";
 
 export default function HomePage() {
   return (
-    <main className={styles.container}>
-      {/* Background Texture (Reusing your texture logic) */}
-      <Image
-        className={styles.backgroundImage}
-        src={Background}
-        alt="Background Texture"
-        priority
-      />
+    <main className={styles.page}>
+      <Background />
 
-      {/* Radial vignette */}
-      <div className={styles.vignette} aria-hidden="true" />
+      {/* Decorative corner circles borrowed from the Waitlist page */}
+      <div className={styles.cornerCircles} aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
 
-      <section className={styles.hero}>
+      {/* The card wrapper initiates the base fadeUp animation */}
+      <section className={styles.card}>
         <div className={styles.logoWrapper}>
           <Image
             className={styles.logo}
             src={DesktopLogo}
-            alt="Background Texture"
+            alt="Attire Logo"
             priority
           />
         </div>
 
-        <h1 className={styles.title}>
-          Your style is an <span>Evolution</span>
-        </h1>
+        <div className={styles.headline}>
+          <h1 className={styles.title}>
+            Your style is an <span>Evolution</span>
+          </h1>
+        </div>
 
         <p className={styles.subtitle}>
           The digital home for the modern curator. The Private Salon is
           currently by invitation only.
         </p>
 
-        <Link href="/waitlist" className={styles.button}>
-          Enter The Salon
-        </Link>
+        {/* Action wrapper keeps the button constrained similarly to the form */}
+        <div className={styles.actionWrapper}>
+          <Link href="/waitlist" className={styles.button}>
+            Enter The Salon
+          </Link>
+        </div>
       </section>
 
       <footer className={styles.footer}>

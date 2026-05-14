@@ -1,67 +1,93 @@
 @use "../../styles/variables" as *;
 @use "sass:color";
 
-.container {
+// ─── Animations ───────────────────────────────────────────────────────────────
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ─── Page wrapper ─────────────────────────────────────────────────────────────
+.page {
   position: relative;
-  min-height: 100vh;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
+  width: 100%;
   color: var(--white);
   overflow: hidden;
 }
-// ─── Radial vignette glow (center lighter) ────────────────────────────────────
-.vignette {
+
+// ─── Decorative corner circles ────────────────────────────────────────────────
+.cornerCircles {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2;
-  background: radial-gradient(
-    ellipse 125% 60% at 50% 50%,
-    rgba($ivory, 0) 0%,
-    rgba(color.adjust($ivory, $lightness: -8%), 0.65)
-  );
-}
+  z-index: 3;
 
-// ─── Textured grain overlay ───────────────────────────────────────────────────
-.backgroundImage {
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.12;
-  height: auto;
-  object-fit: cover;
-  // inset: -50%;
-  @media (max-width: 480px) {
-    background-color: #b94040;
+  span {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    border: 5px solid rgba($charcoal, 0.1);
+
+    &:nth-child(1) { width: 150px; height: 150px; top: -60px; left: -60px; }
+    &:nth-child(2) { width: 100px; height: 100px; top: -40px; left: -40px; }
+    &:nth-child(3) { width: 250px; height: 250px; top: -100px; right: -100px; }
+    &:nth-child(4) { width: 150px; height: 150px; top: -50px; right: -50px; }
+    &:nth-child(5) { width: 250px; height: 250px; bottom: -100px; left: -100px; }
+    &:nth-child(6) { width: 150px; height: 150px; bottom: -50px; left: -50px; }
+    &:nth-child(7) { width: 150px; height: 150px; bottom: -60px; right: -60px; }
+    &:nth-child(8) { width: 100px; height: 100px; bottom: -40px; right: -40px; }
   }
 }
 
-.hero {
+// ─── Content card ─────────────────────────────────────────────────────────────
+.card {
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  width: 100%;
   max-width: 800px;
   padding: 0 20px;
+  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
-  .logoWrapper {
-    margin-bottom: 2rem;
-    .logo {
-      width: 70vw;
-      max-width: 25rem;
-      height: auto;
-      color: var(--emerald);
-    }
+// ─── Staggered Elements ───────────────────────────────────────────────────────
+
+.logoWrapper {
+  margin-bottom: 2rem;
+  animation: fadeUp 0.9s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  
+  .logo {
+    width: 70vw;
+    max-width: 25rem;
+    height: auto;
+    color: var(--emerald);
   }
+}
+
+.headline {
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.9s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .title {
   font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 300;
   letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
+  margin: 0;
   line-height: 1.1;
 
   span {
@@ -76,11 +102,17 @@
   color: rgba($charcoal, 0.7);
   margin-bottom: 3rem;
   max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+  animation: fadeUp 0.9s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.actionWrapper {
+  width: 100%;
+  max-width: 380px; // Matches the width of the form on the waitlist page
+  animation: fadeUp 0.9s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .button {
+  display: block; // Required to make Link element respect padding/width
   width: 100%;
   background: $muted-gold;
   color: $charcoal;
@@ -106,7 +138,7 @@
     transition: background 0.25s ease;
   }
 
-  &:hover:not(:disabled) {
+  &:hover {
     background: color.adjust($muted-gold, $lightness: -6%);
     box-shadow: 0 4px 24px rgba($muted-gold, 0.4);
     transform: translateY(-1px);
@@ -116,13 +148,8 @@
     }
   }
 
-  &:active:not(:disabled) {
+  &:active {
     transform: translateY(0);
-  }
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
   }
 }
 
@@ -133,4 +160,5 @@
   font-size: 0.7rem;
   opacity: 0.4;
   letter-spacing: 0.1em;
+  animation: fadeUp 0.9s 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }

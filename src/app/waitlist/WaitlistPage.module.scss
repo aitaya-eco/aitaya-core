@@ -1,5 +1,5 @@
 @use "../../../styles/variables" as *;
-@use "sass:color"; 
+@use "sass:color";
 
 // ─── Page wrapper ─────────────────────────────────────────────────────────────
 .page {
@@ -13,32 +13,7 @@
   overflow: hidden;
 }
 
-// ─── Radial vignette glow (center lighter) ────────────────────────────────────
-.vignette {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  background: radial-gradient(
-    ellipse 125% 60% at 50% 50%,
-    rgba($ivory, 0) 0%,
-    rgba(color.adjust($ivory, $lightness: -8%), 0.65)
-  );
-}
 
-// ─── Textured grain overlay ───────────────────────────────────────────────────
-.backgroundImage {
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.12;
-  height: auto;
-  object-fit: cover;
-  // inset: -50%;
-  @media (max-width: 480px) {
-    background-color: #b94040;
-  }
-}
 
 // ─── Decorative corner circles ────────────────────────────────────────────────
 .cornerCircles {
