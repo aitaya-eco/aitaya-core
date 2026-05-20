@@ -21,7 +21,6 @@ function isValidEmail(email: string): boolean {
 
 // ─── POST /api/waitlist ───────────────────────────────────────────────────────
 export async function POST(request: NextRequest) {
-   console.log('DB URL:', process.env.DATABASE_URL) // ADD THIS
   try {
     const body = await request.json()
     const email = (body?.email ?? '').trim().toLowerCase()

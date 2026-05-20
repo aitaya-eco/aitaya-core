@@ -46,7 +46,7 @@ export default function WaitlistPage() {
 
   return (
     <main className={styles.page}>
-      <Background/>
+      <Background />
 
       {/* Corner circle ornaments */}
       <div className={styles.cornerCircles} aria-hidden="true">
@@ -96,6 +96,26 @@ export default function WaitlistPage() {
             <p className={styles.successSub}>
               We&apos;ll be in touch when the doors open.
             </p>
+
+            <div className={styles.communityButtons}>
+              <a
+                href="https://chat.whatsapp.com/DqAelICKYU8ICM5VpVNflI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.button} ${styles.whatsappButton}`}
+              >
+                Join Us On WhatsApp
+              </a>
+
+              <a
+                href="https://t.me/+BmlcB3HQ-TAzM2E0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.button} ${styles.telegramButton}`}
+              >
+                Join Us On Telegram
+              </a>
+            </div>
           </div>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit} noValidate>

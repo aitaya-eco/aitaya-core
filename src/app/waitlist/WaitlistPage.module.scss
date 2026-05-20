@@ -365,3 +365,34 @@
   color: rgba($charcoal, 0.6);
   font-style: italic;
 }
+
+
+.communityButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 280px;
+  margin-top: 0.5rem;
+}
+
+.whatsappButton,
+.telegramButton {
+  font-size: 1rem;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+}
+
+.whatsappButton {
+  background: #25d366;
+  color: $ivory;
+}
+
+.telegramButton {
+  background: #229ed9;
+  color: $ivory;
+}
