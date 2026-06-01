@@ -212,7 +212,7 @@ export default function WaitlistPage() {
               </p>
               <div className={styles.communityButtons}>
                 <a
-                  href="https://chat.whatsapp.com/DqAelICKYU8ICM5VpVNflI"
+                  href="https://chat.whatsapp.com/Jsv32LbdrCz7xcUBs3hRs8"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`${styles.button} ${styles.whatsappButton}`}
