@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aitaya — "I tire!" · Dress for the culture, styled by intelligence.</title>
+<meta name="description" content="Aitaya is the Africa-first fashion network. Your closet scanned, your outfits planned against the weather, your tailor paid by escrow. Broadcasting soon — join the waitlist.">
+<meta property="og:title" content="Aitaya — Coming Soon">
+<meta property="og:description" content="Dress for the culture, styled by intelligence. Join the waitlist at aitaya.ng">
+<meta property="og:image" content="https://aitaya.ng/assets/brand/lockup_ivory_clean.png">
+<meta property="og:url" content="https://aitaya.ng">
+<link rel="icon" href="assets/brand/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon_32.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=GFS+Didot:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   AITAYA · waitlist · retro-broadcast edition
+   Emerald #1E5F4A · Ivory #F1EDE4 · Charcoal #2A2C2D · Gold #DDC47F
+   ============================================================ */
+
+/* The bespoke brand face — shipped with the site. */
+@font-face{
+  font-family:"Attire Display Script";
+  src:url("assets/fonts/AttireDisplayScript-Regular.ttf") format("truetype");
+  font-display:swap;
+}
+
+:root{
+  --emerald:#1E5F4A;
+  --emerald-deep:#17493A;
+  --ivory:#F1EDE4;
+  --ivory-2:#E6E2DB;
+  --charcoal:#2A2C2D;
+  --gold:#DDC47F;
+  --gold-deep:#C2A85E;
+  --tv-body:#8A7B6B;
+  --tv-body-dark:#6E6154;
+  --tv-face:#DCD3C4;
+  --ink-soft:#585349;
+  --didot:"Didot","Bodoni Moda","GFS Didot",serif;
+  --script:"Attire Display Script","Bodoni Moda",serif;
+  --grotesk:"Space Grotesk",system-ui,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background-color:var(--ivory);
+  color:var(--charcoal);
+  font-family:var(--grotesk);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ---------- the paper ---------- */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background-color:var(--ivory);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.055'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23p)'/%3E%3C/svg%3E"),url("assets/img/paper.jpg");
+  background-size:240px 240px, cover;
+  background-position:0 0, center;
+}
+body::after{ /* soft vignette, like a photographed set */
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse 120% 90% at 50% 38%, transparent 55%, rgba(90,80,64,.10) 100%);
+}
+
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* ---------- utilities ---------- */
+.caps{
+  font-family:var(--grotesk);
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  font-weight:500;
+}
+.gold-rule{
+  display:inline-block;
+  width:44px;height:3px;
+  background:var(--gold);
+  margin-bottom:14px;
+}
+
+/* ---------- top bar ---------- */
+header.site{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px clamp(20px,4vw,48px);
+  background:linear-gradient(to bottom, rgba(241,237,228,.92), rgba(241,237,228,0));
+  pointer-events:none;
+}
+header.site > *{pointer-events:auto}
+.brand-mini{display:flex;align-items:center;gap:12px}
+.brand-mini img{height:30px;width:auto}
+.onair{
+  display:flex;align-items:center;gap:9px;
+  font-size:11px;
+  color:var(--emerald);
+}
+.onair .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#B3402E;
+  box-shadow:0 0 0 0 rgba(179,64,46,.5);
+  animation:pulse 2.2s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(179,64,46,.45)}
+  70%{box-shadow:0 0 0 9px rgba(179,64,46,0)}
+  100%{box-shadow:0 0 0 0 rgba(179,64,46,0)}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:100svh;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:center;
+  gap:clamp(16px,3vw,48px);
+  max-width:1240px;
+  margin:0 auto;
+  padding:96px clamp(20px,4vw,48px) 40px;
+}
+.tv-stage{
+  position:relative;
+  height:min(78svh,760px);
+  min-height:480px;
+}
+#tv-canvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  display:block;
+  cursor:grab;
+}
+#tv-canvas:active{cursor:grabbing}
+.stage-hint{
+  position:absolute;
+  bottom:6px;left:50%;
+  transform:translateX(-50%);
+  font-size:10px;
+  color:var(--ink-soft);
+  white-space:nowrap;
+  opacity:.75;
+}
+/* static fallback if WebGL is unavailable */
+.tv-fallback{
+  display:none;
+  position:absolute;inset:0;
+  align-items:center;justify-content:center;
+}
+.tv-fallback img{max-height:70%;width:auto;filter:drop-shadow(0 24px 40px rgba(42,44,45,.18))}
+.no-webgl .tv-fallback{display:flex}
+.no-webgl #tv-canvas,.no-webgl .stage-hint{display:none}
+
+.hero-copy{max-width:520px}
+.hero-copy .eyebrow{
+  font-size:11px;
+  color:var(--emerald);
+  margin-bottom:22px;
+  display:flex;align-items:center;gap:14px;
+}
+.hero-copy .eyebrow::after{
+  content:"";flex:1;height:1px;background:rgba(42,44,45,.18);
+}
+.wordmark{width:min(340px,78%);height:auto;margin-bottom:6px}
+.itire{
+  font-family:var(--script);
+  font-style:normal;
+  font-size:clamp(15px,1.6vw,18px);
+  color:var(--ink-soft);
+  margin-bottom:26px;
+}
+h1.thesis{
+  font-family:var(--didot);
+  font-weight:400;
+  font-size:clamp(30px,3.6vw,46px);
+  line-height:1.14;
+  letter-spacing:.005em;
+  margin-bottom:20px;
+}
+h1.thesis em{
+  font-style:italic;
+  color:var(--emerald);
+}
+.hero-copy p.lede{
+  color:var(--ink-soft);
+  font-size:15px;
+  max-width:44ch;
+  margin-bottom:34px;
+}
+
+/* waitlist form */
+.waitlist{
+  display:flex;
+  gap:0;
+  max-width:440px;
+  border:1.5px solid var(--charcoal);
+  background:rgba(255,255,255,.55);
+  box-shadow:4px 4px 0 rgba(30,95,74,.9);
+}
+.waitlist input{
+  flex:1;
+  min-width:0;
+  border:0;background:transparent;
+  padding:15px 16px;
+  font-family:var(--grotesk);
+  font-size:14px;
+  color:var(--charcoal);
+  outline:none;
+}
+.waitlist input::placeholder{color:#8d8779}
+.waitlist button{
+  border:0;
+  background:var(--emerald);
+  color:var(--ivory);
+  font-family:var(--grotesk);
+  font-weight:700;
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  padding:0 22px;
+  cursor:pointer;
+  transition:background .18s ease;
+  white-space:nowrap;
+}
+.waitlist button:hover{background:var(--emerald-deep)}
+.waitlist button:focus-visible,.waitlist input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.form-note{
+  margin-top:12px;
+  font-size:12px;
+  color:var(--ink-soft);
+}
+.form-ok{
+  display:none;
+  margin-top:12px;
+  font-family:var(--didot);
+  font-style:italic;
+  font-size:16px;
+  color:var(--emerald);
+}
+.waitlist.done ~ .form-ok{display:block}
+.waitlist.done ~ .form-note{display:none}
+
+/* ---------- ticker ---------- */
+.ticker{
+  border-top:1.5px solid var(--charcoal);
+  border-bottom:1.5px solid var(--charcoal);
+  background:var(--emerald);
+  color:var(--ivory);
+  overflow:hidden;
+  padding:12px 0;
+}
+.ticker .lane{
+  display:flex;
+  gap:0;
+  width:max-content;
+  animation:tick 46s linear infinite;
+}
+@keyframes tick{to{transform:translateX(-50%)}}
+.ticker span{
+  font-size:12px;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  padding:0 18px;
+  white-space:nowrap;
+}
+.ticker span i{font-style:normal;color:var(--gold);padding-left:36px}
+
+/* ---------- channel guide ---------- */
+.section{
+  max-width:1240px;
+  margin:0 auto;
+  padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px);
+}
+.section-head{
+  max-width:640px;
+  margin-bottom:clamp(40px,5vw,64px);
+}
+.section-head .kicker{
+  font-size:11px;
+  color:var(--emerald);
+  margin-bottom:14px;
+}
+.section-head h2{
+  font-family:var(--didot);
+  font-weight:400;
+  font-size:clamp(28px,3.2vw,42px);
+  line-height:1.15;
+}
+.section-head h2 em{font-style:italic;color:var(--emerald)}
+
+.guide{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  border-top:1.5px solid var(--charcoal);
+  border-left:1.5px solid var(--charcoal);
+}
+.channel{
+  border-right:1.5px solid var(--charcoal);
+  border-bottom:1.5px solid var(--charcoal);
+  padding:28px 26px 32px;
+  background:rgba(255,255,255,.42);
+  position:relative;
+  transition:background .2s ease;
+}
+.channel:hover{background:rgba(221,196,127,.16)}
+.channel .ch{
+  font-size:11px;
+  letter-spacing:.24em;
+  color:var(--emerald);
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
+}
+.channel .ch::before{
+  content:"";
+  width:9px;height:9px;
+  border:1.5px solid var(--emerald);
+  border-radius:50%;
+  background:transparent;
+  transition:background .2s ease;
+}
+.channel:hover .ch::before{background:var(--gold)}
+.channel h3{
+  font-family:var(--script);
+  font-weight:400;
+  font-size:23px;
+  line-height:1.2;
+  margin-bottom:10px;
+}
+.channel p{
+  font-size:14px;
+  color:var(--ink-soft);
+  max-width:36ch;
+}
+
+/* ---------- on air gallery ---------- */
+.onair-section{padding-bottom:0}
+.reel-wrap{
+  margin-top:8px;
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+  padding:26px clamp(20px,4vw,48px) 64px;
+  margin-left:calc(clamp(20px,4vw,48px) * -1);
+  margin-right:calc(clamp(20px,4vw,48px) * -1);
+}
+.reel-wrap::-webkit-scrollbar{display:none}
+.reel{
+  display:flex;
+  gap:26px;
+  width:max-content;
+}
+.frame{
+  width:216px;
+  flex:none;
+}
+.frame .crt{
+  border:1.5px solid var(--charcoal);
+  background:var(--tv-face);
+  padding:10px 10px 14px;
+  box-shadow:5px 6px 0 rgba(42,44,45,.16);
+  transform:rotate(var(--tilt,0deg));
+  transition:transform .25s ease;
+}
+.frame:hover .crt{transform:rotate(0deg) translateY(-4px)}
+.frame .crt img{
+  border-radius:10px;
+  border:1px solid rgba(42,44,45,.35);
+}
+.frame figcaption{
+  margin-top:12px;
+}
+.frame figcaption .rule{
+  width:30px;height:3px;background:var(--gold);margin-bottom:8px;
+}
+.frame figcaption span{
+  display:block;
+  font-size:10.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.frame figcaption b{
+  font-family:var(--script);
+  font-weight:400;
+  font-size:16px;
+}
+
+/* ---------- roles strip ---------- */
+.roles{
+  background:var(--emerald);
+  color:var(--ivory);
+  border-top:1.5px solid var(--charcoal);
+}
+.roles .inner{
+  max-width:1240px;margin:0 auto;
+  padding:clamp(64px,8vw,104px) clamp(20px,4vw,48px);
+  display:grid;
+  grid-template-columns:minmax(260px,1.1fr) 2fr;
+  gap:clamp(32px,5vw,72px);
+}
+.roles h2{
+  font-family:var(--didot);
+  font-weight:400;
+  font-size:clamp(26px,3vw,38px);
+  line-height:1.18;
+}
+.roles h2 em{font-style:italic;color:var(--gold)}
+.roles .kicker{font-size:11px;color:var(--gold);margin-bottom:14px}
+.role-list{display:grid;gap:0;border-top:1px solid rgba(241,237,228,.28)}
+.role{
+  display:grid;
+  grid-template-columns:110px 1fr;
+  gap:18px;
+  padding:20px 0;
+  border-bottom:1px solid rgba(241,237,228,.28);
+  align-items:baseline;
+}
+.role b{
+  font-family:var(--script);
+  font-weight:400;
+  font-size:20px;
+  color:var(--gold);
+}
+.role p{font-size:14px;color:rgba(241,237,228,.85)}
+
+/* ---------- footer ---------- */
+footer{
+  background:var(--charcoal);
+  color:var(--ivory);
+}
+footer .inner{
+  max-width:1240px;margin:0 auto;
+  padding:56px clamp(20px,4vw,48px) 40px;
+  display:flex;flex-wrap:wrap;gap:28px;
+  align-items:flex-end;justify-content:space-between;
+}
+footer img{height:40px;width:auto}
+footer .fi{font-family:var(--didot);font-style:italic;color:var(--gold);font-size:15px;margin-top:10px}
+footer small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(241,237,228,.55)}
+
+/* ---------- motion & responsive ---------- */
+@media (prefers-reduced-motion:reduce){
+  .ticker .lane{animation:none}
+  .onair .dot{animation:none}
+  html{scroll-behavior:auto}
+}
+@media (max-width:900px){
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:84px;
+    gap:8px;
+  }
+  .tv-stage{height:min(58svh,520px);min-height:400px;order:0}
+  .hero-copy{order:1;max-width:none;padding-bottom:40px}
+  .roles .inner{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .waitlist{flex-direction:column;box-shadow:3px 3px 0 rgba(30,95,74,.9)}
+  .waitlist button{padding:14px}
+  .role{grid-template-columns:1fr;gap:4px}
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="brand-mini">
+    <img src="assets/brand/logo_primary_emerald.png" alt="Aitaya">
+  </div>
+  <div class="onair caps"><span class="dot"></span>Broadcasting soon · aitaya.ng</div>
+</header>
+
+<!-- ================= HERO ================= -->
+<main>
+<section class="hero">
+  <div class="tv-stage" id="tv-stage">
+    <canvas id="tv-canvas" aria-label="Three stacked retro televisions previewing the Aitaya app. Click a set to change the channel." role="img"></canvas>
+    <div class="tv-fallback"><img src="assets/brand/lockup_ivory_clean.png" alt="Aitaya — I tire!"></div>
+    <div class="stage-hint caps">Tap a set to change the channel · drag to look around</div>
+  </div>
+
+  <div class="hero-copy">
+    <div class="eyebrow caps">Est. Nigeria · The fashion network</div>
+    <img class="wordmark" src="assets/brand/logo_primary_emerald.png" alt="Aitaya">
+    <div class="itire">&ldquo;I tire!&rdquo;</div>
+    <h1 class="thesis">Dress for the culture, <em>styled by intelligence.</em></h1>
+    <p class="lede">Your closet, scanned once and known forever. Outfits planned against the actual weather. Your tailor paid by escrow. All of it broadcasting soon &mdash; first on campus, then everywhere.</p>
+
+    <form class="waitlist" id="waitlist-form" novalidate>
+      <input type="email" name="email" id="waitlist-email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
+      <button type="submit">Join the waitlist</button>
+    </form>
+    <div class="form-ok" id="form-ok">You&rsquo;re on the list &mdash; we&rsquo;ll signal you when your channel opens.</div>
+    <p class="form-note">Beta invites go out in waves. One email when it&rsquo;s your turn &mdash; nothing else.</p>
+  </div>
+</section>
+
+<!-- ================= NICHE TICKER ================= -->
+<div class="ticker" aria-hidden="true">
+  <div class="lane" id="ticker-lane"></div>
+</div>
+
+<!-- ================= CHANNEL GUIDE ================= -->
+<section class="section">
+  <div class="section-head">
+    <div class="kicker caps">This season&rsquo;s programming</div>
+    <h2>Six channels. <em>One wardrobe.</em></h2>
+  </div>
+
+  <div class="guide">
+    <article class="channel">
+      <div class="ch caps">CH &middot; 01</div>
+      <h3>The Closet</h3>
+      <p>Scan your wardrobe once. Every piece catalogued &mdash; what&rsquo;s clean, what&rsquo;s in laundry, what goes with what.</p>
+    </article>
+    <article class="channel">
+      <div class="ch caps">CH &middot; 02</div>
+      <h3>The AI Stylist</h3>
+      <p>Dresses you from clothes you already own &mdash; then books the look straight into your planner from chat.</p>
+    </article>
+    <article class="channel">
+      <div class="ch caps">CH &middot; 03</div>
+      <h3>The Outfit Planner</h3>
+      <p>Every look scheduled against real weather. 34&deg; in Kano on wedding day? It tells you to swap the coat.</p>
+    </article>
+    <article class="channel">
+      <div class="ch caps">CH &middot; 04</div>
+      <h3>Runway</h3>
+      <p>Full-screen video looks. Analyse any fit on screen, then recreate it from pieces in your own closet.</p>
+    </article>
+    <article class="channel">
+      <div class="ch caps">CH &middot; 05</div>
+      <h3>Squads &amp; Fit of the Day</h3>
+      <p>Your campus, your event, your squad. One vote a day, a monthly Hall of Fame &mdash; starting at Nile University.</p>
+    </article>
+    <article class="channel">
+      <div class="ch caps">CH &middot; 06</div>
+      <h3>Sellers, Properly Paid</h3>
+      <p>Tailors on escrow, brands with storefronts, stylists booked by session &mdash; every naira moves through Paystack.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ================= ON AIR ================= -->
+<section class="section onair-section">
+  <div class="section-head">
+    <div class="kicker caps">Now showing &middot; from the beta build</div>
+    <h2>On air <em>previews.</em></h2>
+  </div>
+</section>
+<div class="reel-wrap">
+  <div class="reel" id="reel"></div>
+</div>
+
+<!-- ================= ROLES ================= -->
+<section class="roles">
+  <div class="inner">
+    <div>
+      <div class="kicker caps">Choose how you move</div>
+      <h2>One account. <em>Every role you play.</em></h2>
+    </div>
+    <div class="role-list">
+      <div class="role"><b>Creator</b><p>Post looks, build your wardrobe, get styled.</p></div>
+      <div class="role"><b>Tailor</b><p>Bespoke &mdash; take briefs, sew to measure, get paid by escrow.</p></div>
+      <div class="role"><b>Brand</b><p>Shop &mdash; sell ready-made from your own storefront.</p></div>
+      <div class="role"><b>Stylist</b><p>Styling &mdash; book sessions, dress clients from their closet.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="inner">
+    <div>
+      <img src="assets/brand/logo_primary_ivory.png" alt="Aitaya">
+      <div class="fi">&ldquo;I tire!&rdquo;</div>
+    </div>
+    <small>&copy; 2026 Aitaya &middot; aitaya.ng &middot; Made for the culture</small>
+  </div>
+</footer>
+
+<script>
+/* ---------- waitlist ----------
+   Posts to the same Postgres-backed endpoint the previous site used. */
+const WAITLIST_ENDPOINT = "/api/waitlist";
+
+const form = document.getElementById("waitlist-form");
+const okLine = document.getElementById("form-ok");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("waitlist-email").value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById("waitlist-email").focus();
+    return;
+  }
+  const btn = form.querySelector("button");
+  btn.disabled = true; btn.textContent = "Tuning in…";
+  let message = "You\u2019re on the list \u2014 we\u2019ll signal you when your channel opens.";
+  try {
+    const res = await fetch(WAITLIST_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json().catch(() => null);
+    if (res.status === 409) message = "You\u2019re already on the list \u2014 stay tuned.";
+    else if (!res.ok) {
+      message = (data && data.message) || "Something went wrong \u2014 try again shortly.";
+      btn.disabled = false; btn.textContent = "Join the waitlist";
+      okLine.textContent = message;
+      okLine.style.display = "block";
+      return;
+    }
+  } catch (err) {
+    btn.disabled = false; btn.textContent = "Join the waitlist";
+    okLine.textContent = "Network hiccup \u2014 check your connection and try again.";
+    okLine.style.display = "block";
+    return;
+  }
+  okLine.textContent = message;
+  form.classList.add("done");
+});
+
+/* ---------- niche ticker ---------- */
+const niches = ["Adire","Agbada","Gothic Ankara","Aso-Ebi","Streetwear","Minimalist","Cottagecore","Layering","Aso-Oke","Boubou","Afro-Punk","50s Suits","Contemporary"];
+const lane = document.getElementById("ticker-lane");
+const run = niches.map(n => `<span>${n}<i>&#10022;</i></span>`).join("");
+lane.innerHTML = run + run; /* duplicated for the seamless loop */
+
+/* ---------- on-air reel ---------- */
+const shots = [
+  ["look-01-welcome.jpg","Onboarding","Choose how you move"],
+  ["look-02-feed.jpg","Home","Tyres &amp; the feed"],
+  ["look-11-closet-new.jpg","Closet","64 pieces, known"],
+  ["look-13-stylist-schedule.jpg","AI Stylist","Chat that schedules"],
+  ["look-12-planner.jpg","Planner","Weather-checked"],
+  ["look-10-reel.jpg","Runway","Full-screen looks"],
+  ["look-04-analyse-fit.jpg","Analyse Fit","Four pieces, one silhouette"],
+  ["look-09-squad.jpg","Squad","Vote, tailor, deliver"],
+  ["look-08-community.jpg","Community","Fit of the Day"],
+  ["look-07-storefront.jpg","Storefront","Bespoke &amp; shop"],
+  ["look-14-explore-search.jpg","Explore","Africa-first"]
+];
+const reel = document.getElementById("reel");
+reel.innerHTML = shots.map(([f,t,c],i) => `
+  <figure class="frame" style="--tilt:${(i%2? -1:1) * (0.6 + (i%3)*0.5)}deg">
+    <div class="crt"><img loading="lazy" src="assets/img/looks/${f}" alt="${t} screen from the Aitaya app"></div>
+    <figcaption><div class="rule"></div><b>${t}</b><span>${c}</span></figcaption>
+  </figure>`).join("");
+</script>
+
+<!-- ================= THE SET · three.js ================= -->
+<script type="module">
+import * as THREE from "./assets/vendor/three.module.js";
+
+const stage  = document.getElementById("tv-stage");
+const canvas = document.getElementById("tv-canvas");
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+} catch (e) {
+  document.body.classList.add("no-webgl");
+}
+
+if (renderer) {
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 60);
+  camera.position.set(0, 0.1, 11.4);
+
+  /* lighting — warm afternoon room */
+  scene.add(new THREE.HemisphereLight(0xfff6e6, 0x9a8f7d, 1.05));
+  const key = new THREE.DirectionalLight(0xffefd2, 1.5);
+  key.position.set(4, 6, 7);
+  scene.add(key);
+  const fill = new THREE.DirectionalLight(0xdfe8e2, 0.5);
+  fill.position.set(-6, 2, 4);
+  scene.add(fill);
+
+  /* ---------- materials ---------- */
+  const bodyMat = new THREE.MeshStandardMaterial({ color:0x8a7b6b, roughness:.62, metalness:.05 });
+  const bodyDarkMat = new THREE.MeshStandardMaterial({ color:0x6e6154, roughness:.7 });
+  const faceMat = new THREE.MeshStandardMaterial({ color:0xdcd3c4, roughness:.85 });
+  const grillMat = new THREE.MeshStandardMaterial({ color:0x3b362f, roughness:.9 });
+  const knobMat = new THREE.MeshStandardMaterial({ color:0xcfc6b6, roughness:.35, metalness:.35 });
+  const footMat = new THREE.MeshStandardMaterial({ color:0x2a2c2d, roughness:.8 });
+
+  /* ---------- screen textures (canvas-baked, scanlines included) ---------- */
+  const TEXW = 512, TEXH = 400;
+  function bakeScanlines(ctx){
+    ctx.globalAlpha = .16;
+    ctx.fillStyle = "#000";
+    for (let y = 0; y < TEXH; y += 4) ctx.fillRect(0, y, TEXW, 1.4);
+    ctx.globalAlpha = 1;
+    const v = ctx.createRadialGradient(TEXW/2, TEXH/2, TEXH*.32, TEXW/2, TEXH/2, TEXH*.78);
+    v.addColorStop(0, "rgba(0,0,0,0)");
+    v.addColorStop(1, "rgba(10,14,12,.5)");
+    ctx.fillStyle = v; ctx.fillRect(0,0,TEXW,TEXH);
+    const s = ctx.createLinearGradient(0,0,TEXW,TEXH*.5);
+    s.addColorStop(0,"rgba(255,255,255,.10)");
+    s.addColorStop(.35,"rgba(255,255,255,0)");
+    ctx.fillStyle = s; ctx.fillRect(0,0,TEXW,TEXH);
+  }
+  function makeScreenTex(){
+    const c = document.createElement("canvas");
+    c.width = TEXW; c.height = TEXH;
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = 4;
+    return { c, ctx:c.getContext("2d"), tex };
+  }
+  function drawCover(ctx, img){
+    const s = Math.max(TEXW/img.width, TEXH/img.height);
+    const w = img.width*s, h = img.height*s;
+    ctx.drawImage(img, (TEXW-w)/2, (TEXH-h)/2, w, h);
+  }
+  function drawNoise(ctx){
+    const id = ctx.createImageData(TEXW, TEXH);
+    const d = id.data;
+    for (let i = 0; i < d.length; i += 4){
+      const v = 40 + Math.random()*190;
+      d[i]=v; d[i+1]=v*0.98; d[i+2]=v*0.92; d[i+3]=255;
+    }
+    ctx.putImageData(id, 0, 0);
+    bakeScanlines(ctx);
+  }
+
+  const loader = new THREE.ImageLoader();
+  const load = (src) => new Promise(res => loader.load(src, res, undefined, () => res(null)));
+
+  /* channel line-ups */
+  const channelFiles = [
+    "look-02-feed.jpg","look-11-closet-new.jpg","look-12-planner.jpg",
+    "look-10-reel.jpg","look-09-squad.jpg","look-07-storefront.jpg",
+    "look-13-stylist-schedule.jpg","look-14-explore-search.jpg"
+  ].map(f => "assets/img/looks/" + f);
+
+  /* ---------- TV builder ---------- */
+  const CURVE = .16;
+  function crtGeometry(w, h){
+    const g = new THREE.PlaneGeometry(w, h, 24, 24);
+    const p = g.attributes.position;
+    for (let i = 0; i < p.count; i++){
+      const x = p.getX(i)/(w/2), y = p.getY(i)/(h/2);
+      p.setZ(i, CURVE * (1 - Math.min(1, x*x*.7 + y*y*.7)));
+    }
+    g.computeVertexNormals();
+    return g;
+  }
+
+  function buildTV({ w=3.6, h=2.55, d=2.2 }){
+    const tv = new THREE.Group();
+    const shell = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), bodyMat);
+    tv.add(shell);
+    const back = new THREE.Mesh(new THREE.BoxGeometry(w*.86, h*.86, .5), bodyDarkMat);
+    back.position.z = -d/2 - .18;
+    tv.add(back);
+    const face = new THREE.Mesh(new THREE.BoxGeometry(w*.94, h*.9, .14), faceMat);
+    face.position.z = d/2 + .07;
+    tv.add(face);
+
+    /* screen */
+    const sw = w*.62, sh = h*.72;
+    const { c, ctx, tex } = makeScreenTex();
+    const screen = new THREE.Mesh(
+      crtGeometry(sw, sh),
+      new THREE.MeshBasicMaterial({ map: tex })
+    );
+    screen.position.set(-w*.115, 0, d/2 + .15);
+    tv.add(screen);
+    const bezel = new THREE.Mesh(new THREE.BoxGeometry(sw + .22, sh + .22, .06), grillMat);
+    bezel.position.set(-w*.115, 0, d/2 + .12);
+    tv.add(bezel);
+
+    /* knobs */
+    const knobGeo = new THREE.CylinderGeometry(.16, .16, .14, 24);
+    const knobs = [];
+    [[.32],[-.18]].forEach(([y]) => {
+      const k = new THREE.Mesh(knobGeo, knobMat);
+      k.rotation.x = Math.PI/2;
+      k.position.set(w*.355, h*y, d/2 + .16);
+      k.userData.isKnob = true;
+      tv.add(k); knobs.push(k);
+      const tick = new THREE.Mesh(new THREE.BoxGeometry(.03, .1, .03), grillMat);
+      tick.position.set(0, 0, .075);
+      k.add(tick);
+    });
+
+    /* speaker grill */
+    for (let i = 0; i < 6; i++){
+      const s = new THREE.Mesh(new THREE.BoxGeometry(w*.16, .045, .05), grillMat);
+      s.position.set(w*.355, -h*.44 + i*.09, d/2 + .15);
+      tv.add(s);
+    }
+    /* feet */
+    [-1,1].forEach(sx => {
+      const f = new THREE.Mesh(new THREE.CylinderGeometry(.09,.12,.22,12), footMat);
+      f.position.set(sx*w*.36, -h/2 - .11, d*.18);
+      tv.add(f);
+    });
+
+    tv.userData = { screenCtx:ctx, screenTex:tex, screen, knobs, w, h, d };
+    return tv;
+  }
+
+  /* ---------- the stack ---------- */
+  const stack = new THREE.Group();
+  const tvTop = buildTV({ w:3.5, h:2.5, d:2.1 });
+  const tvMid = buildTV({ w:3.7, h:2.6, d:2.2 });
+  const tvBot = buildTV({ w:3.9, h:2.9, d:2.3 });
+
+  tvBot.position.y = -2.85;
+  tvMid.position.y = 0;
+  tvTop.position.y = 2.72;
+  tvTop.rotation.y = .10;  tvTop.rotation.z = .012;
+  tvMid.rotation.y = -.06;
+  tvBot.rotation.y = .045;
+
+  stack.add(tvBot, tvMid, tvTop);
+  stack.position.y = .18;
+  scene.add(stack);
+
+  /* soft contact shadow */
+  const shadowTex = (() => {
+    const c = document.createElement("canvas"); c.width = c.height = 256;
+    const x = c.getContext("2d");
+    const g = x.createRadialGradient(128,128,10,128,128,120);
+    g.addColorStop(0, "rgba(60,52,40,.34)");
+    g.addColorStop(1, "rgba(60,52,40,0)");
+    x.fillStyle = g; x.fillRect(0,0,256,256);
+    const t = new THREE.CanvasTexture(c); return t;
+  })();
+  const shadow = new THREE.Mesh(
+    new THREE.PlaneGeometry(7.5, 3.4),
+    new THREE.MeshBasicMaterial({ map:shadowTex, transparent:true, depthWrite:false })
+  );
+  shadow.rotation.x = -Math.PI/2;
+  shadow.position.y = -4.62;
+  scene.add(shadow);
+
+  /* ---------- programme each screen ---------- */
+  /* bottom: COMING SOON on emerald */
+  function drawComingSoon(ctx, t=0){
+    ctx.fillStyle = "#17493A";
+    ctx.fillRect(0,0,TEXW,TEXH);
+    const g = ctx.createRadialGradient(TEXW/2, TEXH/2, 20, TEXW/2, TEXH/2, 300);
+    g.addColorStop(0, "rgba(46,110,88,.85)");
+    g.addColorStop(1, "rgba(23,73,58,0)");
+    ctx.fillStyle = g; ctx.fillRect(0,0,TEXW,TEXH);
+    ctx.fillStyle = "#F1EDE4";
+    ctx.textAlign = "center";
+    ctx.font = "italic 500 64px 'Bodoni Moda', Didot, serif";
+    const bob = reduceMotion ? 0 : Math.sin(t*1.4)*3;
+    ctx.fillText("COMING", TEXW/2, TEXH/2 - 14 + bob);
+    ctx.fillText("SOON...", TEXW/2, TEXH/2 + 58 + bob);
+    ctx.fillStyle = "#DDC47F";
+    ctx.font = "500 17px 'Space Grotesk', sans-serif";
+    ctx.fillText("A I T A Y A   ·   2 0 2 6", TEXW/2, TEXH - 42);
+    bakeScanlines(ctx);
+  }
+
+  /* middle: the mark + wordmark on ivory */
+  let markImg = null, lockImg = null;
+  function drawLogoScreen(ctx){
+    ctx.fillStyle = "#F1EDE4";
+    ctx.fillRect(0,0,TEXW,TEXH);
+    if (markImg){
+      const mw = 190, mh = 190 * markImg.height/markImg.width;
+      ctx.drawImage(markImg, TEXW/2 - mw/2, TEXH*.16, mw, mh);
+    }
+    if (lockImg){
+      const lw = 300, lh = lw * lockImg.height/lockImg.width;
+      ctx.drawImage(lockImg, TEXW/2 - lw/2, TEXH*.66, lw, lh);
+    } else {
+      ctx.fillStyle = "#1E5F4A";
+      ctx.textAlign = "center";
+      ctx.font = "italic 44px 'Bodoni Moda', Didot, serif";
+      ctx.fillText("Aitaya", TEXW/2, TEXH*.82);
+    }
+    bakeScanlines(ctx);
+  }
+
+  /* top: cycling app screens */
+  const channelImgs = [];
+  let channel = 0;
+
+  function drawChannel(ctx){
+    const img = channelImgs[channel];
+    ctx.fillStyle = "#101512";
+    ctx.fillRect(0,0,TEXW,TEXH);
+    if (img) drawCover(ctx, img);
+    /* channel number chip, like an 80s tuner OSD */
+    ctx.fillStyle = "rgba(23,73,58,.9)";
+    ctx.fillRect(TEXW-96, 22, 74, 34);
+    ctx.strokeStyle = "#DDC47F"; ctx.lineWidth = 2;
+    ctx.strokeRect(TEXW-96, 22, 74, 34);
+    ctx.fillStyle = "#F1EDE4";
+    ctx.textAlign = "center";
+    ctx.font = "700 19px 'Space Grotesk', monospace";
+    ctx.fillText("CH " + String(channel+1).padStart(2,"0"), TEXW-59, 46);
+    bakeScanlines(ctx);
+  }
+
+  /* static burst then redraw */
+  let staticUntil = 0, staticTarget = null;
+  function burst(tvData, after){
+    staticUntil = performance.now() + (reduceMotion ? 60 : 340);
+    staticTarget = { tvData, after };
+  }
+
+  /* initial paint: static everywhere until assets land */
+  [tvTop, tvMid, tvBot].forEach(tv => { drawNoise(tv.userData.screenCtx); tv.userData.screenTex.needsUpdate = true; });
+
+  Promise.all([
+    load("assets/brand/mark_emerald_transparent.png"),
+    load("assets/brand/logo_primary_emerald.png"),
+    ...channelFiles.map(load)
+  ]).then(([m, l, ...imgs]) => {
+    markImg = m; lockImg = l;
+    imgs.forEach(i => i && channelImgs.push(i));
+    burst(tvMid.userData, () => drawLogoScreen(tvMid.userData.screenCtx));
+    burst(tvBot.userData, () => drawComingSoon(tvBot.userData.screenCtx));
+    setTimeout(() => burst(tvTop.userData, () => drawChannel(tvTop.userData.screenCtx)), reduceMotion ? 0 : 260);
+  });
+
+  /* auto channel surf */
+  if (!reduceMotion){
+    setInterval(() => {
+      if (!channelImgs.length || document.hidden) return;
+      channel = (channel + 1) % channelImgs.length;
+      burst(tvTop.userData, () => drawChannel(tvTop.userData.screenCtx));
+    }, 4200);
+  }
+
+  /* ---------- interaction ---------- */
+  const ray = new THREE.Raycaster();
+  const ptr = new THREE.Vector2();
+  let targetRX = 0, targetRY = 0, dragging = false, moved = false, px = 0, py = 0;
+
+  function pointerNorm(e){
+    const r = canvas.getBoundingClientRect();
+    ptr.x = ((e.clientX - r.left)/r.width)*2 - 1;
+    ptr.y = -(((e.clientY - r.top)/r.height)*2 - 1);
+  }
+
+  canvas.addEventListener("pointerdown", e => {
+    dragging = true; moved = false; px = e.clientX; py = e.clientY;
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener("pointermove", e => {
+    if (dragging){
+      const dx = e.clientX - px, dy = e.clientY - py;
+      if (Math.abs(dx) + Math.abs(dy) > 6) moved = true;
+      targetRY += dx * .0032;
+      targetRX += dy * .0022;
+      targetRY = Math.max(-.5, Math.min(.5, targetRY));
+      targetRX = Math.max(-.22, Math.min(.28, targetRX));
+      px = e.clientX; py = e.clientY;
+    } else if (!reduceMotion){
+      pointerNorm(e);
+      targetRY = ptr.x * .16;
+      targetRX = -ptr.y * .07;
+    }
+  });
+  canvas.addEventListener("pointerup", e => {
+    dragging = false;
+    if (moved) return;
+    pointerNorm(e);
+    ray.setFromCamera(ptr, camera);
+    const hits = ray.intersectObjects(stack.children, true);
+    if (!hits.length || !channelImgs.length) return;
+    /* whichever set you tap, the top set changes channel — one tuner, house rules */
+    channel = (channel + 1) % channelImgs.length;
+    burst(tvTop.userData, () => drawChannel(tvTop.userData.screenCtx));
+    /* spin the top set's knobs */
+    tvTop.userData.knobs.forEach(k => k.rotation.z -= Math.PI/3);
+  });
+
+  /* ---------- sizing ---------- */
+  function size(){
+    const w = stage.clientWidth, h = stage.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h;
+    /* keep the full stack in frame on narrow screens */
+    camera.position.z = camera.aspect < .78 ? 14.6 : (camera.aspect < 1.05 ? 12.6 : 11.4);
+    camera.updateProjectionMatrix();
+  }
+  size();
+  addEventListener("resize", size);
+
+  /* ---------- power-on + loop ---------- */
+  let t0 = performance.now();
+  stack.scale.setScalar(.001);
+
+  function frame(now){
+    const t = (now - t0)/1000;
+
+    /* power-on: vertical line grow feel via scale */
+    if (!reduceMotion){
+      const k = Math.min(1, t/0.9);
+      const e = 1 - Math.pow(1-k, 3);
+      stack.scale.set(.6 + .4*e, .05 + .95*e, .6 + .4*e);
+    } else {
+      stack.scale.setScalar(1);
+    }
+
+    /* idle drift */
+    if (!reduceMotion && !dragging){
+      stack.position.y = .18 + Math.sin(t*.7)*.05;
+    }
+    stack.rotation.y += (targetRY - stack.rotation.y)*.08;
+    stack.rotation.x += (targetRX - stack.rotation.x)*.08;
+
+    /* static bursts */
+    if (staticTarget){
+      const { tvData, after } = staticTarget;
+      if (now < staticUntil){
+        drawNoise(tvData.screenCtx);
+      } else {
+        after();
+        staticTarget = null;
+      }
+      tvData.screenTex.needsUpdate = true;
+    }
+    /* animated coming-soon bob */
+    if (!reduceMotion && !staticTarget && channelImgs.length){
+      if (((now/120)|0) % 4 === 0){
+        drawComingSoon(tvBot.userData.screenCtx, t);
+        tvBot.userData.screenTex.needsUpdate = true;
+      }
+    }
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+} else {
+  document.body.classList.add("no-webgl");
+}
+</script>
+</body>
+</html>
