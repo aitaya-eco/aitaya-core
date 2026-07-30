@@ -1,7 +1,7 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/waitlist.js", "use": "@vercel/node" },
+    { "src": "api/*.js", "use": "@vercel/node" },
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "assets/**", "use": "@vercel/static" }
   ]
