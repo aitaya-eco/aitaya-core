@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- build: ribbons-adaptive -->
+<!-- build: ribbons-spread -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aitaya · "I tire!" · Dress for the culture, styled by intelligence.</title>
 <meta name="description" content="Aitaya is a fashion ecosystem in your pocket. Closet, stylist, tailor, runway, one loop. Broadcasting soon from Nigeria. Join the waitlist.">
@@ -2521,16 +2521,29 @@ if (renderer && !reduceMotion){
       yTgt: -5, rotTgt: 0
     });
   }
+  /* Keep every ribbon inside the frame from end to end. A tilt of r radians
+     lifts a ribbon's ends by (width/2)*sin(r), and the waves add their own
+     amplitude on top, so the usable vertical band is what remains after both.
+     Strands are then spaced evenly across that band instead of dropped at
+     random, which is what made them fan off one side of the screen. */
+  const ROT_MAX = .085;
+  function visibleHalfHeight(){
+    return Math.tan((50 * Math.PI / 180) / 2) * (camera.position.z - STRAND_Z);
+  }
   function layoutStrands(mood){
+    const endRise = (STRAND_W / 2) * Math.sin(ROT_MAX);
+    const band = Math.max(1.5, visibleHalfHeight() - endRise - (mood.amp || 1) - .5);
     strands.forEach((st, s) => {
       if (mood.rows){
-        st.yTgt = -6.4 + s * (12.8 / (STRANDS-1));
+        st.yTgt = -band + s * (2 * band / Math.max(1, STRANDS - 1));
         st.rotTgt = 0;
         st.spj = 1;
       } else {
-        st.yTgt = -6.5 + Math.random()*13 * mood.spreadY;
-        st.rotTgt = (Math.random()-.5)*.4;
-        st.spj = .7 + Math.random()*.8;
+        const span = band * (mood.spreadY == null ? 1 : mood.spreadY);
+        const slot = 2 * span / STRANDS;
+        st.yTgt = -span + (s + .5) * slot + (Math.random() - .5) * slot * .45;
+        st.rotTgt = (Math.random() - .5) * 2 * ROT_MAX;
+        st.spj = .7 + Math.random() * .8;
       }
     });
   }
@@ -2599,7 +2612,7 @@ if (renderer && !reduceMotion){
       st.mesh.geometry = st.geo;
       st.base = st.geo.attributes.position.array.slice();
     });
-    if (curMood) applyMood(curMood, curIdx);   /* the stitched patch is sized off STRAND_W */
+    if (curMood){ applyMood(curMood, curIdx); layoutStrands(curMood); }   /* patch and spacing both key off STRAND_W */
   }
   function size(){
     renderer.setSize(innerWidth, innerHeight, false);
