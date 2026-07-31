@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- build: ribbons-spread -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aitaya · "I tire!" · Dress for the culture, styled by intelligence.</title>
+<title>Aitaya· Dress for the culture, styled by intelligence.</title>
 <meta name="description" content="Aitaya is a fashion ecosystem in your pocket. Closet, stylist, tailor, runway, one loop. Broadcasting soon from Nigeria. Join the waitlist.">
 <meta property="og:title" content="Aitaya · Coming Soon">
 <meta property="og:description" content="Dress for the culture, styled by intelligence. Join the waitlist at aitaya.ng">
@@ -2090,8 +2089,6 @@ if (renderer && !reduceMotion){
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, 1, .1, 40);
   camera.position.z = 12;
-  camera.aspect = innerWidth / Math.max(1, innerHeight);
-  camera.updateProjectionMatrix();
 
   scene.add(new THREE.HemisphereLight(0xffe9c8, 0x6b4a2e, 1.1));
   const sun = new THREE.DirectionalLight(0xffcf8e, 1.2);
@@ -2438,7 +2435,7 @@ if (renderer && !reduceMotion){
     if (emb){
       const patch = embroidery(emb.st, emb.th, "thread");
       /* correct for the strand's stretch so the mark keeps its true shape */
-      const pxPerUnitX = TW / STRAND_W, pxPerUnitY = 64 / .85;
+      const pxPerUnitX = TW / 38, pxPerUnitY = 64 / .85;
       const ht = 58;
       const wt = (patch.width / patch.height) * ht * (pxPerUnitX / pxPerUnitY);
       const py = (64 - ht) / 2;
@@ -2492,58 +2489,33 @@ if (renderer && !reduceMotion){
 
   /* ---- the fabric: ribbons of woven cloth, each with its own cut ---- */
   const STRANDS = isMobile ? 5 : 7;
-  const STRAND_Z = -8;
-  /* How wide the ribbons must be to cross the screen at their depth. Measured
-     from the camera instead of guessed, so it holds on any display: past both
-     edges on desktop, and just to the edges on a phone so the whole ribbon shows
-     rather than a slice of its middle. */
-  function neededWidth(){
-    const dist = camera.position.z - STRAND_Z;
-    const visH = 2 * Math.tan((50 * Math.PI / 180) / 2) * dist;
-    const visW = visH * camera.aspect;
-    return Math.max(10, visW * (isMobile ? 1.08 : 1.4));
-  }
-  let STRAND_W = neededWidth();
   const SEG = isMobile ? 70 : 120;
   const strands = [];
   for (let s = 0; s < STRANDS; s++){
-    const geo = new THREE.PlaneGeometry(STRAND_W, .85, SEG, 6);
+    const geo = new THREE.PlaneGeometry(38, .85, SEG, 6);
     const mat = new THREE.MeshStandardMaterial({
       side:THREE.DoubleSide, transparent:true, opacity:.42,
       roughness:.85, metalness:.04
     });
     const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(0, -5 - s*.12, STRAND_Z);   /* they begin bundled where the bolt used to lie */
+    mesh.position.set(0, -5 - s*.12, -8);   /* they begin bundled where the bolt used to lie */
     scene.add(mesh);
     strands.push({
       mesh, geo, mat, base: geo.attributes.position.array.slice(),
-      ph: s*1.7, cycles: 2.1 + s*.34, spj: .8 + Math.random()*.5, tw: .7 + s*.18,
+      ph: s*1.7, fq: .4 + s*.09, spj: .8 + Math.random()*.5, tw: .7 + s*.18,
       yTgt: -5, rotTgt: 0
     });
   }
-  /* Keep every ribbon inside the frame from end to end. A tilt of r radians
-     lifts a ribbon's ends by (width/2)*sin(r), and the waves add their own
-     amplitude on top, so the usable vertical band is what remains after both.
-     Strands are then spaced evenly across that band instead of dropped at
-     random, which is what made them fan off one side of the screen. */
-  const ROT_MAX = .085;
-  function visibleHalfHeight(){
-    return Math.tan((50 * Math.PI / 180) / 2) * (camera.position.z - STRAND_Z);
-  }
   function layoutStrands(mood){
-    const endRise = (STRAND_W / 2) * Math.sin(ROT_MAX);
-    const band = Math.max(1.5, visibleHalfHeight() - endRise - (mood.amp || 1) - .5);
     strands.forEach((st, s) => {
       if (mood.rows){
-        st.yTgt = -band + s * (2 * band / Math.max(1, STRANDS - 1));
+        st.yTgt = -6.4 + s * (12.8 / (STRANDS-1));
         st.rotTgt = 0;
         st.spj = 1;
       } else {
-        const span = band * (mood.spreadY == null ? 1 : mood.spreadY);
-        const slot = 2 * span / STRANDS;
-        st.yTgt = -span + (s + .5) * slot + (Math.random() - .5) * slot * .45;
-        st.rotTgt = (Math.random() - .5) * 2 * ROT_MAX;
-        st.spj = .7 + Math.random() * .8;
+        st.yTgt = -6.5 + Math.random()*13 * mood.spreadY;
+        st.rotTgt = (Math.random()-.5)*.4;
+        st.spj = .7 + Math.random()*.8;
       }
     });
   }
@@ -2602,23 +2574,10 @@ if (renderer && !reduceMotion){
   let paused = document.hidden;
   document.addEventListener("visibilitychange", () => { paused = document.hidden; });
 
-  function rebuildStrands(){
-    const w = neededWidth();
-    if (Math.abs(w - STRAND_W) < 1.2) return;
-    STRAND_W = w;
-    strands.forEach(st => {
-      st.geo.dispose();
-      st.geo = new THREE.PlaneGeometry(STRAND_W, .85, SEG, 6);
-      st.mesh.geometry = st.geo;
-      st.base = st.geo.attributes.position.array.slice();
-    });
-    if (curMood){ applyMood(curMood, curIdx); layoutStrands(curMood); }   /* patch and spacing both key off STRAND_W */
-  }
   function size(){
     renderer.setSize(innerWidth, innerHeight, false);
-    camera.aspect = innerWidth/Math.max(1, innerHeight);
+    camera.aspect = innerWidth/innerHeight;
     camera.updateProjectionMatrix();
-    rebuildStrands();
   }
   size(); addEventListener("resize", size);
 
@@ -2651,15 +2610,14 @@ if (renderer && !reduceMotion){
     const rows = tgt.amp < .2;
     strands.forEach((st, s) => {
       const a = st.geo.attributes.position.array, b = st.base;
-      const k = st.cycles * 2 * Math.PI / STRAND_W;   /* same number of waves on any screen */
       for (let i = 0; i < a.length; i += 3){
         const x = b[i], y0 = b[i+1];
-        const twist = rows ? 0 : Math.sin(x*k*1.05 + t*cur.fsp*2.2*st.spj + st.ph) * st.tw;
-        a[i+2] = Math.sin(x*k + t*cur.fsp*3*st.spj + st.ph) * cur.amp * .55
-               + Math.sin(x*k*.47 - t*cur.fsp*1.6*st.spj + st.ph*2) * cur.amp * .3
+        const twist = rows ? 0 : Math.sin(x*.42 + t*cur.fsp*2.2*st.spj + st.ph) * st.tw;
+        a[i+2] = Math.sin(x*st.fq + t*cur.fsp*3*st.spj + st.ph) * cur.amp * .55
+               + Math.sin(x*.19 - t*cur.fsp*1.6*st.spj + st.ph*2) * cur.amp * .3
                + y0 * Math.sin(twist);                       /* the ribbon turns over */
-        a[i+1] = y0 * Math.cos(twist)
-               + Math.sin(x*k*.82 + t*cur.fsp*2*st.spj + st.ph) * cur.amp * .18
+      a[i+1] = y0 * Math.cos(twist)
+               + Math.sin(x*.33 + t*cur.fsp*2*st.spj + st.ph) * cur.amp * .18
                + (rows ? Math.sin(t*.6 + s) * .04 : 0);
       }
       st.geo.attributes.position.needsUpdate = true;
