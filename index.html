@@ -2435,7 +2435,7 @@ if (renderer && !reduceMotion){
     if (emb){
       const patch = embroidery(emb.st, emb.th, "thread");
       /* correct for the strand's stretch so the mark keeps its true shape */
-      const pxPerUnitX = TW / 38, pxPerUnitY = 64 / .85;
+      const pxPerUnitX = TW / STRAND_W, pxPerUnitY = 64 / .85;
       const ht = 58;
       const wt = (patch.width / patch.height) * ht * (pxPerUnitX / pxPerUnitY);
       const py = (64 - ht) / 2;
@@ -2489,10 +2489,13 @@ if (renderer && !reduceMotion){
 
   /* ---- the fabric: ribbons of woven cloth, each with its own cut ---- */
   const STRANDS = isMobile ? 5 : 7;
+  /* wide enough to run past both edges on desktop; shorter on a phone so you see
+     the whole ribbon move instead of a slice of its middle */
+  const STRAND_W = isMobile ? 17 : 52;
   const SEG = isMobile ? 70 : 120;
   const strands = [];
   for (let s = 0; s < STRANDS; s++){
-    const geo = new THREE.PlaneGeometry(38, .85, SEG, 6);
+    const geo = new THREE.PlaneGeometry(STRAND_W, .85, SEG, 6);
     const mat = new THREE.MeshStandardMaterial({
       side:THREE.DoubleSide, transparent:true, opacity:.42,
       roughness:.85, metalness:.04

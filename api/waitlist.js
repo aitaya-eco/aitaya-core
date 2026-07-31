@@ -1,19 +1,19 @@
-// POST /api/waitlist — identical behaviour to the previous Next.js route.
-// Uses the same `waitlist` table and the same DATABASE_URL env var already
-// configured in the Vercel project, so no data or settings change.
+// POST /api/waitlist  -> saves {email}
+// GET  /api/waitlist  -> { count }
+// GET  /api/waitlist?diag=1 -> connection diagnosis (remove once launched)
 const { Pool } = require('pg')
 
 let pool
 function getPool () {
   if (!pool) {
     const connectionString = process.env.DATABASE_URL
-    if (!connectionString) throw new Error('DATABASE_URL environment variable is not set.')
+    if (!connectionString) throw new Error('DATABASE_URL is not set on this deployment.')
     pool = new Pool({
       connectionString,
       ssl: { rejectUnauthorized: false },
       max: 1,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 5000
+      idleTimeoutMillis: 10000,
+      connectionTimeoutMillis: 8000
     })
   }
   return pool
@@ -31,9 +31,33 @@ async function ensureTable () {
   `)
 }
 
-const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+const isValidEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)
 
 module.exports = async (req, res) => {
+  // ---- temporary self-check: open /api/waitlist?diag=1 in a browser ----
+  if (req.method === 'GET' && req.query && req.query.diag) {
+    const raw = process.env.DATABASE_URL || ''
+    const report = {
+      hasEnvVar: !!raw,
+      looksLikePostgresUrl: raw.startsWith('postgresql://'),
+      stillHasBrackets: raw.includes('[') || raw.includes(']'),
+      host: raw ? (raw.split('@')[1] || '').split(':')[0] : null,
+      port: raw ? ((raw.split('@')[1] || '').split(':')[1] || '').split('/')[0] : null
+    }
+    try {
+      const r = await getPool().query('SELECT 1 AS ok')
+      report.connection = 'OK'
+      report.select = r.rows[0]
+      await ensureTable()
+      report.table = 'ready'
+    } catch (e) {
+      report.connection = 'FAILED'
+      report.error = e.message
+      report.code = e.code || null
+    }
+    return res.status(200).json(report)
+  }
+
   try {
     if (req.method === 'GET') {
       await ensureTable()
@@ -45,34 +69,32 @@ module.exports = async (req, res) => {
       return res.status(405).json({ success: false, message: 'Method not allowed.' })
     }
 
-    const email = String((req.body && req.body.email) || '').trim().toLowerCase()
+    let body = req.body
+    if (typeof body === 'string') { try { body = JSON.parse(body) } catch (e) { body = {} } }
+    const email = String((body && body.email) || '').trim().toLowerCase()
 
-    if (!email) {
-      return res.status(400).json({ success: false, message: 'Email address is required.' })
-    }
-    if (!isValidEmail(email)) {
-      return res.status(400).json({ success: false, message: 'Please enter a valid email address.' })
-    }
+    if (!email) return res.status(400).json({ success: false, message: 'Email address is required.' })
+    if (!isValidEmail(email)) return res.status(400).json({ success: false, message: 'Please enter a valid email address.' })
 
     await ensureTable()
 
-    const ip =
-      (req.headers['x-forwarded-for'] || '').split(',')[0] ||
-      req.headers['x-real-ip'] ||
-      'unknown'
-    const userAgent = req.headers['user-agent'] || 'unknown'
+    const ip = (req.headers['x-forwarded-for'] || '').split(',')[0] || 'unknown'
+    const ua = req.headers['user-agent'] || 'unknown'
 
     await getPool().query(
       'INSERT INTO waitlist (email, ip_address, user_agent) VALUES ($1, $2, $3)',
-      [email, ip, userAgent]
+      [email, ip, ua]
     )
-
-    return res.status(201).json({ success: true, message: "You're on the list. We'll be in touch." })
+    return res.status(201).json({ success: true, message: "You're on the list." })
   } catch (error) {
     if (error && error.code === '23505') {
       return res.status(409).json({ success: false, message: "You're already on our waitlist." })
     }
-    console.error('[waitlist] Unexpected error:', error)
-    return res.status(500).json({ success: false, message: 'Something went wrong. Please try again shortly.' })
+    console.error('[waitlist]', error && error.message, error && error.code)
+    // surfaced on purpose while launching, so the cause is visible instead of guessed
+    return res.status(500).json({
+      success: false,
+      message: 'Database error: ' + (error && error.message ? error.message : 'unknown')
+    })
   }
 }
