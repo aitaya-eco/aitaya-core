@@ -1,6 +1,5 @@
 // POST /api/waitlist  -> saves {email}
 // GET  /api/waitlist  -> { count }
-// GET  /api/waitlist?diag=1 -> connection diagnosis (remove once launched)
 const { Pool } = require('pg')
 
 let pool
@@ -34,30 +33,6 @@ async function ensureTable () {
 const isValidEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)
 
 module.exports = async (req, res) => {
-  // ---- temporary self-check: open /api/waitlist?diag=1 in a browser ----
-  if (req.method === 'GET' && req.query && req.query.diag) {
-    const raw = process.env.DATABASE_URL || ''
-    const report = {
-      hasEnvVar: !!raw,
-      looksLikePostgresUrl: raw.startsWith('postgresql://'),
-      stillHasBrackets: raw.includes('[') || raw.includes(']'),
-      host: raw ? (raw.split('@')[1] || '').split(':')[0] : null,
-      port: raw ? ((raw.split('@')[1] || '').split(':')[1] || '').split('/')[0] : null
-    }
-    try {
-      const r = await getPool().query('SELECT 1 AS ok')
-      report.connection = 'OK'
-      report.select = r.rows[0]
-      await ensureTable()
-      report.table = 'ready'
-    } catch (e) {
-      report.connection = 'FAILED'
-      report.error = e.message
-      report.code = e.code || null
-    }
-    return res.status(200).json(report)
-  }
-
   try {
     if (req.method === 'GET') {
       await ensureTable()
@@ -91,10 +66,6 @@ module.exports = async (req, res) => {
       return res.status(409).json({ success: false, message: "You're already on our waitlist." })
     }
     console.error('[waitlist]', error && error.message, error && error.code)
-    // surfaced on purpose while launching, so the cause is visible instead of guessed
-    return res.status(500).json({
-      success: false,
-      message: 'Database error: ' + (error && error.message ? error.message : 'unknown')
-    })
+    return res.status(500).json({ success: false, message: 'Something went wrong. Please try again shortly.' })
   }
 }
