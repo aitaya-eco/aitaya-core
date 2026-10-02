@@ -22,8 +22,15 @@
    Fit themes: the audience vote redresses the whole room
    ============================================================ */
 @font-face{
-  font-family:"Attire Display Script";
-  src:url("assets/fonts/AttireDisplayScript-Regular.ttf") format("truetype");
+  font-family:"Aitaya Ari";
+  src:url("assets/fonts/AitayaAri-Regular.woff2") format("woff2"),
+      url("assets/fonts/AitayaAri-Regular.ttf") format("truetype");
+  font-display:swap;
+}
+@font-face{
+  font-family:"Aitaya Ari Stitch";
+  src:url("assets/fonts/AitayaAriStitch-Regular.woff2") format("woff2"),
+      url("assets/fonts/AitayaAriStitch-Regular.ttf") format("truetype");
   font-display:swap;
 }
 :root{
@@ -54,7 +61,8 @@
   --accent-deep:#153E31;
 
   --didot:"Didot","Bodoni Moda","GFS Didot",serif;
-  --script:"Attire Display Script","Bodoni Moda",serif;
+  --script:"Aitaya Ari","Bodoni Moda",serif;
+  --script-stitch:"Aitaya Ari Stitch","Aitaya Ari","Bodoni Moda",serif;
   --grotesk:"Space Grotesk",system-ui,sans-serif;
 
   --s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:48px;--s6:64px;--s7:96px;
@@ -525,7 +533,7 @@ body[data-fit="fur"] .brand-mini img{filter:invert(.92) sepia(.3) saturate(.6) h
 #greenroom h2{font-family:var(--didot);font-weight:400;font-size:clamp(24px,3vw,34px);line-height:1.16;color:var(--ink)}
 #greenroom h2 em{font-style:italic;color:var(--accent)}
 #greenroom .slot{
-  font-family:var(--script);font-size:clamp(30px,4.5vw,46px);color:var(--bronze);
+  font-family:var(--script-stitch);font-size:clamp(30px,4.5vw,46px);color:var(--bronze);
   margin:var(--s2) 0 4px;line-height:1;
 }
 #greenroom .slotnote{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
@@ -1575,7 +1583,7 @@ rwShow(0);
 const shots = [
   ["look-01-welcome.jpg","Onboarding","Choose how you move"],
   ["look-02-feed.jpg","Home","Tyres and the feed"],
-  ["look-11-closet-new.jpg","Closet","64 pieces, known"],
+  ["look-11-closet-new.jpg","Closet","Every piece, known"],
   ["look-13-stylist-schedule.jpg","AI Stylist","Chat that schedules"],
   ["look-12-planner.jpg","Planner","Weather-checked"],
   ["look-09-squad.jpg","Squad","Vote, tailor, deliver"],
@@ -2360,7 +2368,7 @@ if (renderer && !reduceMotion){
     /* rasterise the letters, then read them back as a bitmap */
     const m = document.createElement("canvas"); m.width = EMB_W; m.height = EMB_H;
     const mx = m.getContext("2d");
-    mx.font = (46 * SS) + 'px "Attire Display Script", Didot, serif';
+    mx.font = (46 * SS) + 'px "Aitaya Ari", Didot, serif';
     mx.textBaseline = "alphabetic";
     mx.fillStyle = "#fff";
     mx.fillText("Aitaya", textX, dy);
@@ -2563,7 +2571,7 @@ if (renderer && !reduceMotion){
   applyMood(MOODS[12], 12); /* the house cloth, until a niche is tapped */
   /* the script face may land after first paint; restitch once it has */
   if (document.fonts && document.fonts.load){
-    document.fonts.load('30px "Attire Display Script"').then(() => applyMood(curMood, curIdx)).catch(() => {});
+    document.fonts.load('30px "Aitaya Ari"').then(() => applyMood(curMood, curIdx)).catch(() => {});
   }
 
   let mx = 0, my = 0;

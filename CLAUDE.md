@@ -11,7 +11,7 @@ Frame the product as a **fashion ecosystem**, never a generic "app" or "platform
 - **Static site, no framework, no build step.** One `index.html` with inline `<style>` and inline `<script>`. This is intentional. Do NOT convert to React/Next/Vite.
 - `api/waitlist.js` — Vercel serverless function, POST `{email}` → Postgres (`waitlist` table, auto-created). Uses `DATABASE_URL`. GET returns count. Duplicate emails → 409.
 - `vercel.json` — tells Vercel to serve static + build only the api function. Overrides any dashboard settings.
-- `assets/` — `brand/` (logos, favicons), `fonts/` (AttireDisplayScript-Regular.ttf), `img/looks/` (11 app screenshots), `img/paper.jpg` (texture), `vendor/three.module.js` (three.js, vendored — no CDN in production).
+- `assets/` — `brand/` (logos, favicons), `fonts/` (Aitaya Ari: `AitayaAri-Regular` solid and `AitayaAriStitch-Regular` stitched, woff2 + ttf), `img/looks/` (11 app screenshots), `img/paper.jpg` (texture), `vendor/three.module.js` (three.js, vendored — no CDN in production).
 - three.js is loaded locally in prod. (The chat previews swap to a CDN import + inline the assets; the repo version imports `./assets/vendor/three.module.js`.)
 
 ## The aesthetic — "the parlor edition"
@@ -28,7 +28,7 @@ Layered design languages, all present on purpose:
 ### Palette (contrast-audited — respect these rules)
 - Emerald `#1E5F4A`, emerald-deep `#153E31`, charcoal `#26282A`, gold `#DDC47F`, bronze `#7C6320`, sunset `#D97B2F`, rust `#A64B26`, cocoa `#4A3826`.
 - **HARD RULE: light gold (#DDC47F) fails WCAG on cream (~1.5:1). Never put gold text on light surfaces.** Use **bronze #7C6320** (≥4.5:1) for gold-family text on light. Gold text only on dark surfaces.
-- Type: **Didot** (GFS Didot / Bodoni Moda) for display, **Attire Display Script** (the bundled brand face) for accents/headings-script, **Space Grotesk** for UI/body.
+- Type: **Didot** (GFS Didot / Bodoni Moda) for display, **Aitaya Ari** (Aitaya's own embroidered uncial, bundled) for accents via `--script`; the stitched cut via `--script-stitch` only at 30px and above. The old Attire Display Script belongs to a former contributor and must never be reintroduced, **Space Grotesk** for UI/body.
 
 ## Interactive systems (all already built — understand before editing)
 - **Power-on boot**, **power-off switch** (CRT collapse), **doze** easter egg (idle 40s → screens dim, ivory mark bounces DVD-style, header says "The set dozes… it tires").
