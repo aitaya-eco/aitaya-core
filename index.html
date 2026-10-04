@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aitaya· Dress for the culture, styled by intelligence.</title>
-<meta name="description" content="Aitaya is a fashion ecosystem in your pocket. Closet, stylist, tailor, runway, one loop. Broadcasting soon from Nigeria. Join the waitlist.">
+<title>Aitaya · Your closet, stylist and tailor in one place</title>
+<meta name="description" content="Aitaya is a fashion ecosystem in your pocket: your closet, a stylist and trusted tailors in one place. Launching soon in Nigeria. Join the waitlist.">
 <meta property="og:title" content="Aitaya · Coming Soon">
-<meta property="og:description" content="Dress for the culture, styled by intelligence. Join the waitlist at aitaya.ng">
+<meta property="og:description" content="Your closet, stylist and tailor in one place. Join the waitlist at aitaya.ng">
 <meta property="og:image" content="https://aitaya.ng/assets/brand/lockup_ivory_clean.png">
 <meta property="og:url" content="https://aitaya.ng">
 <link rel="icon" href="assets/brand/favicon.ico">
@@ -667,7 +667,7 @@ body[data-fit="fur"] #greenroom .gr-wordmark{filter:invert(.92) sepia(.3) satura
           mask-image:radial-gradient(circle 90px at var(--wx) var(--wy), transparent 0 52px, rgba(0,0,0,.35) 66px, black 88px);
 }
 .screen.cleaned .grime{opacity:.14}
-.wipe-cue{
+.wipe-cue{white-space:nowrap;
   position:absolute;z-index:7;left:50%;bottom:12px;transform:translateX(-50%);
   font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(243,239,230,.85);
   background:rgba(15,21,18,.45);
@@ -717,7 +717,25 @@ body.dozing .dvd{opacity:.9}
 .hero-zone:first-child{padding-top:0}
 .wordmark{width:min(280px,72%);height:auto;margin-bottom:var(--s1)}
 body[data-fit="fur"] .wordmark{filter:invert(.92) sepia(.3) saturate(.6) hue-rotate(100deg)}
-.itire{font-family:var(--script);font-size:17px;color:var(--ink-soft)}
+.brandline{display:flex;align-items:center;flex-wrap:wrap;gap:6px 26px;margin-bottom:var(--s1)}
+.brandline .wordmark{margin-bottom:0}
+.itire{
+  position:relative;display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.1;
+  padding:7px 14px 8px 26px;border-radius:7px 13px 13px 7px;
+  background:linear-gradient(180deg,#F2E7CC,#E8DAB8);color:var(--cocoa);
+  box-shadow:4px 5px 10px rgba(var(--shadow-warm),.22), inset 1px 1px 2px rgba(255,255,245,.8);
+  transform:rotate(-4deg);transform-origin:left center;
+}
+.itire small{font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--bronze)}
+.itire b{font-family:var(--script);font-weight:400;font-size:19px}
+.itire::before{content:"";position:absolute;left:9px;top:50%;transform:translateY(-50%);width:7px;height:7px;border-radius:50%;
+  background:var(--bg);box-shadow:inset 1px 1px 2px rgba(74,58,38,.5)}
+.itire::after{content:"";position:absolute;left:-22px;top:36%;width:26px;height:12px;
+  border-bottom:1.5px solid rgba(124,99,32,.55);border-radius:0 0 60% 20%}
+body[data-fit="fur"] .brandline{justify-content:center}
+body[data-fit="fur"] .itire{background:linear-gradient(180deg,#3A332A,#332C23);color:#E8DAB8}
+body[data-fit="fur"] .itire small{color:#DDC47F}
+@media (max-width:560px){.itire::after{display:none}}
 h1.thesis{font-family:var(--didot);font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.12;color:var(--ink);margin-top:var(--s2)}
 h1.thesis em{font-style:italic;color:var(--accent)}
 .lede{color:var(--ink-soft);font-size:15px;max-width:48ch}
@@ -900,6 +918,42 @@ body[data-fit="fur"] .interstitial .tag{background:linear-gradient(180deg,#3A332
 /* gallery: little framed prints, slight bulge */
 .reel-wrap{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:var(--s3) 4px var(--s2)}
 .reel-wrap::-webkit-scrollbar{display:none}
+.reel-shell{position:relative}
+.frame .shot{cursor:zoom-in}
+.frame .shot img{display:block;width:100%}
+/* stitched arrows: a running-stitch arrow sewn onto a felt button */
+.stitch-arrow{
+  width:52px;height:52px;border-radius:50%;flex:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;position:relative;
+  background:linear-gradient(180deg,#F2E7CC,#E6D6B0);color:var(--accent);
+  border:0;box-shadow:5px 6px 12px rgba(var(--shadow-warm),.28), inset 1px 1px 2px rgba(255,255,245,.85);
+  transition:transform .2s, opacity .2s;
+}
+.stitch-arrow::before{content:"";position:absolute;inset:5px;border-radius:50%;border:1.5px dashed rgba(124,99,32,.55)}
+.stitch-arrow:hover{transform:translateY(-2px) scale(1.05)}
+.stitch-arrow:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.stitch-arrow[disabled]{opacity:.35;cursor:default;transform:none}
+.stitch-arrow svg{width:24px;height:24px}
+.stitch-arrow.prev svg{transform:scaleX(-1)}
+body[data-fit="fur"] .stitch-arrow{background:linear-gradient(180deg,#3A332A,#2E2820);color:#E8DAB8}
+body[data-fit="fur"] .stitch-arrow::before{border-color:rgba(221,196,127,.5)}
+.reel-shell .stitch-arrow{position:absolute;top:40%;z-index:3}
+.reel-shell .stitch-arrow.prev{left:-10px}
+.reel-shell .stitch-arrow.next{right:-10px}
+@media (hover:none) and (pointer:coarse){.reel-shell .stitch-arrow{display:none}}
+/* full-screen viewer */
+#viewer{position:fixed;inset:0;z-index:125;display:none;align-items:center;justify-content:center;gap:clamp(10px,3vw,40px);
+  padding:clamp(14px,3vw,36px);background:rgba(12,15,13,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#viewer.on{display:flex}
+#viewer figure{margin:0;display:flex;flex-direction:column;align-items:center;max-height:100%}
+#viewer img{max-height:calc(100vh - 120px);max-width:min(92vw,520px);width:auto;height:auto;border-radius:26px;
+  border:6px solid #37302A;box-shadow:0 20px 50px rgba(0,0,0,.5);background:#0F1512}
+#viewer figcaption{margin-top:12px;text-align:center;color:#F3EFE6}
+#viewer figcaption b{display:block;font-family:var(--script);font-weight:400;font-size:20px}
+#viewer figcaption span{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(243,239,230,.75)}
+#viewer .v-close{position:absolute;top:clamp(12px,2.5vw,26px);right:clamp(12px,2.5vw,26px)}
+@media (max-width:640px){#viewer .stitch-arrow.prev,#viewer .stitch-arrow.next{position:absolute;bottom:18px}
+  #viewer .stitch-arrow.prev{left:18px}#viewer .stitch-arrow.next{right:18px}#viewer img{max-height:calc(100vh - 170px)}}
 .reel{display:flex;gap:var(--s3);width:max-content}
 .frame{width:190px;flex:none}
 .frame .shot{
@@ -981,6 +1035,11 @@ body[data-fit="fur"] .interstitial .tag{background:linear-gradient(180deg,#3A332
   transition:border-color .3s, background .3s;
 }
 .role.spot{border-color:var(--gold);background:rgba(221,196,127,.13)}
+button.role{font:inherit;color:inherit;text-align:left;width:100%;cursor:pointer}
+button.role:hover{border-color:rgba(221,196,127,.6);background:rgba(255,255,255,.11)}
+button.role:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.role .pick{grid-column:1/-1;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(221,196,127,.85);font-weight:700}
+.role.spot .pick::after{content:" \2713"}
 .role b{font-family:var(--script);font-weight:400;font-size:19px;color:var(--gold)}
 .role p{font-size:14px;color:rgba(243,239,230,.88)}
 
@@ -1067,28 +1126,28 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
 <div id="greenroom" role="dialog" aria-modal="true" aria-label="You are on the waitlist">
   <div class="card">
     <img class="gr-wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
-    <div class="onair-badge"><i></i>You are on the air</div>
-    <h2>Your seat is <em>reserved.</em></h2>
+    <div class="onair-badge"><i></i>You&rsquo;re on the list</div>
+    <h2>You&rsquo;re <em>in.</em></h2>
     <div class="slot" id="gr-slot">&nbsp;</div>
-    <div class="slotnote" id="gr-slotnote">In the queue</div>
-    <p class="gr-lede">The broadcast has a green room, and you are welcome in it. This is where the first wearers, tailors, brands and stylists are already talking.</p>
-    <div class="gr-sep"><span></span><b>Join the room</b><span></span></div>
+    <div class="slotnote" id="gr-slotnote">Your place in line</div>
+    <p class="gr-lede">Join our WhatsApp group for updates and early invites.</p>
+    <div class="gr-sep"><span></span><b>Join the community</b><span></span></div>
     <div class="gr-rooms" id="gr-rooms"></div>
-    <div class="gr-sep"><span></span><b>Follow the station</b><span></span></div>
+    <div class="gr-sep"><span></span><b>Follow us</b><span></span></div>
     <div class="gr-socials" id="gr-socials"></div>
-    <button class="gr-close" id="gr-close">Back to the broadcast</button>
+    <button class="gr-close" id="gr-close">Back to the site</button>
   </div>
 </div>
-<div id="crt-off" aria-hidden="true"><div class="collapse"></div><div class="osd">The set is resting &middot; tap to wake it</div></div>
+<div id="crt-off" aria-hidden="true"><div class="collapse"></div><div class="osd">Tap to turn it back on</div></div>
 
-<nav class="spine" aria-label="Broadcast acts">
+<nav class="spine" aria-label="Sections">
   <span class="rail"></span>
-  <button class="node" data-goto=".hero" title="Sign-on"></button>
-  <button class="node" data-goto="#act-pick" title="Who is watching"></button>
-  <button class="node" data-goto="#act-guide" title="Programming"></button>
+  <button class="node" data-goto=".hero" title="Home"></button>
+  <button class="node" data-goto="#act-pick" title="Your role"></button>
+  <button class="node" data-goto="#act-guide" title="Features"></button>
   <button class="node" data-goto="#act-runway" title="Runway"></button>
-  <button class="node" data-goto="#act-vote" title="Audience vote"></button>
-  <button class="node" data-goto="#act-goodnight" title="Sign-off"></button>
+  <button class="node" data-goto="#act-vote" title="Vote"></button>
+  <button class="node" data-goto="#act-goodnight" title="Join"></button>
   <span class="rail"></span>
 </nav>
 
@@ -1096,15 +1155,15 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
   <div class="container">
     <div class="bar felted">
       <div class="brand-mini"><img src="assets/brand/logo_primary_transparent.png" alt="Aitaya"></div>
-      <div class="nowline caps" id="nowline" aria-live="polite">Sign-on</div>
+      <div class="nowline caps" id="nowline" aria-live="polite">Home</div>
       <div class="hdr-right">
         <button class="hum" id="hum" aria-pressed="false" title="TV hum" aria-label="TV hum, off">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w1" d="M15.5 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18 7a8 8 0 0 1 0 10"/></svg>
         </button>
-        <button class="pwr" id="pwr" title="Switch the set off" aria-label="Power">
+        <button class="pwr" id="pwr" title="Turn off the screen" aria-label="Power">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v8"/><path d="M6.2 6.2a8 8 0 1 0 11.6 0"/></svg>
         </button>
-        <div class="onair caps" title="Broadcasting soon"><span class="dot"></span><span>Broadcasting soon</span></div>
+        <div class="onair caps" title="Launching soon"><span class="dot"></span><span>Launching soon</span></div>
       </div>
     </div>
   </div>
@@ -1121,7 +1180,7 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
           <img class="dvd" id="dvd" src="assets/brand/mark_ivory_transparent.png" alt="">
           <div class="chip" id="channel-chip">CH 01</div>
           <div class="grime"></div>
-          <div class="wipe-cue">Dusty &middot; wipe the glass</div>
+          <div class="wipe-cue">Wipe the screen</div>
           <div class="tear" id="hero-tear"></div>
           <div class="static" id="channel-static"></div>
         </div>
@@ -1129,48 +1188,50 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
     </div>
     <div class="dial-row">
       <div class="knob" id="knob" role="slider" aria-label="Channel dial" aria-valuemin="1" aria-valuemax="8" tabindex="0"><span class="tick"></span></div>
-      <div class="hint">This set has been waiting for you.<br>Wipe the glass. Turn the dial. Or tap a niche on the tape below.</div>
+      <div class="hint">Turn the dial to look inside.</div>
     </div>
     <div class="pic-ctl">
       <label>V-hold<div class="minidial" id="d-vhold" role="slider" aria-label="Vertical hold" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" tabindex="0"><i></i></div></label>
       <label>Tracking<div class="minidial" id="d-track" role="slider" aria-label="Tracking" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" tabindex="0"><i></i></div></label>
-      <button class="setauto" id="setauto">Set auto</button>
+      <button class="setauto" id="setauto">Reset</button>
     </div>
   </div>
 
   <div class="hero-copy clay stitched tube furred rv">
     <div class="hero-zone">
-      <span class="standfirst">Now broadcasting from Nigeria</span>
+      <span class="standfirst">Launching soon in Nigeria</span>
     </div>
     <div class="hero-zone">
-      <img class="wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
-      <div class="itire">&ldquo;I tire!&rdquo;</div>
-      <h1 class="thesis" id="hero-thesis">Dress for the culture, <em>styled by intelligence.</em></h1>
+      <div class="brandline">
+        <img class="wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
+        <div class="itire" aria-label="Pronounced I tire"><small>Say it like</small><b>&ldquo;I tire!&rdquo;</b></div>
+      </div>
+      <h1 class="thesis" id="hero-thesis">Your closet, stylist and tailor. <em>All in one place.</em></h1>
     </div>
     <div class="hero-zone">
-      <p class="lede" id="hero-lede">Aitaya is a fashion ecosystem in your pocket. Your closet talks to a stylist that knows the weather in Kano. Your tailor gets paid through escrow, not promises. Your campus votes one fit to the top every night. Everything connects, and it starts here.</p>
+      <p class="lede" id="hero-lede">Aitaya is a fashion ecosystem in your pocket. Plan outfits from clothes you already own, get styled for any event, and find tailors you can trust to deliver.</p>
     </div>
     <div class="hero-zone" id="form-zone">
-      <div class="form-label" id="form-label-1">Reserve your seat</div>
+      <div class="form-label" id="form-label-1">Get early access</div>
       <form class="waitlist" novalidate>
         <input type="email" name="email" id="waitlist-email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
         <button type="submit" id="cta-1">Join the waitlist</button>
       </form>
       <div class="form-ok"></div>
-      <p class="form-note">Invites go out in waves. One email when your turn comes, nothing else.</p>
+      <p class="form-note">You&rsquo;ll be mailed when it&rsquo;s your turn.</p>
     </div>
     <div class="hero-zone">
-      <div class="sched" aria-label="Broadcast schedule">
+      <div class="sched" aria-label="Launch schedule">
         <div><span>Now</span><b>Waitlist open</b></div>
-        <div><span>Up next</span><b>Campus beta &middot; Nile University</b></div>
-        <div><span>Then</span><b>Lagos &middot; Abuja &middot; everywhere</b></div>
+        <div><span>Next</span><b>Nile University beta</b></div>
+        <div><span>Then</span><b>Abuja, Lagos and beyond</b></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================= MEASURING TAPE ================= -->
-<div class="ticker" aria-label="Style niches on the measuring tape. Tap one to tune the set"><div class="lane" id="ticker-lane"></div></div>
+<div class="ticker" aria-label="Style niches. Tap one to change the look"><div class="lane" id="ticker-lane"></div></div>
 
 <!-- ================= WHO'S WATCHING ================= -->
 <div class="interstitial rv" aria-hidden="true"><span class="line"></span><span class="tag felted">Act I &middot; who&rsquo;s watching tonight</span><span class="line"></span></div>
@@ -1179,11 +1240,11 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
     <div class="act-head">
       <span class="act-no">01</span>
       <div class="act-title">
-        <div class="kicker caps">The broadcast bends to you</div>
+        <div class="kicker caps">Who are you?</div>
         <h2>Pick your seat <em>in the ecosystem.</em></h2>
       </div>
     </div>
-    <p class="section-lede" style="margin-bottom:var(--s3)">Every wardrobe needs wearers, makers, sellers and stylists. Choose yours and watch this whole page re-dress itself around you. The words change, the colours change, the order of things changes. Change your mind any time, the set won&rsquo;t judge.</p>
+    <p class="section-lede" style="margin-bottom:var(--s3)">Pick one and we&rsquo;ll show you what matters to you.</p>
     <div class="roles-pick" id="roles-pick">
       <button class="rolechip" data-role="creator"><b>Creator</b><span>I wear it, post it, and let the city rate it</span></button>
       <button class="rolechip" data-role="tailor"><b>Tailor</b><span>I cut, I sew, I deliver, I get paid</span></button>
@@ -1195,14 +1256,14 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
 </section>
 
 <!-- ================= PROGRAMMING ================= -->
-<div class="interstitial rv" aria-hidden="true"><span class="line"></span><span class="tag felted">Act II &middot; tonight&rsquo;s programming</span><span class="line"></span></div>
+<div class="interstitial rv" aria-hidden="true"><span class="line"></span><span class="tag felted">Act II &middot; what&rsquo;s inside</span><span class="line"></span></div>
 <section class="section" id="act-guide">
   <div class="clay stitched panel furred rv">
     <div class="act-head">
       <span class="act-no">02</span>
       <div class="act-title">
-        <div class="kicker caps" id="guide-kicker">Six channels, one wardrobe</div>
-        <h2 id="guide-title">The ecosystem, <em>channel by channel.</em></h2>
+        <div class="kicker caps" id="guide-kicker">Six features, one wardrobe</div>
+        <h2 id="guide-title">What you <em>get.</em></h2>
       </div>
     </div>
     <div class="guide" id="guide"></div>
@@ -1217,11 +1278,11 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
       <span class="act-no">03</span>
       <div class="act-title">
         <div class="kicker caps">The signature feed</div>
-        <h2>Runway, <em>full turn.</em></h2>
+        <h2>Fashion you can watch, <em>then wear.</em></h2>
       </div>
     </div>
     <div class="runway-grid">
-      <div class="rw-phone" id="rw-phone" role="img" aria-label="Runway video feed preview. Tap to see the next look">
+      <div class="rw-phone" id="rw-phone" role="img" aria-label="Runway video feed preview. Tap to view full screen" tabindex="0">
         <img id="rw-img" src="assets/img/looks/look-10-reel.jpg" alt="Runway look">
         <div class="prog"><i id="rw-prog"></i></div>
         <div class="rw-rail">
@@ -1233,9 +1294,8 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
       </div>
       <div class="rw-copy">
         <img class="wordmark rw-wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
-        <p id="rw-copy-p">Vertical video, full screen, with the action rail down the side. Love a look, save it, analyse the fit, then recreate it from pieces already hanging in your own closet. The aso-oke catches light differently at every angle. Runway is where the whole ecosystem shows off.</p>
-        <p>Tap the screen or the arrow. The feed keeps rolling, same as launch night.</p>
-        <div class="rw-tip">The heart is real. Press it.</div>
+        <p id="rw-copy-p">Scroll outfit videos, save the ones you love, and recreate them from what&rsquo;s already in your closet.</p>
+        <div class="rw-tip">Tap the screen to see it full size</div>
       </div>
     </div>
   </div>
@@ -1248,26 +1308,26 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
     <div class="act-head">
       <span class="act-no">04</span>
       <div class="act-title">
-        <div class="kicker caps">Straight from the beta build</div>
-        <h2>What&rsquo;s on air <em>right now.</em></h2>
+        <div class="kicker caps">Real screens from the beta</div>
+        <h2>A look <em>inside.</em></h2>
       </div>
     </div>
-    <div class="reel-wrap"><div class="reel" id="reel"></div></div>
+    <div class="reel-shell"><button class="stitch-arrow prev" id="reel-prev" aria-label="Previous screens"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M3.5 12h15"/><path d="M13 6.5l5.5 5.5-5.5 5.5"/></svg></button><div class="reel-wrap" id="reel-wrap"><div class="reel" id="reel"></div></div><button class="stitch-arrow next" id="reel-next" aria-label="More screens"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M3.5 12h15"/><path d="M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></div>
   </div>
   <div class="clay stitched panel furred rv">
     <div class="act-head">
       <span class="act-no">&#10022;</span>
       <div class="act-title">
-        <div class="kicker caps">Audience participation &middot; the aso-ebi ritual</div>
-        <h2>Vote the fabric. <em>Watch the room change.</em></h2>
+        <div class="kicker caps">The aso-ebi vote</div>
+        <h2>Pick a fabric. <em>Watch the page change.</em></h2>
       </div>
     </div>
-    <p class="section-lede" style="margin-bottom:var(--s3)">This is how squads work in the app. Before any owambe, the group votes a base colour and the tailor cuts every outfit from the winning cloth. Try it on this very page: pick a swatch and the whole room gets re-dressed in your colour.</p>
+    <p class="section-lede" style="margin-bottom:var(--s3)">Planning aso-ebi? Your group votes on the fabric and the tailor sews from the winner. Try it here.</p>
     <div class="vote" id="vote">
-      <button class="opt" data-v="0" data-fit="emerald"><span class="swatch sw-em"></span><span class="lbl">Deep emerald</span><span class="bar"><i></i></span><b class="pct">58%</b></button>
-      <button class="opt" data-v="1" data-fit="fur"><span class="swatch sw-cg"></span><span class="lbl">Mohair shag, after dark</span><span class="bar"><i></i></span><b class="pct">34%</b></button>
-      <button class="opt" data-v="2" data-fit="ivory"><span class="swatch sw-iv"></span><span class="lbl">Ivory, washed bright</span><span class="bar"><i></i></span><b class="pct">8%</b></button>
-      <div class="vote-after" id="vote-after">Counted, and the room obeys the cloth. Emerald keeps the parlor. Mohair grows fur on everything, maybe too much fur. Ivory washes it bright. In the app your squad settles this before the tailor ever threads a needle. <a href="#waitlist-email" id="vote-cta">Save a seat and vote for real on campus.</a> <button type="button" id="revote" style="background:none;border:0;color:var(--bronze);cursor:pointer;font:inherit;text-decoration:underline;text-underline-offset:3px">Change the cloth.</button></div>
+      <button class="opt" data-v="0" data-fit="emerald"><span class="swatch sw-em"></span><span class="lbl">Emerald</span><span class="bar"><i></i></span><b class="pct">58%</b></button>
+      <button class="opt" data-v="1" data-fit="fur"><span class="swatch sw-cg"></span><span class="lbl">Mohair</span><span class="bar"><i></i></span><b class="pct">34%</b></button>
+      <button class="opt" data-v="2" data-fit="ivory"><span class="swatch sw-iv"></span><span class="lbl">Ivory</span><span class="bar"><i></i></span><b class="pct">8%</b></button>
+      <div class="vote-after" id="vote-after">Vote counted. On Aitaya, your group decides before the tailor starts cutting. <a href="#waitlist-email" id="vote-cta">Join the waitlist to vote for real.</a> <button type="button" id="revote" style="background:none;border:0;color:var(--bronze);cursor:pointer;font:inherit;text-decoration:underline;text-underline-offset:3px">Vote again</button></div>
     </div>
   </div>
 </section>
@@ -1279,13 +1339,13 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
     <div class="rv">
       <div class="kicker caps">Behind every look, a maker</div>
       <h2>An ecosystem pays <em>everyone in it.</em></h2>
-      <p class="makers-lede">The looks you just watched were cut, sewn and styled by real hands. On Aitaya those hands get paid properly: escrow for tailors, storefronts for brands, bookings for stylists, every naira through Paystack.</p>
+      <p class="makers-lede">Tailors, brands and stylists all earn on Aitaya. Tap a role to see the page through their eyes.</p>
     </div>
     <div class="role-list">
-      <div class="role rv" data-role="creator"><b>Creator</b><p>Post looks, build your wardrobe, get styled by people and by the machine.</p></div>
-      <div class="role rv" data-role="tailor"><b>Tailor</b><p>Briefs come in with measurements attached. Escrow holds the money while you sew.</p></div>
-      <div class="role rv" data-role="brand"><b>Brand</b><p>Sell ready-made from your own storefront, right where the culture already scrolls.</p></div>
-      <div class="role rv" data-role="stylist"><b>Stylist</b><p>Book sessions and dress clients straight from their own closets.</p></div>
+      <button type="button" class="role rv" data-role="creator" aria-pressed="false"><b>Creator</b><p>Post looks, build your wardrobe, get styled by people and by the machine.</p><span class="pick">See it as a creator</span></button>
+      <button type="button" class="role rv" data-role="tailor" aria-pressed="false"><b>Tailor</b><p>Briefs come in with measurements attached. Escrow holds the money while you sew.</p><span class="pick">See it as a tailor</span></button>
+      <button type="button" class="role rv" data-role="brand" aria-pressed="false"><b>Brand</b><p>Sell ready-made from your own storefront, right where the culture already scrolls.</p><span class="pick">See it as a brand</span></button>
+      <button type="button" class="role rv" data-role="stylist" aria-pressed="false"><b>Stylist</b><p>Book sessions and dress clients straight from their own closets.</p><span class="pick">See it as a stylist</span></button>
     </div>
   </div>
 </section>
@@ -1305,15 +1365,15 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
         </div>
       </div>
       <div class="gn-copy">
-        <h2 id="gn-title">Before the screen goes dark, <em>leave your name with the station.</em></h2>
-        <p id="gn-p">Seats open in waves: campus first, then the cities. One email and the ecosystem remembers you on opening night.</p>
+        <h2 id="gn-title">Be first <em>in line.</em></h2>
+        <p id="gn-p">Campus first, then the rest of Nigeria.</p>
         <div class="form-zone" id="form-zone-2" style="margin-top:var(--s3)">
           <form class="waitlist" novalidate>
             <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
-            <button type="submit" id="cta-2">Wake me at launch</button>
+            <button type="submit" id="cta-2">Join the waitlist</button>
           </form>
           <div class="form-ok"></div>
-          <p class="form-note">Same list, same promise. One email, nothing else.</p>
+          <p class="form-note">You&rsquo;ll be mailed as soon as your invite is ready.</p>
         </div>
       </div>
     </div>
@@ -1321,20 +1381,24 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
 </section>
 </main>
 
+<div id="viewer" role="dialog" aria-modal="true" aria-label="Full screen view">
+  <button class="stitch-arrow v-close" id="v-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  <button class="stitch-arrow prev" id="v-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M3.5 12h15"/><path d="M13 6.5l5.5 5.5-5.5 5.5"/></svg></button>
+  <figure><img id="v-img" alt=""><figcaption><b id="v-title"></b><span id="v-sub"></span></figcaption></figure>
+  <button class="stitch-arrow next" id="v-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M3.5 12h15"/><path d="M13 6.5l5.5 5.5-5.5 5.5"/></svg></button>
+</div>
+
 <footer>
   <div class="credits" id="credits">
     <div class="roll">
-      <p>A Nigerian broadcast</p>
+      <p>Made in Nigeria</p>
       <p>Wardrobe by <b>you</b></p>
-      <p>Cut and sewn by <b>the tailors</b></p>
-      <p>Styled by <b>the stylists</b></p>
-      <p>Stocked by <b>the brands</b></p>
-      <p>Filmed on <b>every campus</b></p>
+      <p>Made by <b>the tailors, stylists and brands</b></p>
       <div class="big">Directed by the culture.</div>
       <p>No fits were harmed in the making of this ecosystem</p>
     </div>
   </div>
-  <div class="signoff" aria-hidden="true">Sign-off &middot; transmission resumes at launch</div>
+  <div class="signoff" aria-hidden="true">Sign-off &middot; see you at launch</div>
   <div class="inner">
     <div>
       <img src="assets/brand/logo_primary_ivory_transparent.png" alt="Aitaya">
@@ -1394,12 +1458,12 @@ function bindWaitlist(zone){
     e.preventDefault();
     const email = input.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ input.focus(); return; }
-    btn.disabled = true; btn.textContent = "Tuning in\u2026";
+    const label = btn.textContent; btn.disabled = true; btn.textContent = "Joining\u2026";
     if (!WAITLIST_ENDPOINT){
       okLine.textContent = "Preview mode. The live site saves this to your waitlist.";
       zone.classList.add("done-state"); return;
     }
-    let message = "You\u2019re in. We\u2019ll signal you when your channel opens.";
+    let message = "You\u2019re in. You\u2019ll be mailed when it\u2019s your turn.";
     let success = true;
     try {
       const res = await fetch(WAITLIST_ENDPOINT, {
@@ -1409,10 +1473,10 @@ function bindWaitlist(zone){
       const data = await res.json().catch(() => null);
       if (res.status === 409) message = "You\u2019re already on the list. Stay tuned.";
       else if (!res.ok){ success = false; message = (data && data.message) || "Something went wrong. Try again shortly."; }
-    } catch (err){ success = false; message = "Network hiccup. Check your connection and try again."; }
+    } catch (err){ success = false; message = "Couldn\u2019t connect. Check your internet and try again."; }
     okLine.textContent = message;
     if (success){ zone.classList.add("done-state"); openGreenRoom(); }
-    else { okLine.style.display = "block"; btn.disabled = false; btn.textContent = "Join the waitlist"; }
+    else { okLine.style.display = "block"; btn.disabled = false; btn.textContent = label; }
   });
 }
 bindWaitlist(document.getElementById("form-zone"));
@@ -1426,12 +1490,12 @@ lane.innerHTML = runHTML + runHTML;
 
 /* ---------- channels + deep role curation ---------- */
 const channels = [
-  ["01","The Closet","Scan your wardrobe once and it stays known. Sixty-four pieces, what\u2019s clean, what\u2019s in laundry, what pairs with what.", ["creator","stylist"]],
-  ["02","The AI Stylist","It dresses you from clothes you already own, then books the look into your planner straight from chat.", ["creator"]],
-  ["03","The Outfit Planner","Every look is scheduled against real weather. Thirty-four degrees in Kano on wedding day? It tells you to lose the coat.", ["creator","stylist"]],
-  ["04","Runway","Full-screen video looks. Analyse any fit on screen, then rebuild it from pieces in your own closet.", ["creator","brand"]],
-  ["05","Squads and Fit of the Day","Your campus, your event, your squad. One vote a day, a Hall of Fame monthly, starting at Nile University.", ["creator"]],
-  ["06","Sellers, Properly Paid","Tailors on escrow, brands with storefronts, stylists booked by session. Every naira moves through Paystack.", ["tailor","brand","stylist"]]
+  ["01","The Closet","Scan your clothes once. Aitaya remembers every piece and what goes with what.", ["creator","stylist"]],
+  ["02","Taya the Stylist","The AI stylist that plans outfit ideas from clothes you already own.", ["creator"]],
+  ["03","The Planner","Plan looks around the real weather. 34\u00b0C in Kano? Leave the coat.", ["creator","stylist"]],
+  ["04","Runway","Watch outfit videos, then recreate them from your own closet.", ["creator","brand"]],
+  ["05","Fit of the Day","Your campus, workplace or community votes on the best outfit every day.", ["creator"]],
+  ["06","Everyone Gets Paid","Tailors paid on delivery, brands with storefronts, stylists with bookings.", ["tailor","brand","stylist"]]
 ];
 const guide = document.getElementById("guide");
 function renderGuide(role){
@@ -1451,54 +1515,54 @@ renderGuide(null);
 const personas = {
   creator: {
     accent:"creator",
-    lede:"You bring the looks. The ecosystem brings the rest: a closet that remembers every piece, a stylist on call, a planner that reads the sky, and a whole city voting on your fit by nightfall.",
-    cta1:"Save my front-row seat", cta2:"Wake me for opening night",
-    label:"Front row, reserved",
-    curated:"Curated for creators. Start at CH 01, your closet is the studio. The stylist is on retainer and the squad votes on opening night.",
-    guideKicker:"Your channels first",
-    gnp:"Opening night needs an audience with taste. One email and your seat is held.",
+    lede:"Aitaya is a fashion ecosystem in your pocket. Plan outfits from clothes you already own, get styled for any event, and let your campus vote on your look.",
+    cta1:"Join as a creator", cta2:"Join as a creator",
+    label:"Early access for creators",
+    curated:"Showing what matters to creators first.",
+    guideKicker:"Your features first",
+    gnp:"Campus first, then the rest of Nigeria. Get in early and be among the first to post.",
     rwFirst:0,
-    now:"Tuned for creators"
+    now:"Showing creator view"
   },
   tailor: {
     accent:"tailor",
-    lede:"Briefs arrive with measurements attached. Escrow holds the money while you cut and sew. On delivery day you get paid in full. The ecosystem does the chasing so your hands stay on the cloth.",
-    cta1:"Reserve my atelier", cta2:"Wake my workshop at launch",
-    label:"Ateliers, this way",
-    curated:"Curated for tailors. CH 06 first: briefs in, escrow holds the money, you sew, you get paid. The rest of the dial is where your clients live.",
-    guideKicker:"The money channel leads",
-    gnp:"When the broadcast starts, verified ateliers get found first. Leave the address of your inbox.",
+    lede:"Aitaya is a fashion ecosystem in your pocket. Customers send their measurements with the order. We hold their payment until you deliver, so you always get paid.",
+    cta1:"Join as a tailor", cta2:"Join as a tailor",
+    label:"Early access for tailors",
+    curated:"Showing what matters to tailors first.",
+    guideKicker:"Getting paid comes first",
+    gnp:"Campus first, then the rest of Nigeria. Get in early and be ready for the first orders.",
     rwFirst:3,
-    now:"Tuned for tailors"
+    now:"Showing tailor view"
   },
   brand: {
     accent:"brand",
-    lede:"Your rail sits where the culture already scrolls. A look blows up on Runway and its pieces point straight at your storefront. Checkout runs through Paystack and the ecosystem handles the rest.",
-    cta1:"Reserve my storefront", cta2:"Open my shop at launch",
-    label:"Storefronts, this way",
-    curated:"Curated for brands. Your storefront is CH 06 and your marketing is CH 04. Every viral look can carry your label on it.",
-    guideKicker:"Shopfront and runway first",
-    gnp:"Early storefronts get the best corner of the market square. One email holds yours.",
+    lede:"Aitaya is a fashion ecosystem in your pocket. Sell from your own storefront. When a look takes off on Aitaya, shoppers can buy your pieces straight away.",
+    cta1:"Join as a brand", cta2:"Join as a brand",
+    label:"Early access for brands",
+    curated:"Showing what matters to brands first.",
+    guideKicker:"Storefront and runway first",
+    gnp:"Campus first, then the rest of Nigeria. Get in early and be ready to sell from day one.",
     rwFirst:3,
-    now:"Tuned for brands"
+    now:"Showing brand view"
   },
   stylist: {
     accent:"stylist",
-    lede:"Your clients\u2019 closets open to you like lookbooks. Plan their week against the weather, book sessions inside the app, and take your fee without the awkward transfer talk.",
-    cta1:"Reserve my book", cta2:"Fill my calendar at launch",
-    label:"Stylists, by appointment",
-    curated:"Curated for stylists. Their closets are open books on CH 01, the weather is on CH 03, and your bookings live on CH 06. Take the credit publicly.",
+    lede:"Aitaya is a fashion ecosystem in your pocket. See your clients\u2019 wardrobes, plan their outfits around the weather, and take bookings and payment in one place.",
+    cta1:"Join as a stylist", cta2:"Join as a stylist",
+    label:"Early access for stylists",
+    curated:"Showing what matters to stylists first.",
     guideKicker:"Closets and calendars first",
-    gnp:"The first stylists on the roster get the first clients. Pencil yourself in.",
+    gnp:"Campus first, then the rest of Nigeria. Get in early and be ready for the first clients.",
     rwFirst:2,
-    now:"Tuned for stylists"
+    now:"Showing stylist view"
   }
 };
 const defaults = {
   lede:document.getElementById("hero-lede").textContent,
-  cta1:"Join the waitlist", cta2:"Wake me at launch",
-  label:"Reserve your seat",
-  guideKicker:"Six channels, one wardrobe",
+  cta1:"Join the waitlist", cta2:"Join the waitlist",
+  label:"Get early access",
+  guideKicker:"Six features, one wardrobe",
   gnp:document.getElementById("gn-p").textContent
 };
 const curated = document.getElementById("curated");
@@ -1513,8 +1577,14 @@ function applyRole(r){
   document.getElementById("guide-kicker").textContent = p ? p.guideKicker : defaults.guideKicker;
   document.getElementById("gn-p").textContent = p ? p.gnp : defaults.gnp;
   renderGuide(r);
-  document.querySelectorAll(".makers .role").forEach(el =>
-    el.classList.toggle("spot", !!r && el.dataset.role === r));
+  document.querySelectorAll(".makers .role").forEach(el => {
+    const on = !!r && el.dataset.role === r;
+    el.classList.toggle("spot", on); el.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+  document.querySelectorAll(".rolechip").forEach(c => {
+    const on = !!r && c.dataset.role === r;
+    c.classList.toggle("on", on); c.setAttribute("aria-pressed", on ? "true" : "false");
+  });
   if (p){
     curated.textContent = p.curated; curated.classList.add("show");
     rwShow(p.rwFirst);
@@ -1522,17 +1592,16 @@ function applyRole(r){
     curated.classList.remove("show");
   }
 }
-document.querySelectorAll(".rolechip").forEach(chip => {
-  chip.addEventListener("click", () => {
-    const r = chip.dataset.role;
-    document.querySelectorAll(".rolechip").forEach(c => c.classList.remove("on"));
-    if (pickedRole === r){
-      pickedRole = null; applyRole(null); flashNow("Broadcast for everyone"); MEM.set("role", ""); return;
-    }
-    pickedRole = r; chip.classList.add("on");
-    applyRole(r); blip(); flashNow(personas[r].now);
-    MEM.set("role", r);
-  });
+function pickRole(r){
+  if (pickedRole === r){
+    pickedRole = null; applyRole(null); flashNow("Showing everything"); MEM.set("role", ""); return;
+  }
+  pickedRole = r;
+  applyRole(r); blip(); flashNow(personas[r].now);
+  MEM.set("role", r);
+}
+document.querySelectorAll(".rolechip, .makers .role").forEach(el => {
+  el.addEventListener("click", () => pickRole(el.dataset.role));
 });
 
 /* ---------- runway ---------- */
@@ -1566,7 +1635,10 @@ function rwShow(i){
 }
 document.getElementById("rw-phone").addEventListener("click", (e) => {
   if (e.target.closest(".rw-btn")) return;
-  rwShow(rwIdx + 1); blip();
+  openViewer(rwLooks.map(([f,t,sub]) => [f,t,sub]), rwIdx, "runway"); blip();
+});
+document.getElementById("rw-phone").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " "){ e.preventDefault(); openViewer(rwLooks.map(([f,t,sub]) => [f,t,sub]), rwIdx, "runway"); }
 });
 document.getElementById("rw-next").addEventListener("click", () => { rwShow(rwIdx + 1); blip(); });
 rwLike.addEventListener("click", () => {
@@ -1581,20 +1653,78 @@ rwShow(0);
 
 /* ---------- on-air reel ---------- */
 const shots = [
-  ["look-01-welcome.jpg","Onboarding","Choose how you move"],
-  ["look-02-feed.jpg","Home","Tyres and the feed"],
-  ["look-11-closet-new.jpg","Closet","Every piece, known"],
-  ["look-13-stylist-schedule.jpg","AI Stylist","Chat that schedules"],
+  ["look-13-stylist-schedule.jpg","Taya","Your AI stylist"],
+  ["look-11-closet-new.jpg","Closet","Every piece, saved"],
+  ["look-04-analyse-fit.jpg","Analyse Fit","Find every piece"],
   ["look-12-planner.jpg","Planner","Weather-checked"],
-  ["look-09-squad.jpg","Squad","Vote, tailor, deliver"],
-  ["look-08-community.jpg","Community","Fit of the Day"],
-  ["look-07-storefront.jpg","Storefront","Bespoke and shop"]
+  ["look-09-squad.jpg","Squad","Aso-ebi, sorted"],
+  ["look-08-community.jpg","Fit of the Day","Vote the best look"],
+  ["look-07-storefront.jpg","Tailor Storefront","Made to measure"],
+  ["look-14-explore-search.jpg","Explore","Looks, tailors, communities"]
 ];
-document.getElementById("reel").innerHTML = shots.map(([f,t,c]) => `
+document.getElementById("reel").innerHTML = shots.map(([f,t,c], i) => `
   <figure class="frame">
-    <div class="shot"><img loading="lazy" src="${lookSrc(f)}" alt="${t} screen from the Aitaya app"></div>
+    <div class="shot" data-i="${i}" role="button" tabindex="0" aria-label="View ${t} full screen"><img loading="lazy" src="${lookSrc(f)}" alt="${t} screen from Aitaya"></div>
     <figcaption><div class="rule"></div><b>${t}</b><span>${c}</span></figcaption>
   </figure>`).join("");
+
+/* stitched arrows move the screens on desktop */
+const reelWrap = document.getElementById("reel-wrap");
+const reelPrev = document.getElementById("reel-prev"), reelNext = document.getElementById("reel-next");
+function reelStep(){ const f = reelWrap.querySelector(".frame"); return f ? (f.offsetWidth + 24) * 2 : 400; }
+function reelArrows(){
+  const max = reelWrap.scrollWidth - reelWrap.clientWidth - 2;
+  reelPrev.disabled = reelWrap.scrollLeft <= 2;
+  reelNext.disabled = reelWrap.scrollLeft >= max;
+}
+reelPrev.addEventListener("click", () => { reelWrap.scrollBy({ left:-reelStep(), behavior: reduceMotion ? "auto" : "smooth" }); blip(); });
+reelNext.addEventListener("click", () => { reelWrap.scrollBy({ left: reelStep(), behavior: reduceMotion ? "auto" : "smooth" }); blip(); });
+reelWrap.addEventListener("scroll", reelArrows, { passive:true });
+addEventListener("resize", reelArrows);
+reelArrows();
+document.getElementById("reel").addEventListener("click", (e) => {
+  const sh = e.target.closest(".shot"); if (!sh) return;
+  openViewer(shots, parseInt(sh.dataset.i, 10), "reel"); blip();
+});
+document.getElementById("reel").addEventListener("keydown", (e) => {
+  const sh = e.target.closest(".shot"); if (!sh || (e.key !== "Enter" && e.key !== " ")) return;
+  e.preventDefault(); openViewer(shots, parseInt(sh.dataset.i, 10), "reel");
+});
+
+/* full-screen viewer, shared by Runway and the screens reel */
+const viewer = document.getElementById("viewer");
+const vImg = document.getElementById("v-img"), vTitle = document.getElementById("v-title"), vSub = document.getElementById("v-sub");
+let vSet = [], vIdx = 0, vFrom = null, vReturn = null;
+function vShow(i){
+  vIdx = (i + vSet.length) % vSet.length;
+  const [f,t,sub] = vSet[vIdx];
+  vImg.src = lookSrc(f); vImg.alt = t; vTitle.textContent = t; vSub.textContent = sub;
+}
+function openViewer(set, i, from){
+  vSet = set; vFrom = from; vReturn = document.activeElement;
+  if (from === "runway") clearTimeout(rwTimer);
+  vShow(i);
+  viewer.classList.add("on");
+  document.documentElement.style.overflow = "hidden";
+  document.getElementById("v-close").focus();
+}
+function closeViewer(){
+  if (!viewer.classList.contains("on")) return;
+  viewer.classList.remove("on");
+  document.documentElement.style.overflow = "";
+  if (vFrom === "runway") rwShow(vIdx);
+  if (vReturn && vReturn.focus) vReturn.focus();
+}
+document.getElementById("v-close").addEventListener("click", closeViewer);
+document.getElementById("v-prev").addEventListener("click", () => { vShow(vIdx - 1); blip(); });
+document.getElementById("v-next").addEventListener("click", () => { vShow(vIdx + 1); blip(); });
+viewer.addEventListener("click", (e) => { if (e.target === viewer) closeViewer(); });
+addEventListener("keydown", (e) => {
+  if (!viewer.classList.contains("on")) return;
+  if (e.key === "Escape") closeViewer();
+  else if (e.key === "ArrowRight"){ vShow(vIdx + 1); e.stopImmediatePropagation(); }
+  else if (e.key === "ArrowLeft"){ vShow(vIdx - 1); e.stopImmediatePropagation(); }
+}, true);
 
 /* ---------- hero channels ---------- */
 const channelFiles = [
@@ -1729,7 +1859,7 @@ addEventListener("keydown", e => {
 
 /* ---------- tape tunes the set ---------- */
 const nowline = document.getElementById("nowline");
-let nowTimer = null, sectionNow = "Sign-on";
+let nowTimer = null, sectionNow = "Home";
 function flashNow(text){
   nowline.textContent = text;
   clearTimeout(nowTimer);
@@ -1772,8 +1902,8 @@ vote.querySelectorAll(".opt").forEach(opt => {
     if (votedFit === "fur") setTimeout(() => document.getElementById("act-vote").scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"center"}), 350);
     blip();
     flashNow(votedFit === "fur"
-      ? "The room grows fur\u2026 it is very cozy in here"
-      : "The room wears " + opt.querySelector(".lbl").textContent.toLowerCase());
+      ? "Mohair it is"
+      : "The page wears " + opt.querySelector(".lbl").textContent.toLowerCase());
   });
 });
 document.getElementById("revote").addEventListener("click", () => {
@@ -1782,7 +1912,7 @@ document.getElementById("revote").addEventListener("click", () => {
   document.body.dataset.fit = "";
   MEM.set("fit", "");
   vote.querySelectorAll(".opt").forEach(o => o.classList.remove("voted"));
-  flashNow("Lines are open again");
+  flashNow("Vote again");
 });
 document.getElementById("vote-cta").addEventListener("click", (e) => {
   e.preventDefault();
@@ -1815,8 +1945,6 @@ if (boot){
   const savedRole = MEM.get("role", "");
   if (savedRole && personas[savedRole]){
     pickedRole = savedRole;
-    const chip = document.querySelector('.rolechip[data-role="' + savedRole + '"]');
-    if (chip) chip.classList.add("on");
     applyRole(savedRole);
   }
   const f = document.body.dataset.fit;
@@ -1858,7 +1986,7 @@ document.getElementById("setauto").addEventListener("click", () => {
   pic.vhold = 0; pic.track = 0; pic.roll = 0;
   heroScreen.style.setProperty("--vh", "0px");
   dV.paint(); dT.paint(); blip();
-  flashNow("Picture set to auto");
+  flashNow("Picture reset");
 });
 applyPic();
 
@@ -1895,8 +2023,8 @@ function buildGreenRoom(){
   const rooms = document.getElementById("gr-rooms");
   const socials = document.getElementById("gr-socials");
   const roomDefs = [
-    ["whatsapp","WhatsApp waitlist group","First to hear, first in line"],
-    ["telegram","Telegram channel","For the quieter announcements"]
+    ["whatsapp","WhatsApp group","Updates and early invites"],
+    ["telegram","Telegram channel","Announcements only"]
   ];
   rooms.innerHTML = roomDefs.filter(([k]) => LINKS[k]).map(([k,t,s]) =>
     `<a class="gr-room" href="${LINKS[k]}" target="_blank" rel="noopener">${ICONS[k]}<span><b>${t}</b><span>${s}</span></span></a>`
@@ -1918,12 +2046,12 @@ async function openGreenRoom(){
     const d = await r.json();
     if (d && typeof d.count === "number"){
       slot.textContent = "No. " + d.count.toLocaleString();
-      note.textContent = "Your place in the queue";
+      note.textContent = "Your place in line";
       return;
     }
   } catch(e){}
-  slot.textContent = "Seat held";
-  note.textContent = "We have your name";
+  slot.textContent = "You\u2019re in";
+  note.textContent = "You\u2019re on the list";
 }
 document.getElementById("gr-close").addEventListener("click", () => greenroom.classList.remove("on"));
 greenroom.addEventListener("click", e => { if (e.target === greenroom) greenroom.classList.remove("on"); });
@@ -1993,13 +2121,13 @@ wake();
 
 /* ---------- narration + spine ---------- */
 const beats = [
-  [".hero","Sign-on",0],
-  ["#act-pick","Who\u2019s watching",1],
-  ["#act-guide","Tonight\u2019s programming",2],
-  ["#act-runway","Runway \u00b7 full turn",3],
-  ["#act-vote","Lines are open",4],
-  [".makers","The makers",4],
-  ["#act-goodnight","Sign-off",5]
+  [".hero","Home",0],
+  ["#act-pick","Your role",1],
+  ["#act-guide","Features",2],
+  ["#act-runway","Runway",3],
+  ["#act-vote","Vote",4],
+  [".makers","Who gets paid",4],
+  ["#act-goodnight","Join",5]
 ];
 const nodes = [...document.querySelectorAll(".spine .node")];
 const bio = new IntersectionObserver(es => {
