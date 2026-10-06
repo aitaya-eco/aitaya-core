@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aitaya· Dress for the culture, styled by intelligence.</title>
-<meta name="description" content="Aitaya is a fashion ecosystem in your pocket. Closet, stylist, tailor, runway, one loop. Broadcasting soon from Nigeria. Join the waitlist.">
+<title>Aitaya · Your closet, stylist and tailor in one place</title>
+<meta name="description" content="Aitaya is a fashion ecosystem in your pocket: your closet, a stylist and trusted tailors in one place. Launching soon in Nigeria. Join the waitlist.">
 <meta property="og:title" content="Aitaya · Coming Soon">
-<meta property="og:description" content="Dress for the culture, styled by intelligence. Join the waitlist at aitaya.ng">
+<meta property="og:description" content="Your closet, stylist and tailor in one place. Join the waitlist at aitaya.ng">
 <meta property="og:image" content="https://aitaya.ng/assets/brand/lockup_ivory_clean.png">
 <meta property="og:url" content="https://aitaya.ng">
 <link rel="icon" href="assets/brand/favicon.ico">
@@ -667,7 +667,7 @@ body[data-fit="fur"] #greenroom .gr-wordmark{filter:invert(.92) sepia(.3) satura
           mask-image:radial-gradient(circle 90px at var(--wx) var(--wy), transparent 0 52px, rgba(0,0,0,.35) 66px, black 88px);
 }
 .screen.cleaned .grime{opacity:.14}
-.wipe-cue{
+.wipe-cue{white-space:nowrap;
   position:absolute;z-index:7;left:50%;bottom:12px;transform:translateX(-50%);
   font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(243,239,230,.85);
   background:rgba(15,21,18,.45);
@@ -717,7 +717,25 @@ body.dozing .dvd{opacity:.9}
 .hero-zone:first-child{padding-top:0}
 .wordmark{width:min(280px,72%);height:auto;margin-bottom:var(--s1)}
 body[data-fit="fur"] .wordmark{filter:invert(.92) sepia(.3) saturate(.6) hue-rotate(100deg)}
-.itire{font-family:var(--script);font-size:17px;color:var(--ink-soft)}
+.brandline{display:flex;align-items:center;flex-wrap:wrap;gap:6px 26px;margin-bottom:var(--s1)}
+.brandline .wordmark{margin-bottom:0}
+.itire{
+  position:relative;display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.1;
+  padding:7px 14px 8px 26px;border-radius:7px 13px 13px 7px;
+  background:linear-gradient(180deg,#F2E7CC,#E8DAB8);color:var(--cocoa);
+  box-shadow:4px 5px 10px rgba(var(--shadow-warm),.22), inset 1px 1px 2px rgba(255,255,245,.8);
+  transform:rotate(-4deg);transform-origin:left center;
+}
+.itire small{font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--bronze)}
+.itire b{font-family:var(--script);font-weight:400;font-size:19px}
+.itire::before{content:"";position:absolute;left:9px;top:50%;transform:translateY(-50%);width:7px;height:7px;border-radius:50%;
+  background:var(--bg);box-shadow:inset 1px 1px 2px rgba(74,58,38,.5)}
+.itire::after{content:"";position:absolute;left:-22px;top:36%;width:26px;height:12px;
+  border-bottom:1.5px solid rgba(124,99,32,.55);border-radius:0 0 60% 20%}
+body[data-fit="fur"] .brandline{justify-content:center}
+body[data-fit="fur"] .itire{background:linear-gradient(180deg,#3A332A,#332C23);color:#E8DAB8}
+body[data-fit="fur"] .itire small{color:#DDC47F}
+@media (max-width:560px){.itire::after{display:none}}
 h1.thesis{font-family:var(--didot);font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.12;color:var(--ink);margin-top:var(--s2)}
 h1.thesis em{font-style:italic;color:var(--accent)}
 .lede{color:var(--ink-soft);font-size:15px;max-width:48ch}
@@ -900,6 +918,42 @@ body[data-fit="fur"] .interstitial .tag{background:linear-gradient(180deg,#3A332
 /* gallery: little framed prints, slight bulge */
 .reel-wrap{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:var(--s3) 4px var(--s2)}
 .reel-wrap::-webkit-scrollbar{display:none}
+.reel-shell{position:relative}
+.frame .shot{cursor:zoom-in}
+.frame .shot img{display:block;width:100%}
+/* stitched arrows: a running-stitch arrow sewn onto a felt button */
+.stitch-arrow{
+  width:52px;height:52px;border-radius:50%;flex:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;position:relative;
+  background:linear-gradient(180deg,#F2E7CC,#E6D6B0);color:var(--accent);
+  border:0;box-shadow:5px 6px 12px rgba(var(--shadow-warm),.28), inset 1px 1px 2px rgba(255,255,245,.85);
+  transition:transform .2s, opacity .2s;
+}
+.stitch-arrow::before{content:"";position:absolute;inset:5px;border-radius:50%;border:1.5px dashed rgba(124,99,32,.55)}
+.stitch-arrow:hover{transform:translateY(-2px) scale(1.05)}
+.stitch-arrow:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.stitch-arrow[disabled]{opacity:.35;cursor:default;transform:none}
+.stitch-arrow svg{width:24px;height:24px}
+.stitch-arrow.prev svg{transform:scaleX(-1)}
+body[data-fit="fur"] .stitch-arrow{background:linear-gradient(180deg,#3A332A,#2E2820);color:#E8DAB8}
+body[data-fit="fur"] .stitch-arrow::before{border-color:rgba(221,196,127,.5)}
+.reel-shell .stitch-arrow{position:absolute;top:40%;z-index:3}
+.reel-shell .stitch-arrow.prev{left:-10px}
+.reel-shell .stitch-arrow.next{right:-10px}
+@media (hover:none) and (pointer:coarse){.reel-shell .stitch-arrow{display:none}}
+/* full-screen viewer */
+#viewer{position:fixed;inset:0;z-index:125;display:none;align-items:center;justify-content:center;gap:clamp(10px,3vw,40px);
+  padding:clamp(14px,3vw,36px);background:rgba(12,15,13,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#viewer.on{display:flex}
+#viewer figure{margin:0;display:flex;flex-direction:column;align-items:center;max-height:100%}
+#viewer img{max-height:calc(100vh - 120px);max-width:min(92vw,520px);width:auto;height:auto;border-radius:26px;
+  border:6px solid #37302A;box-shadow:0 20px 50px rgba(0,0,0,.5);background:#0F1512}
+#viewer figcaption{margin-top:12px;text-align:center;color:#F3EFE6}
+#viewer figcaption b{display:block;font-family:var(--script);font-weight:400;font-size:20px}
+#viewer figcaption span{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(243,239,230,.75)}
+#viewer .v-close{position:absolute;top:clamp(12px,2.5vw,26px);right:clamp(12px,2.5vw,26px)}
+@media (max-width:640px){#viewer .stitch-arrow.prev,#viewer .stitch-arrow.next{position:absolute;bottom:18px}
+  #viewer .stitch-arrow.prev{left:18px}#viewer .stitch-arrow.next{right:18px}#viewer img{max-height:calc(100vh - 170px)}}
 .reel{display:flex;gap:var(--s3);width:max-content}
 .frame{width:190px;flex:none}
 .frame .shot{
@@ -981,6 +1035,11 @@ body[data-fit="fur"] .interstitial .tag{background:linear-gradient(180deg,#3A332
   transition:border-color .3s, background .3s;
 }
 .role.spot{border-color:var(--gold);background:rgba(221,196,127,.13)}
+button.role{font:inherit;color:inherit;text-align:left;width:100%;cursor:pointer}
+button.role:hover{border-color:rgba(221,196,127,.6);background:rgba(255,255,255,.11)}
+button.role:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.role .pick{grid-column:1/-1;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(221,196,127,.85);font-weight:700}
+.role.spot .pick::after{content:" \2713"}
 .role b{font-family:var(--script);font-weight:400;font-size:19px;color:var(--gold)}
 .role p{font-size:14px;color:rgba(243,239,230,.88)}
 
@@ -1028,6 +1087,100 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
   .sched{grid-template-columns:1fr;gap:var(--s1)}
   .sched > div + div{border-left:0;padding-left:0;border-top:1px solid var(--hairline);padding-top:var(--s1)}
 }
+
+/* ================= Taya ================= */
+.set#hero-set{margin-top:58px}
+.taya-perch{position:absolute;right:34px;top:-60px;width:116px;height:72px;z-index:7;pointer-events:none}
+.taya-perch .doily{position:absolute;left:0;right:0;bottom:-6px;width:100%;filter:drop-shadow(0 2px 2px rgba(20,14,8,.25))}
+.taya-bug{position:absolute;left:50%;bottom:-2px;width:80px;margin-left:-40px;aspect-ratio:360/344;border:0;padding:0;background:none;cursor:pointer;pointer-events:auto;filter:drop-shadow(0 5px 6px rgba(20,14,8,.35));transform-origin:50% 92%;transition:transform .3s}
+.taya-bug:hover{transform:translateY(-2px) rotate(-2deg)}
+.taya-bug:focus-visible,.taya-dock .face:focus-visible{outline:2px dashed var(--accent);outline-offset:4px;border-radius:12px}
+.tm{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .22s ease}
+.tm.on{opacity:1}
+.taya-bug.flare{animation:tayaflare .7s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes tayaflare{0%{transform:scale(1)}35%{transform:scale(1.14) rotate(-4deg)}65%{transform:scale(.97) rotate(2deg)}100%{transform:scale(1)}}
+.taya-cap{position:absolute;left:12px;right:12px;bottom:14px;z-index:5;text-align:center;
+  font-family:var(--grotesk);font-size:13px;line-height:1.45;color:#F3EFE6;
+  background:rgba(15,21,18,.78);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  border:1px solid rgba(221,196,127,.45);border-radius:10px;padding:8px 11px;
+  opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;pointer-events:none}
+.taya-cap.on{opacity:1;transform:none;pointer-events:auto}
+.taya-cap b{font-family:var(--script);font-weight:400;font-size:15px;color:var(--gold);margin-right:7px}
+.taya-cap .cap-act{display:inline-block;margin-left:8px;background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--gold);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+/* picture-in-picture: she follows you down the page */
+.taya-dock{position:fixed;right:clamp(14px,2.4vw,26px);bottom:clamp(14px,2.4vw,22px);z-index:46;display:flex;align-items:flex-end;gap:10px;
+  opacity:0;transform:translateY(24px) scale(.9);transition:opacity .35s,transform .45s cubic-bezier(.2,.9,.3,1.3);pointer-events:none}
+.taya-dock.on{opacity:1;transform:none}
+.taya-dock .face{pointer-events:auto;position:relative;width:74px;height:74px;border-radius:50%;border:0;cursor:pointer;
+  background:radial-gradient(circle at 38% 32%,#2B7A60,var(--emerald-deep) 72%);
+  box-shadow:0 0 0 2px rgba(221,196,127,.6),6px 8px 18px rgba(20,14,8,.35),inset 0 2px 4px rgba(255,255,255,.18)}
+.taya-dock .face .imgs{position:absolute;left:-8px;right:-8px;bottom:6px;height:86px}
+.taya-dock .face::after{content:"";position:absolute;inset:5px;border-radius:50%;border:1.5px dashed rgba(221,196,127,.55);pointer-events:none}
+.taya-dock .bub{pointer-events:auto;max-width:min(270px,62vw);background:var(--clay);color:var(--ink);font-size:13px;line-height:1.45;
+  padding:10px 13px;border-radius:16px 16px 4px 16px;box-shadow:5px 6px 14px rgba(var(--shadow-warm),.24),inset 1px 1px 3px rgba(var(--hi),.85);
+  border:1px solid rgba(124,99,32,.18);opacity:0;transform:translateX(8px);transition:opacity .3s,transform .3s;margin-bottom:14px}
+.taya-dock .bub.on{opacity:1;transform:none}
+.taya-dock .bub b{font-family:var(--script);font-weight:400;font-size:15px;color:var(--accent);margin-right:6px}
+.taya-dock .bub .cap-act{display:block;margin-top:6px;background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--bronze);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+body.taya-open .taya-dock,#greenroom.on ~ .taya-dock{opacity:0;pointer-events:none}
+@media (max-width:640px){
+  .taya-perch{right:22px;top:-52px;width:100px}.taya-bug{width:68px;margin-left:-34px}.set#hero-set{margin-top:50px}
+  .taya-dock .face{width:62px;height:62px}.taya-dock .face .imgs{height:72px}
+  #chyron{left:14px;transform:none;max-width:calc(100vw - 100px)}
+}
+/* email helper */
+.taya-note{display:flex;align-items:center;gap:10px;margin-top:var(--s2)}
+.taya-note .form-note{margin:0}
+.taya-note .tn-face{position:relative;width:44px;height:42px;flex:none;filter:drop-shadow(0 2px 3px rgba(var(--shadow-warm),.35))}
+.taya-note .fix{background:none;border:0;padding:0;font:inherit;color:var(--bronze);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700}
+.done-state .taya-note{display:none}
+/* chyron */
+#chyron .tface{width:26px;height:25px;flex:none;margin:-6px 0 -4px -6px}
+/* guide card */
+.channel .ch-taya{float:right;width:92px;margin:-8px -8px 4px 10px;filter:drop-shadow(0 4px 6px rgba(var(--shadow-warm),.3))}
+.channel .ch-try{display:inline-flex;align-items:center;gap:8px;margin-top:12px;border:1.5px solid var(--accent);color:var(--accent);background:none;border-radius:999px;padding:7px 14px;font:700 12px var(--grotesk);letter-spacing:.06em;cursor:pointer}
+.channel .ch-try:hover{background:var(--accent);color:#F6F1E4}
+/* green room */
+#greenroom .gr-taya{display:block;width:150px;margin:calc(-1 * clamp(var(--s4),4vw,var(--s5)) - 78px) auto 6px;filter:drop-shadow(0 8px 14px rgba(20,14,8,.35))}
+#greenroom .gr-taya-line{font-family:var(--script);font-size:22px;color:var(--accent);margin:4px 0 var(--s2)}
+#greenroom .gr-squad{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:var(--s2)}
+#greenroom .gr-squad a,#greenroom .gr-squad button{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 16px;font:700 13px var(--grotesk);cursor:pointer;text-decoration:none}
+#greenroom .gr-squad a{background:var(--accent);color:#F6F1E4;border:0}
+#greenroom .gr-squad button{background:none;border:1.5px solid var(--accent);color:var(--accent)}
+/* Ask Taya */
+#taya-ask{position:fixed;right:clamp(14px,2.4vw,26px);bottom:clamp(14px,2.4vw,22px);z-index:128;width:min(400px,calc(100vw - 28px));max-height:min(640px,calc(100vh - 110px));
+  display:flex;flex-direction:column;background:var(--clay);border-radius:var(--r-clay);
+  box-shadow:0 0 0 1.5px rgba(221,196,127,.4),18px 22px 44px rgba(20,14,8,.35),inset 2px 2px 6px rgba(var(--hi),.85);
+  opacity:0;transform:translateY(18px) scale(.97);pointer-events:none;transition:opacity .3s,transform .35s cubic-bezier(.2,.9,.3,1.2)}
+#taya-ask.on{opacity:1;transform:none;pointer-events:auto}
+#taya-ask::after{content:"";position:absolute;inset:8px;pointer-events:none;border:2px dashed var(--stitch);border-radius:calc(var(--r-clay) - 8px);opacity:.7}
+#taya-ask .ta-head{display:flex;align-items:center;gap:12px;padding:16px 18px 12px;border-bottom:1px solid var(--hairline)}
+#taya-ask .ta-face{position:relative;width:58px;height:56px;flex:none}
+#taya-ask .ta-head b{font-family:var(--script);font-weight:400;font-size:24px;color:var(--accent);display:block;line-height:1}
+#taya-ask .ta-head span{font-size:12px;color:var(--ink-soft)}
+#taya-ask .ta-x{margin-left:auto;width:34px;height:34px;border-radius:50%;border:0;background:rgba(124,99,32,.1);color:var(--ink);font-size:18px;cursor:pointer;position:relative;z-index:2}
+#taya-ask .ta-body{overflow-y:auto;padding:14px 18px 18px;display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+#taya-ask .msg{max-width:88%;font-size:14px;line-height:1.5;padding:10px 13px;border-radius:16px 16px 16px 4px;background:#FFF9EC;border:1px solid rgba(124,99,32,.16)}
+#taya-ask .msg.me{align-self:flex-end;background:var(--accent);color:#F6F1E4;border:0;border-radius:16px 16px 4px 16px}
+#taya-ask .msg.dots{font-style:italic;color:var(--ink-soft)}
+#taya-ask .chips{display:flex;flex-wrap:wrap;gap:7px}
+#taya-ask .chips button{border:1.5px solid rgba(124,99,32,.35);background:#FFF9EC;color:var(--ink);border-radius:999px;padding:8px 13px;font:500 13px var(--grotesk);cursor:pointer}
+#taya-ask .chips button:hover,#taya-ask .chips button:focus-visible{border-color:var(--accent);color:var(--accent)}
+#taya-ask .chips button.wx{background:var(--accent);color:#F6F1E4;border-color:var(--accent)}
+#taya-ask .look{background:#FFF9EC;border:1px solid rgba(124,99,32,.2);border-radius:16px;padding:13px 14px}
+#taya-ask .look h4{font-family:var(--didot);font-weight:400;font-size:19px;margin-bottom:6px}
+#taya-ask .look h4 em{color:var(--accent)}
+#taya-ask .look ul{list-style:none;padding:0;margin:0 0 8px;font-size:14px;line-height:1.55}
+#taya-ask .look li::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:9px;vertical-align:middle;box-shadow:0 0 0 1.5px var(--bronze)}
+#taya-ask .look .wxl{font-size:12.5px;color:var(--ink-soft)}
+#taya-ask .look .acts{display:flex;gap:12px;margin-top:10px;font-size:12.5px}
+#taya-ask .look .acts a,#taya-ask .look .acts button{background:none;border:0;padding:0;font:700 12.5px var(--grotesk);color:var(--bronze);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+#taya-ask form{display:flex;gap:8px;margin-top:4px}
+#taya-ask form input{flex:1;min-width:0;border-radius:12px;border:1.5px solid rgba(124,99,32,.3);background:#FFFDF6;padding:11px 12px;font:14px var(--grotesk);color:var(--ink)}
+#taya-ask form button{border:0;border-radius:12px;background:var(--accent);color:#F6F1E4;font:700 13px var(--grotesk);padding:0 14px;cursor:pointer;white-space:nowrap}
+#taya-ask .small{font-size:12px;color:var(--ink-soft)}
+@media (max-width:640px){#taya-ask{right:0;left:0;bottom:0;width:100%;max-height:82vh;border-radius:var(--r-clay) var(--r-clay) 0 0}}
+@media (prefers-reduced-motion:reduce){.taya-bug.flare{animation:none}.taya-dock,#taya-ask,.tm{transition:none}}
 </style>
 </head>
 <body>
@@ -1062,33 +1215,38 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
   <div class="plate"><div class="ring"></div><b>Aitaya</b><span>Test transmission</span></div>
 </div>
 <div id="boot" aria-hidden="true"><div class="beam"></div></div>
-<div id="chyron" aria-live="polite"><span class="live"></span><span id="chyron-text"></span></div>
+<div id="chyron" aria-live="polite"><span class="live"></span><img class="tface" src="assets/taya/head-happy.webp" alt=""><span id="chyron-text"></span></div>
+<div class="taya-dock" id="taya-dock" aria-live="polite"><div class="bub" id="taya-bub"></div><button class="face" type="button" id="taya-dockbtn" aria-label="Ask Taya what to wear"><span class="imgs taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></span></button></div>
+<div id="taya-ask" role="dialog" aria-modal="false" aria-label="Ask Taya what to wear"><div class="ta-head"><span class="ta-face taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></span><div><b>Taya</b><span>Your stylist on Aitaya</span></div><button class="ta-x" type="button" id="taya-askx" aria-label="Close">&times;</button></div><div class="ta-body" id="taya-askbody"></div></div>
 
 <div id="greenroom" role="dialog" aria-modal="true" aria-label="You are on the waitlist">
   <div class="card">
+    <img class="gr-taya" src="assets/taya/full-love.webp" alt="Taya, the Aitaya stylist, with heart eyes">
     <img class="gr-wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
-    <div class="onair-badge"><i></i>You are on the air</div>
-    <h2>Your seat is <em>reserved.</em></h2>
+    <div class="onair-badge"><i></i>You&rsquo;re on the list</div>
+    <h2>You&rsquo;re <em>in.</em></h2>
+    <p class="gr-taya-line">I kept your seat.</p>
     <div class="slot" id="gr-slot">&nbsp;</div>
-    <div class="slotnote" id="gr-slotnote">In the queue</div>
-    <p class="gr-lede">The broadcast has a green room, and you are welcome in it. This is where the first wearers, tailors, brands and stylists are already talking.</p>
-    <div class="gr-sep"><span></span><b>Join the room</b><span></span></div>
+    <div class="slotnote" id="gr-slotnote">Your place in line</div>
+    <div class="gr-squad"><a id="gr-wa" target="_blank" rel="noopener">Bring your squad on WhatsApp</a><button type="button" id="gr-copy">Copy the link</button></div>
+    <p class="gr-lede">Join our WhatsApp group for updates and early invites.</p>
+    <div class="gr-sep"><span></span><b>Join the community</b><span></span></div>
     <div class="gr-rooms" id="gr-rooms"></div>
-    <div class="gr-sep"><span></span><b>Follow the station</b><span></span></div>
+    <div class="gr-sep"><span></span><b>Follow us</b><span></span></div>
     <div class="gr-socials" id="gr-socials"></div>
-    <button class="gr-close" id="gr-close">Back to the broadcast</button>
+    <button class="gr-close" id="gr-close">Back to the site</button>
   </div>
 </div>
-<div id="crt-off" aria-hidden="true"><div class="collapse"></div><div class="osd">The set is resting &middot; tap to wake it</div></div>
+<div id="crt-off" aria-hidden="true"><div class="collapse"></div><div class="osd">Tap to turn it back on</div></div>
 
-<nav class="spine" aria-label="Broadcast acts">
+<nav class="spine" aria-label="Sections">
   <span class="rail"></span>
-  <button class="node" data-goto=".hero" title="Sign-on"></button>
-  <button class="node" data-goto="#act-pick" title="Who is watching"></button>
-  <button class="node" data-goto="#act-guide" title="Programming"></button>
+  <button class="node" data-goto=".hero" title="Home"></button>
+  <button class="node" data-goto="#act-pick" title="Your role"></button>
+  <button class="node" data-goto="#act-guide" title="Features"></button>
   <button class="node" data-goto="#act-runway" title="Runway"></button>
-  <button class="node" data-goto="#act-vote" title="Audience vote"></button>
-  <button class="node" data-goto="#act-goodnight" title="Sign-off"></button>
+  <button class="node" data-goto="#act-vote" title="Vote"></button>
+  <button class="node" data-goto="#act-goodnight" title="Join"></button>
   <span class="rail"></span>
 </nav>
 
@@ -1096,15 +1254,15 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
   <div class="container">
     <div class="bar felted">
       <div class="brand-mini"><img src="assets/brand/logo_primary_transparent.png" alt="Aitaya"></div>
-      <div class="nowline caps" id="nowline" aria-live="polite">Sign-on</div>
+      <div class="nowline caps" id="nowline" aria-live="polite">Home</div>
       <div class="hdr-right">
         <button class="hum" id="hum" aria-pressed="false" title="TV hum" aria-label="TV hum, off">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w1" d="M15.5 9.5a4 4 0 0 1 0 5"/><path class="w2" d="M18 7a8 8 0 0 1 0 10"/></svg>
         </button>
-        <button class="pwr" id="pwr" title="Switch the set off" aria-label="Power">
+        <button class="pwr" id="pwr" title="Turn off the screen" aria-label="Power">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v8"/><path d="M6.2 6.2a8 8 0 1 0 11.6 0"/></svg>
         </button>
-        <div class="onair caps" title="Broadcasting soon"><span class="dot"></span><span>Broadcasting soon</span></div>
+        <div class="onair caps" title="Launching soon"><span class="dot"></span><span>Launching soon</span></div>
       </div>
     </div>
   </div>
@@ -1115,13 +1273,15 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
 <section class="hero">
   <div class="hero-left clay stitched tube furred rv">
     <div class="set" id="hero-set">
+      <div class="taya-perch"><svg class="doily" viewBox="0 0 140 30" aria-hidden="true"><g fill="#F7EFDD" stroke="#CDBB93" stroke-width=".8"><circle cx="134.0" cy="14.0" r="4.2"/><circle cx="133.0" cy="15.7" r="4.2"/><circle cx="130.1" cy="17.4" r="4.2"/><circle cx="125.4" cy="19.0" r="4.2"/><circle cx="119.0" cy="20.4" r="4.2"/><circle cx="111.1" cy="21.7" r="4.2"/><circle cx="102.0" cy="22.7" r="4.2"/><circle cx="91.9" cy="23.4" r="4.2"/><circle cx="81.1" cy="23.8" r="4.2"/><circle cx="70.0" cy="24.0" r="4.2"/><circle cx="58.9" cy="23.8" r="4.2"/><circle cx="48.1" cy="23.4" r="4.2"/><circle cx="38.0" cy="22.7" r="4.2"/><circle cx="28.9" cy="21.7" r="4.2"/><circle cx="21.0" cy="20.4" r="4.2"/><circle cx="14.6" cy="19.0" r="4.2"/><circle cx="9.9" cy="17.4" r="4.2"/><circle cx="7.0" cy="15.7" r="4.2"/><circle cx="6.0" cy="14.0" r="4.2"/><circle cx="7.0" cy="12.3" r="4.2"/><circle cx="9.9" cy="10.6" r="4.2"/><circle cx="14.6" cy="9.0" r="4.2"/><circle cx="21.0" cy="7.6" r="4.2"/><circle cx="28.9" cy="6.3" r="4.2"/><circle cx="38.0" cy="5.3" r="4.2"/><circle cx="48.1" cy="4.6" r="4.2"/><circle cx="58.9" cy="4.2" r="4.2"/><circle cx="70.0" cy="4.0" r="4.2"/><circle cx="81.1" cy="4.2" r="4.2"/><circle cx="91.9" cy="4.6" r="4.2"/><circle cx="102.0" cy="5.3" r="4.2"/><circle cx="111.1" cy="6.3" r="4.2"/><circle cx="119.0" cy="7.6" r="4.2"/><circle cx="125.4" cy="9.0" r="4.2"/><circle cx="130.1" cy="10.6" r="4.2"/><circle cx="133.0" cy="12.3" r="4.2"/></g><ellipse cx="70" cy="14" rx="64" ry="10" fill="#F7EFDD"/><ellipse cx="70" cy="14" rx="59" ry="8" fill="none" stroke="#D9C9A3" stroke-width=".7" stroke-dasharray="2 2"/><g fill="#D9C9A3"><circle cx="125.0" cy="14.0" r="1.3"/><circle cx="123.1" cy="15.8" r="1.3"/><circle cx="117.6" cy="17.4" r="1.3"/><circle cx="108.9" cy="18.8" r="1.3"/><circle cx="97.5" cy="19.9" r="1.3"/><circle cx="84.2" cy="20.6" r="1.3"/><circle cx="70.0" cy="20.8" r="1.3"/><circle cx="55.8" cy="20.6" r="1.3"/><circle cx="42.5" cy="19.9" r="1.3"/><circle cx="31.1" cy="18.8" r="1.3"/><circle cx="22.4" cy="17.4" r="1.3"/><circle cx="16.9" cy="15.8" r="1.3"/><circle cx="15.0" cy="14.0" r="1.3"/><circle cx="16.9" cy="12.2" r="1.3"/><circle cx="22.4" cy="10.6" r="1.3"/><circle cx="31.1" cy="9.2" r="1.3"/><circle cx="42.5" cy="8.1" r="1.3"/><circle cx="55.8" cy="7.4" r="1.3"/><circle cx="70.0" cy="7.2" r="1.3"/><circle cx="84.2" cy="7.4" r="1.3"/><circle cx="97.5" cy="8.1" r="1.3"/><circle cx="108.9" cy="9.2" r="1.3"/><circle cx="117.6" cy="10.6" r="1.3"/><circle cx="123.1" cy="12.2" r="1.3"/></g></svg><button class="taya-bug taya-face" id="taya-bug" type="button" aria-label="Ask Taya about this channel"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></button></div>
       <div class="mat">
         <div class="screen" id="hero-screen">
           <img class="feedimg" id="channel-img" src="assets/img/looks/look-02-feed.jpg" alt="Aitaya app preview">
           <img class="dvd" id="dvd" src="assets/brand/mark_ivory_transparent.png" alt="">
           <div class="chip" id="channel-chip">CH 01</div>
+          <div class="taya-cap" id="taya-cap" aria-live="polite"></div>
           <div class="grime"></div>
-          <div class="wipe-cue">Dusty &middot; wipe the glass</div>
+          <div class="wipe-cue">Wipe the screen</div>
           <div class="tear" id="hero-tear"></div>
           <div class="static" id="channel-static"></div>
         </div>
@@ -1129,48 +1289,50 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
     </div>
     <div class="dial-row">
       <div class="knob" id="knob" role="slider" aria-label="Channel dial" aria-valuemin="1" aria-valuemax="8" tabindex="0"><span class="tick"></span></div>
-      <div class="hint">This set has been waiting for you.<br>Wipe the glass. Turn the dial. Or tap a niche on the tape below.</div>
+      <div class="hint">Turn the dial to look inside.</div>
     </div>
     <div class="pic-ctl">
       <label>V-hold<div class="minidial" id="d-vhold" role="slider" aria-label="Vertical hold" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" tabindex="0"><i></i></div></label>
       <label>Tracking<div class="minidial" id="d-track" role="slider" aria-label="Tracking" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" tabindex="0"><i></i></div></label>
-      <button class="setauto" id="setauto">Set auto</button>
+      <button class="setauto" id="setauto">Reset</button>
     </div>
   </div>
 
   <div class="hero-copy clay stitched tube furred rv">
     <div class="hero-zone">
-      <span class="standfirst">Now broadcasting from Nigeria</span>
+      <span class="standfirst">Launching soon in Nigeria</span>
     </div>
     <div class="hero-zone">
-      <img class="wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
-      <div class="itire">&ldquo;I tire!&rdquo;</div>
-      <h1 class="thesis" id="hero-thesis">Dress for the culture, <em>styled by intelligence.</em></h1>
+      <div class="brandline">
+        <img class="wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
+        <div class="itire" aria-label="Pronounced I tire"><small>Say it like</small><b>&ldquo;I tire!&rdquo;</b></div>
+      </div>
+      <h1 class="thesis" id="hero-thesis">Your closet, stylist and tailor. <em>All in one place.</em></h1>
     </div>
     <div class="hero-zone">
-      <p class="lede" id="hero-lede">Aitaya is a fashion ecosystem in your pocket. Your closet talks to a stylist that knows the weather in Kano. Your tailor gets paid through escrow, not promises. Your campus votes one fit to the top every night. Everything connects, and it starts here.</p>
+      <p class="lede" id="hero-lede">Aitaya is a fashion ecosystem in your pocket. Plan outfits from clothes you already own, get styled for any event, and find tailors you can trust to deliver.</p>
     </div>
     <div class="hero-zone" id="form-zone">
-      <div class="form-label" id="form-label-1">Reserve your seat</div>
+      <div class="form-label" id="form-label-1">Get early access</div>
       <form class="waitlist" novalidate>
         <input type="email" name="email" id="waitlist-email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
         <button type="submit" id="cta-1">Join the waitlist</button>
       </form>
       <div class="form-ok"></div>
-      <p class="form-note">Invites go out in waves. One email when your turn comes, nothing else.</p>
+      <div class="taya-note" id="taya-note"><span class="tn-face taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></span><p class="form-note" id="tn-text">Drop your email and I&rsquo;ll keep your seat.</p></div>
     </div>
     <div class="hero-zone">
-      <div class="sched" aria-label="Broadcast schedule">
+      <div class="sched" aria-label="Launch schedule">
         <div><span>Now</span><b>Waitlist open</b></div>
-        <div><span>Up next</span><b>Campus beta &middot; Nile University</b></div>
-        <div><span>Then</span><b>Lagos &middot; Abuja &middot; everywhere</b></div>
+        <div><span>Next</span><b>Nile University beta</b></div>
+        <div><span>Then</span><b>Abuja, Lagos and beyond</b></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================= MEASURING TAPE ================= -->
-<div class="ticker" aria-label="Style niches on the measuring tape. Tap one to tune the set"><div class="lane" id="ticker-lane"></div></div>
+<div class="ticker" aria-label="Style niches. Tap one to change the look"><div class="lane" id="ticker-lane"></div></div>
 
 <!-- ================= WHO'S WATCHING ================= -->
 <div class="interstitial rv" aria-hidden="true"><span class="line"></span><span class="tag felted">Act I &middot; who&rsquo;s watching tonight</span><span class="line"></span></div>
@@ -1179,11 +1341,11 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
     <div class="act-head">
       <span class="act-no">01</span>
       <div class="act-title">
-        <div class="kicker caps">The broadcast bends to you</div>
+        <div class="kicker caps">Who are you?</div>
         <h2>Pick your seat <em>in the ecosystem.</em></h2>
       </div>
     </div>
-    <p class="section-lede" style="margin-bottom:var(--s3)">Every wardrobe needs wearers, makers, sellers and stylists. Choose yours and watch this whole page re-dress itself around you. The words change, the colours change, the order of things changes. Change your mind any time, the set won&rsquo;t judge.</p>
+    <p class="section-lede" style="margin-bottom:var(--s3)">Pick one and we&rsquo;ll show you what matters to you.</p>
     <div class="roles-pick" id="roles-pick">
       <button class="rolechip" data-role="creator"><b>Creator</b><span>I wear it, post it, and let the city rate it</span></button>
       <button class="rolechip" data-role="tailor"><b>Tailor</b><span>I cut, I sew, I deliver, I get paid</span></button>
@@ -1195,14 +1357,14 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
 </section>
 
 <!-- ================= PROGRAMMING ================= -->
-<div class="interstitial rv" aria-hidden="true"><span class="line"></span><span class="tag felted">Act II &middot; tonight&rsquo;s programming</span><span class="line"></span></div>
+<div class="interstitial rv" aria-hidden="true"><span class="line"></span><span class="tag felted">Act II &middot; what&rsquo;s inside</span><span class="line"></span></div>
 <section class="section" id="act-guide">
   <div class="clay stitched panel furred rv">
     <div class="act-head">
       <span class="act-no">02</span>
       <div class="act-title">
-        <div class="kicker caps" id="guide-kicker">Six channels, one wardrobe</div>
-        <h2 id="guide-title">The ecosystem, <em>channel by channel.</em></h2>
+        <div class="kicker caps" id="guide-kicker">Six features, one wardrobe</div>
+        <h2 id="guide-title">What you <em>get.</em></h2>
       </div>
     </div>
     <div class="guide" id="guide"></div>
@@ -1217,11 +1379,11 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
       <span class="act-no">03</span>
       <div class="act-title">
         <div class="kicker caps">The signature feed</div>
-        <h2>Runway, <em>full turn.</em></h2>
+        <h2>Fashion you can watch, <em>then wear.</em></h2>
       </div>
     </div>
     <div class="runway-grid">
-      <div class="rw-phone" id="rw-phone" role="img" aria-label="Runway video feed preview. Tap to see the next look">
+      <div class="rw-phone" id="rw-phone" role="img" aria-label="Runway video feed preview. Tap to view full screen" tabindex="0">
         <img id="rw-img" src="assets/img/looks/look-10-reel.jpg" alt="Runway look">
         <div class="prog"><i id="rw-prog"></i></div>
         <div class="rw-rail">
@@ -1233,9 +1395,8 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
       </div>
       <div class="rw-copy">
         <img class="wordmark rw-wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
-        <p id="rw-copy-p">Vertical video, full screen, with the action rail down the side. Love a look, save it, analyse the fit, then recreate it from pieces already hanging in your own closet. The aso-oke catches light differently at every angle. Runway is where the whole ecosystem shows off.</p>
-        <p>Tap the screen or the arrow. The feed keeps rolling, same as launch night.</p>
-        <div class="rw-tip">The heart is real. Press it.</div>
+        <p id="rw-copy-p">Scroll outfit videos, save the ones you love, and recreate them from what&rsquo;s already in your closet.</p>
+        <div class="rw-tip">Tap the screen to see it full size</div>
       </div>
     </div>
   </div>
@@ -1248,26 +1409,26 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
     <div class="act-head">
       <span class="act-no">04</span>
       <div class="act-title">
-        <div class="kicker caps">Straight from the beta build</div>
-        <h2>What&rsquo;s on air <em>right now.</em></h2>
+        <div class="kicker caps">Real screens from the beta</div>
+        <h2>A look <em>inside.</em></h2>
       </div>
     </div>
-    <div class="reel-wrap"><div class="reel" id="reel"></div></div>
+    <div class="reel-shell"><button class="stitch-arrow prev" id="reel-prev" aria-label="Previous screens"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M3.5 12h15"/><path d="M13 6.5l5.5 5.5-5.5 5.5"/></svg></button><div class="reel-wrap" id="reel-wrap"><div class="reel" id="reel"></div></div><button class="stitch-arrow next" id="reel-next" aria-label="More screens"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M3.5 12h15"/><path d="M13 6.5l5.5 5.5-5.5 5.5"/></svg></button></div>
   </div>
   <div class="clay stitched panel furred rv">
     <div class="act-head">
       <span class="act-no">&#10022;</span>
       <div class="act-title">
-        <div class="kicker caps">Audience participation &middot; the aso-ebi ritual</div>
-        <h2>Vote the fabric. <em>Watch the room change.</em></h2>
+        <div class="kicker caps">The aso-ebi vote</div>
+        <h2>Pick a fabric. <em>Watch the page change.</em></h2>
       </div>
     </div>
-    <p class="section-lede" style="margin-bottom:var(--s3)">This is how squads work in the app. Before any owambe, the group votes a base colour and the tailor cuts every outfit from the winning cloth. Try it on this very page: pick a swatch and the whole room gets re-dressed in your colour.</p>
+    <p class="section-lede" style="margin-bottom:var(--s3)">Planning aso-ebi? Your group votes on the fabric and the tailor sews from the winner. Try it here.</p>
     <div class="vote" id="vote">
-      <button class="opt" data-v="0" data-fit="emerald"><span class="swatch sw-em"></span><span class="lbl">Deep emerald</span><span class="bar"><i></i></span><b class="pct">58%</b></button>
-      <button class="opt" data-v="1" data-fit="fur"><span class="swatch sw-cg"></span><span class="lbl">Mohair shag, after dark</span><span class="bar"><i></i></span><b class="pct">34%</b></button>
-      <button class="opt" data-v="2" data-fit="ivory"><span class="swatch sw-iv"></span><span class="lbl">Ivory, washed bright</span><span class="bar"><i></i></span><b class="pct">8%</b></button>
-      <div class="vote-after" id="vote-after">Counted, and the room obeys the cloth. Emerald keeps the parlor. Mohair grows fur on everything, maybe too much fur. Ivory washes it bright. In the app your squad settles this before the tailor ever threads a needle. <a href="#waitlist-email" id="vote-cta">Save a seat and vote for real on campus.</a> <button type="button" id="revote" style="background:none;border:0;color:var(--bronze);cursor:pointer;font:inherit;text-decoration:underline;text-underline-offset:3px">Change the cloth.</button></div>
+      <button class="opt" data-v="0" data-fit="emerald"><span class="swatch sw-em"></span><span class="lbl">Emerald</span><span class="bar"><i></i></span><b class="pct">58%</b></button>
+      <button class="opt" data-v="1" data-fit="fur"><span class="swatch sw-cg"></span><span class="lbl">Mohair</span><span class="bar"><i></i></span><b class="pct">34%</b></button>
+      <button class="opt" data-v="2" data-fit="ivory"><span class="swatch sw-iv"></span><span class="lbl">Ivory</span><span class="bar"><i></i></span><b class="pct">8%</b></button>
+      <div class="vote-after" id="vote-after">Vote counted. On Aitaya, your group decides before the tailor starts cutting. <a href="#waitlist-email" id="vote-cta">Join the waitlist to vote for real.</a> <button type="button" id="revote" style="background:none;border:0;color:var(--bronze);cursor:pointer;font:inherit;text-decoration:underline;text-underline-offset:3px">Vote again</button></div>
     </div>
   </div>
 </section>
@@ -1279,13 +1440,13 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
     <div class="rv">
       <div class="kicker caps">Behind every look, a maker</div>
       <h2>An ecosystem pays <em>everyone in it.</em></h2>
-      <p class="makers-lede">The looks you just watched were cut, sewn and styled by real hands. On Aitaya those hands get paid properly: escrow for tailors, storefronts for brands, bookings for stylists, every naira through Paystack.</p>
+      <p class="makers-lede">Tailors, brands and stylists all earn on Aitaya. Tap a role to see the page through their eyes.</p>
     </div>
     <div class="role-list">
-      <div class="role rv" data-role="creator"><b>Creator</b><p>Post looks, build your wardrobe, get styled by people and by the machine.</p></div>
-      <div class="role rv" data-role="tailor"><b>Tailor</b><p>Briefs come in with measurements attached. Escrow holds the money while you sew.</p></div>
-      <div class="role rv" data-role="brand"><b>Brand</b><p>Sell ready-made from your own storefront, right where the culture already scrolls.</p></div>
-      <div class="role rv" data-role="stylist"><b>Stylist</b><p>Book sessions and dress clients straight from their own closets.</p></div>
+      <button type="button" class="role rv" data-role="creator" aria-pressed="false"><b>Creator</b><p>Post looks, build your wardrobe, get styled by people and by the machine.</p><span class="pick">See it as a creator</span></button>
+      <button type="button" class="role rv" data-role="tailor" aria-pressed="false"><b>Tailor</b><p>Briefs come in with measurements attached. Escrow holds the money while you sew.</p><span class="pick">See it as a tailor</span></button>
+      <button type="button" class="role rv" data-role="brand" aria-pressed="false"><b>Brand</b><p>Sell ready-made from your own storefront, right where the culture already scrolls.</p><span class="pick">See it as a brand</span></button>
+      <button type="button" class="role rv" data-role="stylist" aria-pressed="false"><b>Stylist</b><p>Book sessions and dress clients straight from their own closets.</p><span class="pick">See it as a stylist</span></button>
     </div>
   </div>
 </section>
@@ -1305,15 +1466,15 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
         </div>
       </div>
       <div class="gn-copy">
-        <h2 id="gn-title">Before the screen goes dark, <em>leave your name with the station.</em></h2>
-        <p id="gn-p">Seats open in waves: campus first, then the cities. One email and the ecosystem remembers you on opening night.</p>
+        <h2 id="gn-title">Be first <em>in line.</em></h2>
+        <p id="gn-p">Campus first, then the rest of Nigeria.</p>
         <div class="form-zone" id="form-zone-2" style="margin-top:var(--s3)">
           <form class="waitlist" novalidate>
             <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
-            <button type="submit" id="cta-2">Wake me at launch</button>
+            <button type="submit" id="cta-2">Join the waitlist</button>
           </form>
           <div class="form-ok"></div>
-          <p class="form-note">Same list, same promise. One email, nothing else.</p>
+          <p class="form-note">You&rsquo;ll be mailed as soon as your invite is ready.</p>
         </div>
       </div>
     </div>
@@ -1321,20 +1482,25 @@ footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;colo
 </section>
 </main>
 
+<div id="viewer" role="dialog" aria-modal="true" aria-label="Full screen view">
+  <button class="stitch-arrow v-close" id="v-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  <button class="stitch-arrow prev" id="v-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M3.5 12h15"/><path d="M13 6.5l5.5 5.5-5.5 5.5"/></svg></button>
+  <figure><img id="v-img" alt=""><figcaption><b id="v-title"></b><span id="v-sub"></span></figcaption></figure>
+  <button class="stitch-arrow next" id="v-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3.2 2.6" aria-hidden="true"><path d="M3.5 12h15"/><path d="M13 6.5l5.5 5.5-5.5 5.5"/></svg></button>
+</div>
+
 <footer>
   <div class="credits" id="credits">
     <div class="roll">
-      <p>A Nigerian broadcast</p>
+      <p>Made in Nigeria</p>
       <p>Wardrobe by <b>you</b></p>
-      <p>Cut and sewn by <b>the tailors</b></p>
-      <p>Styled by <b>the stylists</b></p>
-      <p>Stocked by <b>the brands</b></p>
-      <p>Filmed on <b>every campus</b></p>
+      <p>Styled by <b>Taya</b></p>
+      <p>Made by <b>the tailors, stylists and brands</b></p>
       <div class="big">Directed by the culture.</div>
       <p>No fits were harmed in the making of this ecosystem</p>
     </div>
   </div>
-  <div class="signoff" aria-hidden="true">Sign-off &middot; transmission resumes at launch</div>
+  <div class="signoff" aria-hidden="true">Sign-off &middot; see you at launch</div>
   <div class="inner">
     <div>
       <img src="assets/brand/logo_primary_ivory_transparent.png" alt="Aitaya">
@@ -1394,12 +1560,12 @@ function bindWaitlist(zone){
     e.preventDefault();
     const email = input.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ input.focus(); return; }
-    btn.disabled = true; btn.textContent = "Tuning in\u2026";
+    const label = btn.textContent; btn.disabled = true; btn.textContent = "Joining\u2026";
     if (!WAITLIST_ENDPOINT){
       okLine.textContent = "Preview mode. The live site saves this to your waitlist.";
       zone.classList.add("done-state"); return;
     }
-    let message = "You\u2019re in. We\u2019ll signal you when your channel opens.";
+    let message = "You\u2019re in. You\u2019ll be mailed when it\u2019s your turn.";
     let success = true;
     try {
       const res = await fetch(WAITLIST_ENDPOINT, {
@@ -1409,10 +1575,10 @@ function bindWaitlist(zone){
       const data = await res.json().catch(() => null);
       if (res.status === 409) message = "You\u2019re already on the list. Stay tuned.";
       else if (!res.ok){ success = false; message = (data && data.message) || "Something went wrong. Try again shortly."; }
-    } catch (err){ success = false; message = "Network hiccup. Check your connection and try again."; }
+    } catch (err){ success = false; message = "Couldn\u2019t connect. Check your internet and try again."; }
     okLine.textContent = message;
     if (success){ zone.classList.add("done-state"); openGreenRoom(); }
-    else { okLine.style.display = "block"; btn.disabled = false; btn.textContent = "Join the waitlist"; }
+    else { okLine.style.display = "block"; btn.disabled = false; btn.textContent = label; }
   });
 }
 bindWaitlist(document.getElementById("form-zone"));
@@ -1426,12 +1592,12 @@ lane.innerHTML = runHTML + runHTML;
 
 /* ---------- channels + deep role curation ---------- */
 const channels = [
-  ["01","The Closet","Scan your wardrobe once and it stays known. Sixty-four pieces, what\u2019s clean, what\u2019s in laundry, what pairs with what.", ["creator","stylist"]],
-  ["02","The AI Stylist","It dresses you from clothes you already own, then books the look into your planner straight from chat.", ["creator"]],
-  ["03","The Outfit Planner","Every look is scheduled against real weather. Thirty-four degrees in Kano on wedding day? It tells you to lose the coat.", ["creator","stylist"]],
-  ["04","Runway","Full-screen video looks. Analyse any fit on screen, then rebuild it from pieces in your own closet.", ["creator","brand"]],
-  ["05","Squads and Fit of the Day","Your campus, your event, your squad. One vote a day, a Hall of Fame monthly, starting at Nile University.", ["creator"]],
-  ["06","Sellers, Properly Paid","Tailors on escrow, brands with storefronts, stylists booked by session. Every naira moves through Paystack.", ["tailor","brand","stylist"]]
+  ["01","The Closet","Scan your clothes once. Aitaya remembers every piece and what goes with what.", ["creator","stylist"]],
+  ["02","Taya the Stylist","The AI stylist that plans outfit ideas from clothes you already own.", ["creator"]],
+  ["03","The Planner","Plan looks around the real weather. 34\u00b0C in Kano? Leave the coat.", ["creator","stylist"]],
+  ["04","Runway","Watch outfit videos, then recreate them from your own closet.", ["creator","brand"]],
+  ["05","Fit of the Day","Your campus, workplace or community votes on the best outfit every day.", ["creator"]],
+  ["06","Everyone Gets Paid","Tailors paid on delivery, brands with storefronts, stylists with bookings.", ["tailor","brand","stylist"]]
 ];
 const guide = document.getElementById("guide");
 function renderGuide(role){
@@ -1440,9 +1606,9 @@ function renderGuide(role){
     : channels;
   guide.innerHTML = ordered.map(([n,t,d,roles]) => `
     <article class="channel furred ${role && roles.includes(role) ? "spot" : ""}">
-      <div class="ch">CH &middot; ${n}</div>
+      <div class="ch">CH &middot; ${n}</div>${n === "02" ? '<img class="ch-taya" src="assets/taya/head-happy.webp" alt="Taya" loading="lazy">' : ""}
       <h3>${t}</h3>
-      <p>${d}</p>
+      <p>${d}</p>${n === "02" ? '<button type="button" class="ch-try" data-ask="1">Ask Taya what to wear</button>' : ""}
     </article>`).join("");
 }
 renderGuide(null);
@@ -1451,54 +1617,54 @@ renderGuide(null);
 const personas = {
   creator: {
     accent:"creator",
-    lede:"You bring the looks. The ecosystem brings the rest: a closet that remembers every piece, a stylist on call, a planner that reads the sky, and a whole city voting on your fit by nightfall.",
-    cta1:"Save my front-row seat", cta2:"Wake me for opening night",
-    label:"Front row, reserved",
-    curated:"Curated for creators. Start at CH 01, your closet is the studio. The stylist is on retainer and the squad votes on opening night.",
-    guideKicker:"Your channels first",
-    gnp:"Opening night needs an audience with taste. One email and your seat is held.",
+    lede:"Aitaya is a fashion ecosystem in your pocket. Plan outfits from clothes you already own, get styled for any event, and let your campus vote on your look.",
+    cta1:"Join as a creator", cta2:"Join as a creator",
+    label:"Early access for creators",
+    curated:"Showing what matters to creators first.",
+    guideKicker:"Your features first",
+    gnp:"Campus first, then the rest of Nigeria. Get in early and be among the first to post.",
     rwFirst:0,
-    now:"Tuned for creators"
+    now:"Showing creator view"
   },
   tailor: {
     accent:"tailor",
-    lede:"Briefs arrive with measurements attached. Escrow holds the money while you cut and sew. On delivery day you get paid in full. The ecosystem does the chasing so your hands stay on the cloth.",
-    cta1:"Reserve my atelier", cta2:"Wake my workshop at launch",
-    label:"Ateliers, this way",
-    curated:"Curated for tailors. CH 06 first: briefs in, escrow holds the money, you sew, you get paid. The rest of the dial is where your clients live.",
-    guideKicker:"The money channel leads",
-    gnp:"When the broadcast starts, verified ateliers get found first. Leave the address of your inbox.",
+    lede:"Aitaya is a fashion ecosystem in your pocket. Customers send their measurements with the order. We hold their payment until you deliver, so you always get paid.",
+    cta1:"Join as a tailor", cta2:"Join as a tailor",
+    label:"Early access for tailors",
+    curated:"Showing what matters to tailors first.",
+    guideKicker:"Getting paid comes first",
+    gnp:"Campus first, then the rest of Nigeria. Get in early and be ready for the first orders.",
     rwFirst:3,
-    now:"Tuned for tailors"
+    now:"Showing tailor view"
   },
   brand: {
     accent:"brand",
-    lede:"Your rail sits where the culture already scrolls. A look blows up on Runway and its pieces point straight at your storefront. Checkout runs through Paystack and the ecosystem handles the rest.",
-    cta1:"Reserve my storefront", cta2:"Open my shop at launch",
-    label:"Storefronts, this way",
-    curated:"Curated for brands. Your storefront is CH 06 and your marketing is CH 04. Every viral look can carry your label on it.",
-    guideKicker:"Shopfront and runway first",
-    gnp:"Early storefronts get the best corner of the market square. One email holds yours.",
+    lede:"Aitaya is a fashion ecosystem in your pocket. Sell from your own storefront. When a look takes off on Aitaya, shoppers can buy your pieces straight away.",
+    cta1:"Join as a brand", cta2:"Join as a brand",
+    label:"Early access for brands",
+    curated:"Showing what matters to brands first.",
+    guideKicker:"Storefront and runway first",
+    gnp:"Campus first, then the rest of Nigeria. Get in early and be ready to sell from day one.",
     rwFirst:3,
-    now:"Tuned for brands"
+    now:"Showing brand view"
   },
   stylist: {
     accent:"stylist",
-    lede:"Your clients\u2019 closets open to you like lookbooks. Plan their week against the weather, book sessions inside the app, and take your fee without the awkward transfer talk.",
-    cta1:"Reserve my book", cta2:"Fill my calendar at launch",
-    label:"Stylists, by appointment",
-    curated:"Curated for stylists. Their closets are open books on CH 01, the weather is on CH 03, and your bookings live on CH 06. Take the credit publicly.",
+    lede:"Aitaya is a fashion ecosystem in your pocket. See your clients\u2019 wardrobes, plan their outfits around the weather, and take bookings and payment in one place.",
+    cta1:"Join as a stylist", cta2:"Join as a stylist",
+    label:"Early access for stylists",
+    curated:"Showing what matters to stylists first.",
     guideKicker:"Closets and calendars first",
-    gnp:"The first stylists on the roster get the first clients. Pencil yourself in.",
+    gnp:"Campus first, then the rest of Nigeria. Get in early and be ready for the first clients.",
     rwFirst:2,
-    now:"Tuned for stylists"
+    now:"Showing stylist view"
   }
 };
 const defaults = {
   lede:document.getElementById("hero-lede").textContent,
-  cta1:"Join the waitlist", cta2:"Wake me at launch",
-  label:"Reserve your seat",
-  guideKicker:"Six channels, one wardrobe",
+  cta1:"Join the waitlist", cta2:"Join the waitlist",
+  label:"Get early access",
+  guideKicker:"Six features, one wardrobe",
   gnp:document.getElementById("gn-p").textContent
 };
 const curated = document.getElementById("curated");
@@ -1513,8 +1679,14 @@ function applyRole(r){
   document.getElementById("guide-kicker").textContent = p ? p.guideKicker : defaults.guideKicker;
   document.getElementById("gn-p").textContent = p ? p.gnp : defaults.gnp;
   renderGuide(r);
-  document.querySelectorAll(".makers .role").forEach(el =>
-    el.classList.toggle("spot", !!r && el.dataset.role === r));
+  document.querySelectorAll(".makers .role").forEach(el => {
+    const on = !!r && el.dataset.role === r;
+    el.classList.toggle("spot", on); el.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+  document.querySelectorAll(".rolechip").forEach(c => {
+    const on = !!r && c.dataset.role === r;
+    c.classList.toggle("on", on); c.setAttribute("aria-pressed", on ? "true" : "false");
+  });
   if (p){
     curated.textContent = p.curated; curated.classList.add("show");
     rwShow(p.rwFirst);
@@ -1522,17 +1694,16 @@ function applyRole(r){
     curated.classList.remove("show");
   }
 }
-document.querySelectorAll(".rolechip").forEach(chip => {
-  chip.addEventListener("click", () => {
-    const r = chip.dataset.role;
-    document.querySelectorAll(".rolechip").forEach(c => c.classList.remove("on"));
-    if (pickedRole === r){
-      pickedRole = null; applyRole(null); flashNow("Broadcast for everyone"); MEM.set("role", ""); return;
-    }
-    pickedRole = r; chip.classList.add("on");
-    applyRole(r); blip(); flashNow(personas[r].now);
-    MEM.set("role", r);
-  });
+function pickRole(r){
+  if (pickedRole === r){
+    pickedRole = null; applyRole(null); flashNow("Showing everything"); MEM.set("role", ""); return;
+  }
+  pickedRole = r;
+  applyRole(r); blip(); flashNow(personas[r].now);
+  MEM.set("role", r);
+}
+document.querySelectorAll(".rolechip, .makers .role").forEach(el => {
+  el.addEventListener("click", () => pickRole(el.dataset.role));
 });
 
 /* ---------- runway ---------- */
@@ -1566,7 +1737,10 @@ function rwShow(i){
 }
 document.getElementById("rw-phone").addEventListener("click", (e) => {
   if (e.target.closest(".rw-btn")) return;
-  rwShow(rwIdx + 1); blip();
+  openViewer(rwLooks.map(([f,t,sub]) => [f,t,sub]), rwIdx, "runway"); blip();
+});
+document.getElementById("rw-phone").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " "){ e.preventDefault(); openViewer(rwLooks.map(([f,t,sub]) => [f,t,sub]), rwIdx, "runway"); }
 });
 document.getElementById("rw-next").addEventListener("click", () => { rwShow(rwIdx + 1); blip(); });
 rwLike.addEventListener("click", () => {
@@ -1581,20 +1755,78 @@ rwShow(0);
 
 /* ---------- on-air reel ---------- */
 const shots = [
-  ["look-01-welcome.jpg","Onboarding","Choose how you move"],
-  ["look-02-feed.jpg","Home","Tyres and the feed"],
-  ["look-11-closet-new.jpg","Closet","Every piece, known"],
-  ["look-13-stylist-schedule.jpg","AI Stylist","Chat that schedules"],
+  ["look-13-stylist-schedule.jpg","Taya","Your AI stylist"],
+  ["look-11-closet-new.jpg","Closet","Every piece, saved"],
+  ["look-04-analyse-fit.jpg","Analyse Fit","Find every piece"],
   ["look-12-planner.jpg","Planner","Weather-checked"],
-  ["look-09-squad.jpg","Squad","Vote, tailor, deliver"],
-  ["look-08-community.jpg","Community","Fit of the Day"],
-  ["look-07-storefront.jpg","Storefront","Bespoke and shop"]
+  ["look-09-squad.jpg","Squad","Aso-ebi, sorted"],
+  ["look-08-community.jpg","Fit of the Day","Vote the best look"],
+  ["look-07-storefront.jpg","Tailor Storefront","Made to measure"],
+  ["look-14-explore-search.jpg","Explore","Looks, tailors, communities"]
 ];
-document.getElementById("reel").innerHTML = shots.map(([f,t,c]) => `
+document.getElementById("reel").innerHTML = shots.map(([f,t,c], i) => `
   <figure class="frame">
-    <div class="shot"><img loading="lazy" src="${lookSrc(f)}" alt="${t} screen from the Aitaya app"></div>
+    <div class="shot" data-i="${i}" role="button" tabindex="0" aria-label="View ${t} full screen"><img loading="lazy" src="${lookSrc(f)}" alt="${t} screen from Aitaya"></div>
     <figcaption><div class="rule"></div><b>${t}</b><span>${c}</span></figcaption>
   </figure>`).join("");
+
+/* stitched arrows move the screens on desktop */
+const reelWrap = document.getElementById("reel-wrap");
+const reelPrev = document.getElementById("reel-prev"), reelNext = document.getElementById("reel-next");
+function reelStep(){ const f = reelWrap.querySelector(".frame"); return f ? (f.offsetWidth + 24) * 2 : 400; }
+function reelArrows(){
+  const max = reelWrap.scrollWidth - reelWrap.clientWidth - 2;
+  reelPrev.disabled = reelWrap.scrollLeft <= 2;
+  reelNext.disabled = reelWrap.scrollLeft >= max;
+}
+reelPrev.addEventListener("click", () => { reelWrap.scrollBy({ left:-reelStep(), behavior: reduceMotion ? "auto" : "smooth" }); blip(); });
+reelNext.addEventListener("click", () => { reelWrap.scrollBy({ left: reelStep(), behavior: reduceMotion ? "auto" : "smooth" }); blip(); });
+reelWrap.addEventListener("scroll", reelArrows, { passive:true });
+addEventListener("resize", reelArrows);
+reelArrows();
+document.getElementById("reel").addEventListener("click", (e) => {
+  const sh = e.target.closest(".shot"); if (!sh) return;
+  openViewer(shots, parseInt(sh.dataset.i, 10), "reel"); blip();
+});
+document.getElementById("reel").addEventListener("keydown", (e) => {
+  const sh = e.target.closest(".shot"); if (!sh || (e.key !== "Enter" && e.key !== " ")) return;
+  e.preventDefault(); openViewer(shots, parseInt(sh.dataset.i, 10), "reel");
+});
+
+/* full-screen viewer, shared by Runway and the screens reel */
+const viewer = document.getElementById("viewer");
+const vImg = document.getElementById("v-img"), vTitle = document.getElementById("v-title"), vSub = document.getElementById("v-sub");
+let vSet = [], vIdx = 0, vFrom = null, vReturn = null;
+function vShow(i){
+  vIdx = (i + vSet.length) % vSet.length;
+  const [f,t,sub] = vSet[vIdx];
+  vImg.src = lookSrc(f); vImg.alt = t; vTitle.textContent = t; vSub.textContent = sub;
+}
+function openViewer(set, i, from){
+  vSet = set; vFrom = from; vReturn = document.activeElement;
+  if (from === "runway") clearTimeout(rwTimer);
+  vShow(i);
+  viewer.classList.add("on");
+  document.documentElement.style.overflow = "hidden";
+  document.getElementById("v-close").focus();
+}
+function closeViewer(){
+  if (!viewer.classList.contains("on")) return;
+  viewer.classList.remove("on");
+  document.documentElement.style.overflow = "";
+  if (vFrom === "runway") rwShow(vIdx);
+  if (vReturn && vReturn.focus) vReturn.focus();
+}
+document.getElementById("v-close").addEventListener("click", closeViewer);
+document.getElementById("v-prev").addEventListener("click", () => { vShow(vIdx - 1); blip(); });
+document.getElementById("v-next").addEventListener("click", () => { vShow(vIdx + 1); blip(); });
+viewer.addEventListener("click", (e) => { if (e.target === viewer) closeViewer(); });
+addEventListener("keydown", (e) => {
+  if (!viewer.classList.contains("on")) return;
+  if (e.key === "Escape") closeViewer();
+  else if (e.key === "ArrowRight"){ vShow(vIdx + 1); e.stopImmediatePropagation(); }
+  else if (e.key === "ArrowLeft"){ vShow(vIdx - 1); e.stopImmediatePropagation(); }
+}, true);
 
 /* ---------- hero channels ---------- */
 const channelFiles = [
@@ -1624,6 +1856,254 @@ document.getElementById("hero-set").addEventListener("click", (e) => {
   if (e.target.closest(".knob")) return;
   changeChannel(); blip();
 });
+
+
+/* ================= Taya ================= */
+const TAYA_MOODS = ["neutral","happy","love","thinking","dozing","wink","surprised"];
+TAYA_MOODS.forEach(m => { const i = new Image(); i.src = "assets/taya/head-" + m + ".webp"; });
+function tayaFace(el, m){                       // crossfade one face holder to a mood
+  const imgs = el.querySelectorAll("img.tm"); if (imgs.length < 2) return;
+  if (el.dataset.mood === m) return; el.dataset.mood = m;
+  const on = el.querySelector("img.tm.on"), off = on === imgs[0] ? imgs[1] : imgs[0];
+  off.src = "assets/taya/head-" + m + ".webp"; off.classList.add("on"); on.classList.remove("on");
+}
+const Taya = (function(){
+  const bug = document.getElementById("taya-bug"), cap = document.getElementById("taya-cap");
+  const dock = document.getElementById("taya-dock"), bub = document.getElementById("taya-bub");
+  const dockFace = dock.querySelector(".taya-face");
+  let mood = "neutral", capT, moodT, heroVisible = true;
+  function set(m){ mood = m; tayaFace(bug, m); tayaFace(dockFace, m); }
+  function hop(){ bug.classList.remove("flare"); void bug.offsetWidth; bug.classList.add("flare"); }
+  function fill(box, text, action){
+    box.innerHTML = "<b>Taya</b>"; const t = document.createElement("span"); t.textContent = text; box.appendChild(t);
+    if (action){ const a = document.createElement("button"); a.type = "button"; a.className = "cap-act"; a.textContent = action.label;
+      a.addEventListener("click", e => { e.stopPropagation(); action.fn(); }); box.appendChild(a); }
+  }
+  function say(text, o = {}){
+    const m = o.mood || "happy", ms = o.ms || 4800;
+    set(m);
+    const box = heroVisible ? cap : bub;
+    (heroVisible ? bub : cap).classList.remove("on");
+    fill(box, text, o.action); box.classList.add("on");
+    clearTimeout(capT);
+    capT = setTimeout(() => { box.classList.remove("on"); if (!document.body.classList.contains("dozing")) set("neutral"); }, ms);
+  }
+  function flash(m, ms = 1300){ set(m); clearTimeout(moodT); moodT = setTimeout(() => { if (!document.body.classList.contains("dozing")) set("neutral"); }, ms); }
+  // picture-in-picture: when the TV leaves the screen, she follows you
+  new IntersectionObserver(([en]) => {
+    heroVisible = en.isIntersecting;
+    dock.classList.toggle("on", !heroVisible);
+    if (heroVisible) bub.classList.remove("on"); else cap.classList.remove("on");
+  }, { threshold: 0.15 }).observe(document.getElementById("hero-set"));
+  return { set, say, flash, hop, get mood(){ return mood; } };
+})();
+
+/* the TV ornament explains each channel */
+const tayaLines = [
+  "See a look you like? I’ll find it in your closet.",
+  "Scan your clothes once. I’ll remember what goes with what.",
+  "I check the weather before I pick your outfit.",
+  "Save a video and I’ll rebuild the look from your wardrobe.",
+  "Aso-ebi colours, sorted before the owambe.",
+  "Your money waits safely until the tailor delivers.",
+  "Book a real stylist and pay in the same place.",
+  "Search by event, colour or fabric."
+];
+const askAction = { label: "Ask me what to wear", fn: () => tayaAsk.open() };
+document.getElementById("taya-bug").addEventListener("click", e => {
+  e.stopPropagation(); Taya.hop(); Taya.say(tayaLines[channel], { action: askAction });
+});
+document.getElementById("taya-dockbtn").addEventListener("click", () => tayaAsk.open());
+new MutationObserver(() => {
+  Taya.hop(); Taya.flash("surprised", 520);
+  if (document.getElementById("taya-cap").classList.contains("on")) setTimeout(() => Taya.say(tayaLines[channel], { action: askAction }), 540);
+}).observe(channelChip, { childList: true });
+
+/* she dozes with the set and wakes with a start */
+let tayaWasDozing = false;
+new MutationObserver(() => {
+  const d = document.body.classList.contains("dozing");
+  if (d){ Taya.set("dozing"); tayaWasDozing = true; }
+  else if (tayaWasDozing){ tayaWasDozing = false; Taya.flash("surprised", 900); }
+}).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+
+/* returning visitors get a wink */
+if (returning) setTimeout(() => Taya.say(MEM.get("joined", "") === "1"
+  ? "Welcome back. You’re already on my list."
+  : "Welcome back. Your seat is still open.", { mood: "wink", ms: 5200 }), 2600);
+
+/* she reacts when you pick who is watching */
+const tayaRoleLines = {
+  creator: "Creator it is. I’ll plan your fits and your campus will judge them.",
+  tailor: "Tailor mode. Measurements come with every order, and you get paid on delivery.",
+  brand: "Brand mode. When a look takes off, shoppers buy straight from your storefront.",
+  stylist: "Stylist mode. Your clients’ closets, schedules and bookings, all in one place."
+};
+document.addEventListener("click", e => {
+  const r = e.target.closest(".rolechip[data-role], .role[data-role]");
+  if (r && tayaRoleLines[r.dataset.role] && !e.target.closest("#taya-ask")) setTimeout(() => {
+    if (pickedRole === r.dataset.role) Taya.say(tayaRoleLines[r.dataset.role], { mood: "happy" });
+  }, 60);
+  if (e.target.closest("[data-ask]")) tayaAsk.open();
+});
+
+/* she has opinions about the vote */
+document.querySelectorAll(".vote .opt").forEach(o => o.addEventListener("click", () => {
+  const f = o.dataset.fit;
+  setTimeout(() => Taya.say(
+    f === "fur" ? "Mohair? Bold. The whole room just grew hair."
+    : f === "ivory" ? "Ivory. Crisp, like a freshly starched agbada."
+    : "Emerald. Good taste. I may be biased.",
+    { mood: f === "fur" ? "surprised" : f === "ivory" ? "happy" : "love" }), 420);
+}));
+
+/* tab title when you wander off */
+const tayaTitle = document.title;
+document.addEventListener("visibilitychange", () => {
+  document.title = document.hidden
+    ? (MEM.get("joined", "") === "1" ? "Taya misses you · Aitaya" : "Your seat is still open · Aitaya")
+    : tayaTitle;
+});
+
+/* email helper: catches typos, confirms a good address */
+(function(){
+  const input = document.getElementById("waitlist-email");
+  const box = document.getElementById("taya-note"), text = document.getElementById("tn-text");
+  const face = box && box.querySelector(".taya-face");
+  if (!input || !box) return;
+  const FIX = {"gmial.com":"gmail.com","gmal.com":"gmail.com","gamil.com":"gmail.com","gnail.com":"gmail.com","gmaill.com":"gmail.com","gmail.co":"gmail.com","gmail.con":"gmail.com",
+    "yahoo.co":"yahoo.com","yaho.com":"yahoo.com","yahooo.com":"yahoo.com","yahoo.con":"yahoo.com","hotmial.com":"hotmail.com","hotmail.co":"hotmail.com",
+    "outlok.com":"outlook.com","outlook.co":"outlook.com","icloud.co":"icloud.com","iclod.com":"icloud.com"};
+  const DEF = "Drop your email and I’ll keep your seat.";
+  function check(){
+    const v = input.value.trim(), at = v.lastIndexOf("@"), dom = at > 0 ? v.slice(at + 1).toLowerCase() : "";
+    if (!v){ text.textContent = DEF; tayaFace(face, "neutral"); return; }
+    if (FIX[dom]){
+      const fixed = v.slice(0, at + 1) + FIX[dom];
+      text.textContent = "Did you mean ";
+      const b = document.createElement("button"); b.type = "button"; b.className = "fix"; b.textContent = fixed;
+      b.addEventListener("click", () => { input.value = fixed; check(); input.focus(); });
+      text.appendChild(b); text.appendChild(document.createTextNode("?"));
+      tayaFace(face, "thinking"); return;
+    }
+    if (/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)){ text.textContent = "That works. I’ll mail you when it’s your turn."; tayaFace(face, "happy"); return; }
+    text.textContent = DEF; tayaFace(face, "neutral");
+  }
+  input.addEventListener("input", check); input.addEventListener("blur", check);
+})();
+
+/* green room: bring your squad */
+(function(){
+  const msg = "I just joined the Aitaya waitlist. Your closet, a stylist and tailors you can trust, all in one app. Join me: https://aitaya.ng";
+  const wa = document.getElementById("gr-wa"), cp = document.getElementById("gr-copy");
+  if (wa) wa.href = "https://wa.me/?text=" + encodeURIComponent(msg);
+  if (cp) cp.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText("https://aitaya.ng"); cp.textContent = "Link copied"; }
+    catch(e){ cp.textContent = "aitaya.ng"; }
+    setTimeout(() => cp.textContent = "Copy the link", 2200);
+  });
+})();
+
+/* Ask Taya: a three-tap stylist demo that ends in a real sign-up */
+const tayaAsk = (function(){
+  const panel = document.getElementById("taya-ask"), body = document.getElementById("taya-askbody");
+  const face = panel.querySelector(".taya-face");
+  const OCC = {
+    "Owambe":        { classic:["Aso-oke wrapper and lace blouse","Gele to match","Gold drop earrings"],
+                       bold:["Ankara peplum top and wrapper","A statement gele, tied high","Chunky coral beads"],
+                       minimal:["A silk kaftan in one strong colour","Small gold studs","Flat leather slippers"] },
+    "Job interview": { classic:["Navy two-piece suit","Crisp white shirt","Loafers or low block heels"],
+                       bold:["Tailored Ankara blazer","A plain shell top underneath","Neat dark trousers"],
+                       minimal:["Cream shirt","Charcoal trousers","One good watch"] },
+    "Lecture day":   { classic:["Clean straight jeans","Plain tee","Adire overshirt"],
+                       bold:["Afro-punk print shirt","Cargo trousers","Chunky trainers"],
+                       minimal:["Linen shirt","Chinos","White trainers"] },
+    "Church":        { classic:["Lace kaftan or a sleeved midi dress","Low heels or sandals","A small handbag"],
+                       bold:["Bright Ankara skirt suit","Matching head wrap","Gold hoops"],
+                       minimal:["Pastel shirt dress or kaftan","Nude sandals","Pearl studs"] },
+    "Date night":    { classic:["A fitted black dress or a dark shirt","Tailored trousers or a sleek skirt","Polished shoes"],
+                       bold:["Emerald silk two-piece","Gold accents","Strappy sandals"],
+                       minimal:["Black tee","Wide-leg trousers","One statement ring"] },
+    "Wedding guest": { classic:["Your aso-ebi, cut to fit","Gele or fila to match","Comfortable heels for the dancing"],
+                       bold:["Aso-ebi with a dramatic sleeve","A high, sculpted gele","Statement earrings"],
+                       minimal:["Aso-ebi cut simply","Flat sandals","Small gold studs"] }
+  };
+  const CITY = { "Abuja":[30,0], "Lagos":[30,1], "Kano":[34,0], "Port Harcourt":[29,1], "Enugu":[29,1], "Ibadan":[29,0] };
+  let st = {};
+  function el(tag, cls, html){ const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function say(text, mood){ tayaFace(face, mood || "happy"); const m = el("div", "msg"); m.textContent = text; body.appendChild(m); body.scrollTop = body.scrollHeight; return m; }
+  function me(text){ const m = el("div", "msg me"); m.textContent = text; body.appendChild(m); body.scrollTop = body.scrollHeight; }
+  function chips(list, fn, extra){
+    const c = el("div", "chips");
+    (extra || []).forEach(x => { const b = el("button", "wx"); b.type = "button"; b.textContent = x.label; b.onclick = () => { c.remove(); x.fn(); }; c.appendChild(b); });
+    list.forEach(x => { const b = el("button"); b.type = "button"; b.textContent = x; b.onclick = () => { c.remove(); fn(x); }; c.appendChild(b); });
+    body.appendChild(c); body.scrollTop = body.scrollHeight;
+    const first = c.querySelector("button"); if (first) first.focus({ preventScroll: true });
+  }
+  function start(){
+    body.innerHTML = ""; st = {};
+    say("Where are you going? I’ll dress you for it.", "happy");
+    chips(Object.keys(OCC), o => { me(o); st.occ = o; askCity(); });
+  }
+  function askCity(){
+    say("Which city? I’ll check the heat.", "thinking");
+    const w = window.__tayaWx, extra = [];
+    if (w && typeof w.temp === "number") extra.push({ label: "Use my weather: " + w.city + ", " + Math.round(w.temp) + "°",
+      fn: () => { me(w.city); st.city = w.city; st.temp = Math.round(w.temp); st.rain = /rain|umbrella/i.test(w.advice || ""); st.live = true; askVibe(); } });
+    chips(Object.keys(CITY), c => { me(c); st.city = c; st.temp = CITY[c][0]; st.rain = !!CITY[c][1]; st.live = false; askVibe(); }, extra);
+  }
+  function askVibe(){
+    say("And the vibe?", "wink");
+    chips(["Classic","Bold","Minimal"], v => { me(v); st.vibe = v.toLowerCase(); answer(); });
+  }
+  function answer(){
+    const t = say("Pulling pieces…", "thinking"); t.classList.add("dots");
+    setTimeout(() => {
+      t.remove();
+      const items = OCC[st.occ][st.vibe];
+      const heat = st.temp >= 31 ? "It’s about " + st.temp + "°" + (st.live ? "" : " there") + ", so choose cotton or linen and skip the heavy lace."
+        : st.rain ? "Rain is likely in " + st.city + ". Carry a small umbrella and leave the suede at home."
+        : "About " + st.temp + "° in " + st.city + ". Bring a light layer if the hall is air-conditioned.";
+      const card = el("div", "look");
+      card.innerHTML = "<h4>" + st.occ + ", <em>" + st.vibe + ".</em></h4>";
+      const ul = el("ul"); items.forEach(i => { const li = el("li"); li.textContent = i; ul.appendChild(li); }); card.appendChild(ul);
+      const wx = el("div", "wxl"); wx.textContent = heat; card.appendChild(wx);
+      const acts = el("div", "acts");
+      const share = el("a"); share.textContent = "Send to my squad"; share.target = "_blank"; share.rel = "noopener";
+      share.href = "https://wa.me/?text=" + encodeURIComponent("Taya from Aitaya styled my " + st.occ.toLowerCase() + " look: " + items.join(", ") + ". Get yours at https://aitaya.ng");
+      const again = el("button"); again.type = "button"; again.textContent = "Try another"; again.onclick = start;
+      acts.appendChild(share); acts.appendChild(again); card.appendChild(acts);
+      body.appendChild(card);
+      tayaFace(face, "love");
+      setTimeout(signup, 500);
+    }, 1100);
+  }
+  function signup(){
+    if (MEM.get("joined", "") === "1"){ say("You’re already on my list, so I’ll build this from your own closet at launch.", "wink"); return; }
+    say("On Aitaya I build this from clothes you already own. Want in?", "happy");
+    const f = el("form"); f.noValidate = true;
+    f.innerHTML = '<input type="email" placeholder="your@email.com" autocomplete="email" aria-label="Email address" required><button type="submit">Save my seat</button>';
+    const note = el("div", "small", "No spam. Just your invite.");
+    body.appendChild(f); body.appendChild(note); body.scrollTop = body.scrollHeight;
+    f.addEventListener("submit", async e => {
+      e.preventDefault();
+      const inp = f.querySelector("input"), btn = f.querySelector("button"), email = inp.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ note.textContent = "That email doesn’t look right yet."; tayaFace(face, "thinking"); inp.focus(); return; }
+      btn.disabled = true; btn.textContent = "Saving…";
+      try {
+        const res = await fetch(WAITLIST_ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ email }) });
+        if (res.ok || res.status === 409){ close(); document.querySelectorAll(".hero-zone#form-zone,#form-zone-2").forEach(z => z.classList.add("done-state")); openGreenRoom(); return; }
+        note.textContent = "The line is busy. Try again in a moment."; tayaFace(face, "surprised");
+      } catch(err){ note.textContent = "Couldn’t connect. Check your internet and try again."; tayaFace(face, "surprised"); }
+      btn.disabled = false; btn.textContent = "Save my seat";
+    });
+  }
+  function open(){ panel.classList.add("on"); document.body.classList.add("taya-open"); if (!body.children.length) start(); }
+  function close(){ panel.classList.remove("on"); document.body.classList.remove("taya-open"); }
+  document.getElementById("taya-askx").addEventListener("click", close);
+  addEventListener("keydown", e => { if (e.key === "Escape" && panel.classList.contains("on")) close(); });
+  return { open, close, start };
+})();
 
 /* ---------- audio ---------- */
 let actx = null, humGain = null, humOn = false;
@@ -1729,7 +2209,7 @@ addEventListener("keydown", e => {
 
 /* ---------- tape tunes the set ---------- */
 const nowline = document.getElementById("nowline");
-let nowTimer = null, sectionNow = "Sign-on";
+let nowTimer = null, sectionNow = "Home";
 function flashNow(text){
   nowline.textContent = text;
   clearTimeout(nowTimer);
@@ -1772,8 +2252,8 @@ vote.querySelectorAll(".opt").forEach(opt => {
     if (votedFit === "fur") setTimeout(() => document.getElementById("act-vote").scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"center"}), 350);
     blip();
     flashNow(votedFit === "fur"
-      ? "The room grows fur\u2026 it is very cozy in here"
-      : "The room wears " + opt.querySelector(".lbl").textContent.toLowerCase());
+      ? "Mohair it is"
+      : "The page wears " + opt.querySelector(".lbl").textContent.toLowerCase());
   });
 });
 document.getElementById("revote").addEventListener("click", () => {
@@ -1782,7 +2262,7 @@ document.getElementById("revote").addEventListener("click", () => {
   document.body.dataset.fit = "";
   MEM.set("fit", "");
   vote.querySelectorAll(".opt").forEach(o => o.classList.remove("voted"));
-  flashNow("Lines are open again");
+  flashNow("Vote again");
 });
 document.getElementById("vote-cta").addEventListener("click", (e) => {
   e.preventDefault();
@@ -1815,8 +2295,6 @@ if (boot){
   const savedRole = MEM.get("role", "");
   if (savedRole && personas[savedRole]){
     pickedRole = savedRole;
-    const chip = document.querySelector('.rolechip[data-role="' + savedRole + '"]');
-    if (chip) chip.classList.add("on");
     applyRole(savedRole);
   }
   const f = document.body.dataset.fit;
@@ -1858,7 +2336,7 @@ document.getElementById("setauto").addEventListener("click", () => {
   pic.vhold = 0; pic.track = 0; pic.roll = 0;
   heroScreen.style.setProperty("--vh", "0px");
   dV.paint(); dT.paint(); blip();
-  flashNow("Picture set to auto");
+  flashNow("Picture reset");
 });
 applyPic();
 
@@ -1877,6 +2355,7 @@ let mgLastY = scrollY, mg = 0;
     const w = await r.json();
     if (!w || typeof w.temp !== "number") return;
     txt.innerHTML = "<b>" + Math.round(w.temp) + "&deg;</b> in " + w.city + " &middot; " + w.advice;
+    window.__tayaWx = w;
     box.classList.add("on");
   } catch(e){ /* no signal, no chyron */ }
 })();
@@ -1895,8 +2374,8 @@ function buildGreenRoom(){
   const rooms = document.getElementById("gr-rooms");
   const socials = document.getElementById("gr-socials");
   const roomDefs = [
-    ["whatsapp","WhatsApp waitlist group","First to hear, first in line"],
-    ["telegram","Telegram channel","For the quieter announcements"]
+    ["whatsapp","WhatsApp group","Updates and early invites"],
+    ["telegram","Telegram channel","Announcements only"]
   ];
   rooms.innerHTML = roomDefs.filter(([k]) => LINKS[k]).map(([k,t,s]) =>
     `<a class="gr-room" href="${LINKS[k]}" target="_blank" rel="noopener">${ICONS[k]}<span><b>${t}</b><span>${s}</span></span></a>`
@@ -1918,12 +2397,12 @@ async function openGreenRoom(){
     const d = await r.json();
     if (d && typeof d.count === "number"){
       slot.textContent = "No. " + d.count.toLocaleString();
-      note.textContent = "Your place in the queue";
+      note.textContent = "Your place in line";
       return;
     }
   } catch(e){}
-  slot.textContent = "Seat held";
-  note.textContent = "We have your name";
+  slot.textContent = "You\u2019re in";
+  note.textContent = "You\u2019re on the list";
 }
 document.getElementById("gr-close").addEventListener("click", () => greenroom.classList.remove("on"));
 greenroom.addEventListener("click", e => { if (e.target === greenroom) greenroom.classList.remove("on"); });
@@ -1993,13 +2472,13 @@ wake();
 
 /* ---------- narration + spine ---------- */
 const beats = [
-  [".hero","Sign-on",0],
-  ["#act-pick","Who\u2019s watching",1],
-  ["#act-guide","Tonight\u2019s programming",2],
-  ["#act-runway","Runway \u00b7 full turn",3],
-  ["#act-vote","Lines are open",4],
-  [".makers","The makers",4],
-  ["#act-goodnight","Sign-off",5]
+  [".hero","Home",0],
+  ["#act-pick","Your role",1],
+  ["#act-guide","Features",2],
+  ["#act-runway","Runway",3],
+  ["#act-vote","Vote",4],
+  [".makers","Who gets paid",4],
+  ["#act-goodnight","Join",5]
 ];
 const nodes = [...document.querySelectorAll(".spine .node")];
 const bio = new IntersectionObserver(es => {
