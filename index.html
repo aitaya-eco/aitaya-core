@@ -1147,39 +1147,119 @@ body.taya-open .taya-dock,#greenroom.on ~ .taya-dock{opacity:0;pointer-events:no
 #greenroom .gr-squad a,#greenroom .gr-squad button{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 16px;font:700 13px var(--grotesk);cursor:pointer;text-decoration:none}
 #greenroom .gr-squad a{background:var(--accent);color:#F6F1E4;border:0}
 #greenroom .gr-squad button{background:none;border:1.5px solid var(--accent);color:var(--accent)}
-/* Ask Taya */
-#taya-ask{position:fixed;right:clamp(14px,2.4vw,26px);bottom:clamp(14px,2.4vw,22px);z-index:128;width:min(400px,calc(100vw - 28px));max-height:min(640px,calc(100vh - 110px));
-  display:flex;flex-direction:column;background:var(--clay);border-radius:var(--r-clay);
-  box-shadow:0 0 0 1.5px rgba(221,196,127,.4),18px 22px 44px rgba(20,14,8,.35),inset 2px 2px 6px rgba(var(--hi),.85);
+/* Taya colour tokens. Every pair here is contrast-checked (WCAG 2 and APCA) in all three rooms and all four roles:
+   light rooms: Taya text 12.5:1, filled role boxes 5.4 to 8.3:1 with ivory ink; mohair room: Taya text 10.8:1,
+   filled role boxes 6.4 to 10.2:1 with dark ink, because the mohair accents are pale. */
+:root{
+  --t-panel:var(--clay);--t-bubble:#FFF9EC;--t-card:#FFFBF2;--t-ink:#33302A;--t-muted:#675E4E;
+  --t-edge:rgba(124,99,32,.18);--t-seam:rgba(124,99,32,.34);--t-chip:#FFF9EC;--t-chip-ink:#33302A;--t-chip-edge:rgba(124,99,32,.36);
+  --t-field:#FFFDF6;--t-field-ink:#33302A;--t-ph:#7A705E;--t-shadow:74,58,38;--t-gloss:rgba(255,255,255,.55);
+  --accent-fill:var(--accent);--accent-ink:var(--accent);--on-accent:#FFF8EA;
+}
+body[data-role="brand"]{--accent-fill:#7A5A0E;--accent-ink:#7A5A0E}
+body[data-fit="ivory"]{--t-panel:#FFFDF6;--t-bubble:#FFFFFF;--t-card:#FFFFFF;--t-ink:#3A362E;--t-muted:#675E4E}
+body[data-fit="fur"]{
+  --t-panel:#2A231C;--t-bubble:#3A3028;--t-card:#332A22;--t-ink:#F3EBD8;--t-muted:#CDBFA3;
+  --t-edge:rgba(221,196,127,.22);--t-seam:rgba(221,196,127,.38);--t-chip:#332A22;--t-chip-ink:#F3EBD8;--t-chip-edge:rgba(221,196,127,.45);
+  --t-field:#1F1A15;--t-field-ink:#F3EBD8;--t-ph:#A89C84;--t-shadow:0,0,0;--t-gloss:rgba(255,240,210,.06);
+  --accent-fill:var(--accent);--accent-ink:var(--accent);--on-accent:#1E1A15;
+}
+body[data-fit="fur"][data-role="brand"]{--accent-fill:#E3C468;--accent-ink:#E3C468}
+body[data-fit="fur"][data-role="tailor"]{--accent-fill:#EBA27C;--accent-ink:#EDA582}
+body[data-fit="fur"][data-role="stylist"]{--accent-fill:#D8A3BD;--accent-ink:#DDA9C1}
+.rolechip.on b{color:var(--accent-ink)}
+
+/* Ask Taya: a stitched clay panel; her lines come with her face, yours are pressed role-colour pills */
+#taya-ask{position:fixed;right:clamp(14px,2.4vw,26px);bottom:clamp(14px,2.4vw,22px);z-index:128;width:min(410px,calc(100vw - 28px));max-height:min(660px,calc(100vh - 110px));
+  display:flex;flex-direction:column;background:var(--t-panel);color:var(--t-ink);border-radius:var(--r-clay);
+  box-shadow:0 0 0 1.5px var(--t-chip-edge),18px 22px 44px rgba(var(--t-shadow),.35),inset 2px 2px 6px var(--t-gloss);
   opacity:0;transform:translateY(18px) scale(.97);pointer-events:none;transition:opacity .3s,transform .35s cubic-bezier(.2,.9,.3,1.2)}
 #taya-ask.on{opacity:1;transform:none;pointer-events:auto}
-#taya-ask::after{content:"";position:absolute;inset:8px;pointer-events:none;border:2px dashed var(--stitch);border-radius:calc(var(--r-clay) - 8px);opacity:.7}
-#taya-ask .ta-head{display:flex;align-items:center;gap:12px;padding:16px 18px 12px;border-bottom:1px solid var(--hairline)}
+#taya-ask::after{content:"";position:absolute;inset:8px;pointer-events:none;border:2px dashed var(--t-seam);border-radius:calc(var(--r-clay) - 8px)}
+#taya-ask .ta-head{display:flex;align-items:center;gap:12px;padding:16px 18px 12px;border-bottom:1px solid var(--t-edge)}
 #taya-ask .ta-face{position:relative;width:58px;height:56px;flex:none}
-#taya-ask .ta-head b{font-family:var(--script);font-weight:400;font-size:24px;color:var(--accent);display:block;line-height:1}
-#taya-ask .ta-head span{font-size:12px;color:var(--ink-soft)}
-#taya-ask .ta-x{margin-left:auto;width:34px;height:34px;border-radius:50%;border:0;background:rgba(124,99,32,.1);color:var(--ink);font-size:18px;cursor:pointer;position:relative;z-index:2}
-#taya-ask .ta-body{overflow-y:auto;padding:14px 18px 18px;display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
-#taya-ask .msg{max-width:88%;font-size:14px;line-height:1.5;padding:10px 13px;border-radius:16px 16px 16px 4px;background:#FFF9EC;border:1px solid rgba(124,99,32,.16)}
-#taya-ask .msg.me{align-self:flex-end;background:var(--accent);color:#F6F1E4;border:0;border-radius:16px 16px 4px 16px}
-#taya-ask .msg.dots{font-style:italic;color:var(--ink-soft)}
-#taya-ask .chips{display:flex;flex-wrap:wrap;gap:7px}
-#taya-ask .chips button{border:1.5px solid rgba(124,99,32,.35);background:#FFF9EC;color:var(--ink);border-radius:999px;padding:8px 13px;font:500 13px var(--grotesk);cursor:pointer}
-#taya-ask .chips button:hover,#taya-ask .chips button:focus-visible{border-color:var(--accent);color:var(--accent)}
-#taya-ask .chips button.wx{background:var(--accent);color:#F6F1E4;border-color:var(--accent)}
-#taya-ask .look{background:#FFF9EC;border:1px solid rgba(124,99,32,.2);border-radius:16px;padding:13px 14px}
-#taya-ask .look h4{font-family:var(--didot);font-weight:400;font-size:19px;margin-bottom:6px}
-#taya-ask .look h4 em{color:var(--accent)}
-#taya-ask .look ul{list-style:none;padding:0;margin:0 0 8px;font-size:14px;line-height:1.55}
-#taya-ask .look li::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:9px;vertical-align:middle;box-shadow:0 0 0 1.5px var(--bronze)}
-#taya-ask .look .wxl{font-size:12.5px;color:var(--ink-soft)}
-#taya-ask .look .acts{display:flex;gap:12px;margin-top:10px;font-size:12.5px}
-#taya-ask .look .acts a,#taya-ask .look .acts button{background:none;border:0;padding:0;font:700 12.5px var(--grotesk);color:var(--bronze);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-#taya-ask form{display:flex;gap:8px;margin-top:4px}
-#taya-ask form input{flex:1;min-width:0;border-radius:12px;border:1.5px solid rgba(124,99,32,.3);background:#FFFDF6;padding:11px 12px;font:14px var(--grotesk);color:var(--ink)}
-#taya-ask form button{border:0;border-radius:12px;background:var(--accent);color:#F6F1E4;font:700 13px var(--grotesk);padding:0 14px;cursor:pointer;white-space:nowrap}
-#taya-ask .small{font-size:12px;color:var(--ink-soft)}
-@media (max-width:640px){#taya-ask{right:0;left:0;bottom:0;width:100%;max-height:82vh;border-radius:var(--r-clay) var(--r-clay) 0 0}}
+#taya-ask .ta-head b{font-family:var(--script);font-weight:400;font-size:25px;color:var(--accent-ink);display:block;line-height:1}
+#taya-ask .ta-head span{font-size:12.5px;color:var(--t-muted)}
+#taya-ask .ta-x{margin-left:auto;width:36px;height:36px;border-radius:50%;border:1px solid var(--t-edge);background:var(--t-bubble);color:var(--t-ink);font-size:19px;line-height:1;cursor:pointer;position:relative;z-index:2}
+#taya-ask .ta-body{overflow-y:auto;padding:16px 18px 20px;display:flex;flex-direction:column;gap:11px;position:relative;z-index:1;scrollbar-width:thin}
+#taya-ask .trow{display:flex;gap:8px;align-items:flex-end;max-width:94%}
+#taya-ask .tav{width:34px;height:auto;flex:none;filter:drop-shadow(0 2px 3px rgba(var(--t-shadow),.3))}
+#taya-ask .msg{position:relative;font-size:14.5px;line-height:1.5;color:var(--t-ink);background:var(--t-bubble);
+  padding:11px 15px;border-radius:18px 18px 18px 6px;border:1px solid var(--t-edge);
+  box-shadow:3px 4px 10px rgba(var(--t-shadow),.10),inset 1px 1px 2px var(--t-gloss)}
+#taya-ask .msg::before{content:"";position:absolute;inset:4px;border:1px dashed var(--t-seam);border-radius:14px 14px 14px 4px;pointer-events:none;opacity:.7}
+#taya-ask .msg.dots{font-style:italic;color:var(--t-muted)}
+#taya-ask .msg.me{align-self:flex-end;max-width:80%;background:var(--accent-fill);color:var(--on-accent);font-weight:500;border:0;border-radius:18px 18px 6px 18px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -2px 4px rgba(0,0,0,.12),3px 4px 10px rgba(var(--t-shadow),.18)}
+#taya-ask .msg.me::before{display:none}
+#taya-ask .chips{display:flex;flex-wrap:wrap;gap:8px;padding-left:42px}
+#taya-ask .chips button{min-height:40px;border:1.5px solid var(--t-chip-edge);background:var(--t-chip);color:var(--t-chip-ink);border-radius:999px;padding:8px 15px;font:500 13.5px var(--grotesk);cursor:pointer;
+  box-shadow:2px 3px 6px rgba(var(--t-shadow),.10),inset 1px 1px 2px var(--t-gloss);transition:transform .15s,border-color .15s,color .15s}
+#taya-ask .chips button:hover{border-color:var(--accent-ink);color:var(--accent-ink);transform:translateY(-1px)}
+#taya-ask .chips button:focus-visible,#taya-ask form :focus-visible,#taya-ask .ta-x:focus-visible,#taya-ask .look .acts :focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px}
+#taya-ask .chips button.wx{background:var(--accent-fill);color:var(--on-accent);border-color:var(--accent-fill);font-weight:700}
+/* the look arrives as a hang-tag, bullets are little four-hole buttons */
+#taya-ask .look{position:relative;margin-left:42px;background:var(--t-card);color:var(--t-ink);border:1px solid var(--t-edge);border-radius:6px 18px 18px 18px;padding:16px 16px 14px 18px;
+  box-shadow:4px 6px 14px rgba(var(--t-shadow),.14),inset 1px 1px 2px var(--t-gloss)}
+#taya-ask .look::before{content:"";position:absolute;left:12px;top:-6px;width:12px;height:12px;border-radius:50%;background:var(--t-panel);border:1.5px solid var(--t-seam);box-shadow:inset 1px 1px 2px rgba(var(--t-shadow),.3)}
+#taya-ask .look h4{font-family:var(--didot);font-weight:400;font-size:20px;line-height:1.2;margin:2px 0 8px;color:var(--t-ink)}
+#taya-ask .look h4 em{color:var(--accent-ink)}
+#taya-ask .look ul{list-style:none;padding:0;margin:0 0 10px;font-size:14.5px;line-height:1.6;color:var(--t-ink)}
+#taya-ask .look li{display:flex;align-items:center;gap:10px}
+#taya-ask .look li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;border:1.5px solid #7C6320;
+  background:radial-gradient(circle at 36% 36%,#5A4520 0 1px,transparent 1.4px),radial-gradient(circle at 64% 36%,#5A4520 0 1px,transparent 1.4px),
+             radial-gradient(circle at 36% 64%,#5A4520 0 1px,transparent 1.4px),radial-gradient(circle at 64% 64%,#5A4520 0 1px,transparent 1.4px),#E3CD8C}
+#taya-ask .look .wxl{font-size:13px;line-height:1.5;color:var(--t-muted);padding-top:8px;border-top:1px dashed var(--t-seam)}
+#taya-ask .look .acts{display:flex;gap:14px;margin-top:10px}
+#taya-ask .look .acts a,#taya-ask .look .acts button{background:none;border:0;padding:4px 0;font:700 13px var(--grotesk);color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+#taya-ask form{display:flex;gap:8px;margin:2px 0 0 42px}
+#taya-ask form input{flex:1;min-width:0;min-height:44px;border-radius:12px;border:1.5px solid var(--t-chip-edge);background:var(--t-field);color:var(--t-field-ink);padding:10px 12px;font:14.5px var(--grotesk);
+  box-shadow:inset 2px 2px 5px rgba(var(--t-shadow),.12)}
+#taya-ask form input::placeholder{color:var(--t-ph)}
+#taya-ask form input:focus{border-color:var(--accent-ink)}
+#taya-ask form button{min-height:44px;border:0;border-radius:12px;background:var(--accent-fill);color:var(--on-accent);font:700 13.5px var(--grotesk);padding:0 16px;cursor:pointer;white-space:nowrap;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),3px 4px 10px rgba(var(--t-shadow),.2)}
+#taya-ask .small{font-size:12.5px;color:var(--t-muted);margin-left:42px}
+@media (max-width:640px){#taya-ask{right:0;left:0;bottom:0;width:100%;max-height:84vh;border-radius:var(--r-clay) var(--r-clay) 0 0}#taya-ask .chips,#taya-ask .look,#taya-ask form,#taya-ask .small{margin-left:0;padding-left:0}}
+/* other Taya surfaces take the same tokens */
+.taya-dock .bub b{color:var(--accent-ink)}
+.channel .ch-try{border-color:var(--accent-ink);color:var(--accent-ink);min-height:40px}
+.channel .ch-try:hover{background:var(--accent-fill);color:var(--on-accent);border-color:var(--accent-fill)}
+#greenroom .gr-squad a{background:var(--accent-fill);color:var(--on-accent)}
+#greenroom .gr-squad button{border-color:var(--accent-ink);color:var(--accent-ink)}
+#greenroom .gr-taya-line{color:var(--accent-ink)}
+/* weather chyron: fix the city */
+#chyron .wx-fix{margin-left:6px;background:none;border:0;padding:2px 0;font:inherit;font-weight:700;color:var(--bronze);text-decoration:underline;text-underline-offset:3px;cursor:pointer;letter-spacing:.1em}
+#chyron .wx-form{display:inline-flex;gap:6px;align-items:center;margin-left:4px}
+#chyron .wx-form input{width:132px;border:1px solid var(--hairline);border-radius:999px;background:var(--panel);color:var(--ink);padding:5px 10px;font:500 12px var(--grotesk);letter-spacing:0;text-transform:none}
+#chyron .wx-form button{border:0;border-radius:999px;background:var(--accent-fill);color:var(--on-accent);padding:5px 10px;font:700 11px var(--grotesk);letter-spacing:.08em;cursor:pointer}
+/* the niche tape: a stitched chalk ring around a niche when a mouse is near it */
+.ticker .nb{position:relative}
+.ticker .nb::before{content:"";position:absolute;left:7px;right:52px;top:-8px;bottom:-8px;border-radius:999px;border:1.5px dashed currentColor;
+  background:color-mix(in srgb, currentColor 8%, transparent);opacity:0;transform:scale(.9);transition:opacity .18s,transform .22s cubic-bezier(.2,.9,.3,1.3);pointer-events:none}
+.ticker .nb:focus-visible{outline:none}
+.ticker .nb:focus-visible::before{opacity:1;transform:none}
+@media (hover:hover) and (pointer:fine){
+  .ticker:hover .lane{animation-play-state:paused}
+  .ticker .nb:hover::before{opacity:1;transform:none}
+  .ticker .nb:hover{transform:translateY(-1px)}
+}
+/* Taya's caption takes the screen's lower third, so the wipe cue steps aside */
+.screen:has(.taya-cap.on) .wipe-cue{opacity:0}
+/* Taya's one-time tape hint */
+.tape-hint-wrap{position:relative;height:0;z-index:9}
+.tape-hint{position:absolute;left:50%;top:12px;display:flex;align-items:center;gap:10px;width:max-content;max-width:min(470px,calc(100vw - 28px));
+  background:var(--t-panel);color:var(--t-ink);border:1px solid var(--t-chip-edge);border-radius:18px;padding:8px 10px 8px 8px;
+  box-shadow:8px 10px 22px rgba(var(--t-shadow),.28),inset 1px 1px 3px var(--t-gloss);
+  opacity:0;transform:translate(-50%,-8px);pointer-events:none;transition:opacity .3s,transform .35s cubic-bezier(.2,.9,.3,1.3)}
+.tape-hint::before{content:"";position:absolute;left:50%;top:-7px;width:12px;height:12px;margin-left:-6px;background:var(--t-panel);border-left:1px solid var(--t-chip-edge);border-top:1px solid var(--t-chip-edge);transform:rotate(45deg)}
+.tape-hint-wrap.on .tape-hint{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.tape-hint .th-face{position:relative;width:44px;height:42px;flex:none}
+.tape-hint p{font-size:13.5px;line-height:1.4;color:var(--t-ink)}
+.tape-hint p b{font-family:var(--script);font-weight:400;font-size:15px;color:var(--accent-ink);margin-right:5px}
+.tape-hint .th-try{flex:none;min-height:36px;border:0;border-radius:999px;background:var(--accent-fill);color:var(--on-accent);font:700 12.5px var(--grotesk);padding:0 13px;cursor:pointer}
+.tape-hint .th-x{flex:none;width:30px;height:30px;border-radius:50%;border:0;background:none;color:var(--t-muted);font-size:18px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.tape-hint{transition:none}.ticker .nb::before{transition:none}}
 @media (prefers-reduced-motion:reduce){.taya-bug.flare{animation:none}.taya-dock,#taya-ask,.tm{transition:none}}
 </style>
 </head>
@@ -1332,7 +1412,7 @@ body.taya-open .taya-dock,#greenroom.on ~ .taya-dock{opacity:0;pointer-events:no
 </section>
 
 <!-- ================= MEASURING TAPE ================= -->
-<div class="ticker" aria-label="Style niches. Tap one to change the look"><div class="lane" id="ticker-lane"></div></div>
+<div class="ticker" aria-label="Style niches. Pick one to restyle the room"><div class="lane" id="ticker-lane"></div></div>
 
 <!-- ================= WHO'S WATCHING ================= -->
 <div class="interstitial rv" aria-hidden="true"><span class="line"></span><span class="tag felted">Act I &middot; who&rsquo;s watching tonight</span><span class="line"></span></div>
@@ -1867,7 +1947,7 @@ function tayaFace(el, m){                       // crossfade one face holder to 
   const on = el.querySelector("img.tm.on"), off = on === imgs[0] ? imgs[1] : imgs[0];
   off.src = "assets/taya/head-" + m + ".webp"; off.classList.add("on"); on.classList.remove("on");
 }
-const Taya = (function(){
+const Taya = window.Taya = (function(){
   const bug = document.getElementById("taya-bug"), cap = document.getElementById("taya-cap");
   const dock = document.getElementById("taya-dock"), bub = document.getElementById("taya-bub");
   const dockFace = dock.querySelector(".taya-face");
@@ -2031,7 +2111,12 @@ const tayaAsk = (function(){
   const CITY = { "Abuja":[30,0], "Lagos":[30,1], "Kano":[34,0], "Port Harcourt":[29,1], "Enugu":[29,1], "Ibadan":[29,0] };
   let st = {};
   function el(tag, cls, html){ const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-  function say(text, mood){ tayaFace(face, mood || "happy"); const m = el("div", "msg"); m.textContent = text; body.appendChild(m); body.scrollTop = body.scrollHeight; return m; }
+  function say(text, mood){
+    const md = mood || "happy"; tayaFace(face, md);
+    const row = el("div", "trow"), av = el("img", "tav"), m = el("div", "msg");
+    av.src = "assets/taya/head-" + md + ".webp"; av.alt = ""; m.textContent = text;
+    row.appendChild(av); row.appendChild(m); body.appendChild(row); body.scrollTop = body.scrollHeight; return row;
+  }
   function me(text){ const m = el("div", "msg me"); m.textContent = text; body.appendChild(m); body.scrollTop = body.scrollHeight; }
   function chips(list, fn, extra){
     const c = el("div", "chips");
@@ -2050,14 +2135,22 @@ const tayaAsk = (function(){
     const w = window.__tayaWx, extra = [];
     if (w && typeof w.temp === "number") extra.push({ label: "Use my weather: " + w.city + ", " + Math.round(w.temp) + "°",
       fn: () => { me(w.city); st.city = w.city; st.temp = Math.round(w.temp); st.rain = /rain|umbrella/i.test(w.advice || ""); st.live = true; askVibe(); } });
-    chips(Object.keys(CITY), c => { me(c); st.city = c; st.temp = CITY[c][0]; st.rain = !!CITY[c][1]; st.live = false; askVibe(); }, extra);
+    chips(Object.keys(CITY), async c => {
+      me(c); st.city = c; st.temp = CITY[c][0]; st.rain = !!CITY[c][1]; st.live = false;
+      try {                                    // live weather for the city they picked, if it answers quickly
+        const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 3500);
+        const r = await fetch("/api/weather?q=" + encodeURIComponent(c), { signal: ctl.signal }); clearTimeout(to);
+        if (r.status === 200){ const w = await r.json(); if (w && typeof w.temp === "number"){ st.temp = Math.round(w.temp); st.rain = /rain/i.test(w.advice || ""); st.live = true; } }
+      } catch(e){}
+      askVibe();
+    }, extra);
   }
   function askVibe(){
     say("And the vibe?", "wink");
     chips(["Classic","Bold","Minimal"], v => { me(v); st.vibe = v.toLowerCase(); answer(); });
   }
   function answer(){
-    const t = say("Pulling pieces…", "thinking"); t.classList.add("dots");
+    const t = say("Pulling pieces…", "thinking"); t.querySelector(".msg").classList.add("dots");
     setTimeout(() => {
       t.remove();
       const items = OCC[st.occ][st.vibe];
@@ -2226,6 +2319,57 @@ document.querySelectorAll(".ticker .nb").forEach(b => {
   });
 });
 
+
+/* Taya and the niche tape: one hint per visitor, only when it helps.
+   It fires when a mouse lingers on the tape without clicking, or after the tape has been fully on screen
+   for six seconds at least fifteen seconds into the visit. Never again once shown, or once a niche is tried. */
+(function(){
+  const tape = document.querySelector(".ticker"); if (!tape) return;
+  const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
+  let tried = MEM.get("nicheTried", "") === "1", hinted = MEM.get("tapeHint", "") === "1";
+  const wrap = document.createElement("div"); wrap.className = "tape-hint-wrap";
+  wrap.innerHTML = '<div class="tape-hint" role="status"><span class="th-face taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></span><p></p>'
+    + '<button type="button" class="th-try">Show me</button><button type="button" class="th-x" aria-label="Dismiss">&times;</button></div>';
+  tape.after(wrap);
+  const face = wrap.querySelector(".taya-face"), p = wrap.querySelector("p");
+  let hideT = null, hoverT = null, seen = 0, inView = false, timer = null;
+  const t0 = Date.now();
+  function hide(){ wrap.classList.remove("on"); clearTimeout(hideT); }
+  function busy(){ return document.body.classList.contains("taya-open") || document.body.classList.contains("dozing")
+    || document.getElementById("greenroom").classList.contains("on"); }
+  function show(){
+    if (hinted || tried || busy()) return;
+    hinted = true; MEM.set("tapeHint", "1"); clearInterval(timer);
+    p.innerHTML = "<b>Taya</b>"; p.appendChild(document.createTextNode("Psst. Every word on this tape restyles the room. " + (fine ? "Click" : "Tap") + " one."));
+    tayaFace(face, "wink"); wrap.classList.add("on");
+    hideT = setTimeout(hide, 9000);
+  }
+  wrap.querySelector(".th-x").addEventListener("click", hide);
+  wrap.querySelector(".th-try").addEventListener("click", () => {
+    hide();
+    const all = [...tape.querySelectorAll(".nb")].slice(0, 13);
+    all[Math.floor(Math.random() * all.length)].click();
+  });
+  if (fine){
+    tape.addEventListener("pointerenter", () => { clearTimeout(hoverT); hoverT = setTimeout(show, 1500); });
+    tape.addEventListener("pointerleave", () => clearTimeout(hoverT));
+  }
+  new IntersectionObserver(([en]) => { inView = en.intersectionRatio > 0.95; }, { threshold: [0, 0.95, 1] }).observe(tape);
+  if (!hinted && !tried) timer = setInterval(() => {
+    if (inView && !document.hidden) seen += 500;
+    if (seen >= 6000 && Date.now() - t0 > 15000) show();
+  }, 500);
+  addEventListener("scroll", () => { if (wrap.classList.contains("on") && !inView) hide(); }, { passive: true });
+  tape.querySelectorAll(".nb").forEach(b => b.addEventListener("click", () => {
+    hide(); clearTimeout(hoverT); clearInterval(timer);
+    if (!tried){
+      tried = true; MEM.set("nicheTried", "1");
+      const n = b.textContent.replace("✦", "").trim();
+      setTimeout(() => Taya.say(n + ". The whole room just changed cloth.", { mood: "surprised", ms: 4000 }), 900);
+    }
+  }));
+})();
+
 /* ---------- the vote that redresses the room ---------- */
 const vote = document.getElementById("vote");
 const tallies = [58, 34, 8];
@@ -2344,20 +2488,89 @@ applyPic();
 const bigmark = document.querySelector(".bigmark");
 let mgLastY = scrollY, mg = 0;
 
-/* ---------- local weather, the way the app works ---------- */
-(async function weather(){
+/* ---------- local weather, the way the app works ----------
+   1. a place this visitor already confirmed (saved in this browser)
+   2. their device location, silently, only if they granted it before
+   3. a network guess, honestly labelled, with a one-tap "Not here?" fix:
+      device location first, and if that is refused, type a city */
+(function weather(){
   const box = document.getElementById("chyron");
   const txt = document.getElementById("chyron-text");
   if (!box) return;
-  try {
-    const r = await fetch("/api/weather");
-    if (!r.ok) return;
-    const w = await r.json();
-    if (!w || typeof w.temp !== "number") return;
-    txt.innerHTML = "<b>" + Math.round(w.temp) + "&deg;</b> in " + w.city + " &middot; " + w.advice;
+  const F = ["US","LR","MM","BS","BZ","KY","PW","FM","MH"];
+  const esc = v => String(v).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+  const deg = w => F.includes(w.country) ? Math.round(w.temp * 9 / 5 + 32) + "&deg;F" : Math.round(w.temp) + "&deg;";
+  async function get(qs){
+    try {
+      const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 6000);
+      const r = await fetch("/api/weather" + qs, { signal: ctl.signal }); clearTimeout(to);
+      if (r.status !== 200) return null;
+      const w = await r.json();
+      return w && typeof w.temp === "number" ? w : null;
+    } catch(e){ return null; }
+  }
+  function show(w){
     window.__tayaWx = w;
+    txt.innerHTML = "<b>" + deg(w) + "</b> in " + esc(w.city) + " &middot; " + esc(w.advice)
+      + (w.source === "ip" ? ' <button type="button" class="wx-fix">Not here?</button>' : "");
     box.classList.add("on");
-  } catch(e){ /* no signal, no chyron */ }
+    const fix = txt.querySelector(".wx-fix");
+    if (fix) fix.addEventListener("click", locate);
+  }
+  function remember(w){ MEM.set("place", JSON.stringify({ lat: w.lat, lon: w.lon, city: w.city, cc: w.country || "" })); }
+  async function fromDevice(){
+    if (!navigator.geolocation) return null;
+    const pos = await new Promise(res => navigator.geolocation.getCurrentPosition(res, () => res(null),
+      { enableHighAccuracy: false, timeout: 12000, maximumAge: 30 * 60 * 1000 }));
+    if (!pos) return null;
+    const lat = pos.coords.latitude, lon = pos.coords.longitude;
+    let city = "", cc = "";
+    try {                                   // free client-side reverse geocode, device location only
+      const r = await fetch("https://api.bigdatacloud.net/data/reverse-geocode-client?localityLanguage=en&latitude=" + lat + "&longitude=" + lon);
+      if (r.ok){ const d = await r.json(); city = d.city || d.locality || d.principalSubdivision || ""; cc = d.countryCode || ""; }
+    } catch(e){}
+    return get("?lat=" + lat.toFixed(4) + "&lon=" + lon.toFixed(4) + "&city=" + encodeURIComponent(city) + "&cc=" + encodeURIComponent(cc));
+  }
+  let settled = false;
+  function askCity(label){
+    txt.innerHTML = '<span class="wx-l"></span> <form class="wx-form"><input type="text" placeholder="Type your city" aria-label="Your city" autocomplete="address-level2" required><button type="submit">Set</button></form>';
+    txt.querySelector(".wx-l").textContent = label;
+    const f = txt.querySelector("form"), inp = f.querySelector("input");
+    f.addEventListener("submit", async e => {
+      e.preventDefault();
+      const q = inp.value.trim(); if (q.length < 2) return;
+      settled = true;
+      const w = await get("?q=" + encodeURIComponent(q));
+      if (w){ remember(w); show(w); if (window.Taya) Taya.say("Noted. " + Math.round(w.temp) + "\u00b0 in " + w.city + ". I\u2019ll dress you for it.", { mood: "happy" }); }
+      else { settled = false; inp.value = ""; inp.placeholder = "I can\u2019t find that one"; inp.focus(); }
+    });
+    return inp;
+  }
+  async function locate(){
+    // ask the device and offer typing at the same time, so nobody waits on an unanswered prompt
+    settled = false;
+    const inp = askCity("Finding you\u2026 or type it:");
+    const w = await Promise.race([fromDevice(), new Promise(r => setTimeout(() => r(null), 15000))]);
+    if (settled) return;
+    if (w){ settled = true; remember(w); show(w); if (window.Taya) Taya.say("Got it. " + Math.round(w.temp) + "\u00b0 in " + w.city + ". Now I can dress you properly.", { mood: "happy" }); }
+    else { const l = txt.querySelector(".wx-l"); if (l) l.textContent = "Where are you?"; if (inp) inp.focus(); }
+  }
+  (async () => {
+    let saved = null;
+    try { saved = JSON.parse(MEM.get("place", "") || "null"); } catch(e){}
+    if (saved && typeof saved.lat === "number"){
+      const w = await get("?lat=" + saved.lat + "&lon=" + saved.lon + "&city=" + encodeURIComponent(saved.city || "") + "&cc=" + encodeURIComponent(saved.cc || ""));
+      if (w){ show(w); return; }
+    }
+    try {
+      if (navigator.permissions && navigator.geolocation){
+        const p = await navigator.permissions.query({ name: "geolocation" });
+        if (p.state === "granted"){ const w = await fromDevice(); if (w){ remember(w); show(w); return; } }
+      }
+    } catch(e){}
+    const w = await get("");
+    if (w) show(w);
+  })();
 })();
 
 /* ---------- the green room ---------- */
