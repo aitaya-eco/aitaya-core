@@ -1285,6 +1285,27 @@ body[data-fit="fur"] .form-ok.err{color:#F0A989}
 #taya-ask .small.err{color:#8F3A26;font-weight:500}
 body[data-fit="fur"] #taya-ask .small.err{color:#F0A989}
 
+
+/* Taya forms like a garment out of the act tags */
+#taya-form{position:fixed;left:0;top:0;z-index:47;pointer-events:none;opacity:0;--fh:172px;width:calc(var(--fh) * .726);height:var(--fh)}
+#taya-form.on{opacity:1}
+#taya-form .fig{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%;filter:drop-shadow(0 8px 10px rgba(20,14,8,.28))}
+#taya-form .fig.cloth{filter:url(#tayaCloth) drop-shadow(0 8px 10px rgba(20,14,8,.28))}
+#taya-form.idle .fig{animation:tsway 3.4s ease-in-out infinite}
+@keyframes tsway{0%,100%{transform:rotate(-.7deg) skewX(.7deg)}50%{transform:rotate(.7deg) skewX(-.7deg)}}
+#taya-form .rib{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+@media (max-width:760px){#taya-form{--fh:128px}}
+/* the text box is timed: a running stitch that is used up as she talks (pauses while you hover) */
+#taya-guide{padding-right:34px}
+#taya-guide .g-x{position:absolute;z-index:2;top:7px;right:8px;width:24px;height:24px;border-radius:50%;border:0;background:none;color:var(--t-muted);font-size:17px;line-height:1;cursor:pointer}
+#taya-guide .g-x:hover{color:var(--t-ink)}
+#taya-guide .g-time{position:relative;z-index:1;height:3px;margin:9px -20px 1px 0;border-radius:2px;background:var(--t-edge);overflow:hidden}
+#taya-guide .g-time i{display:block;height:100%;transform-origin:left center;
+  background:repeating-linear-gradient(90deg,var(--accent-ink) 0 7px,transparent 7px 11px);animation:gtime linear forwards}
+@keyframes gtime{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+#taya-guide:hover .g-time i,#taya-guide:focus-within .g-time i{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){#taya-form.idle .fig{animation:none}}
+
 /* Taya's caption takes the screen's lower third, so the wipe cue steps aside */
 .screen:has(.taya-cap.on) .wipe-cue{opacity:0}
 /* Taya's one-time tape hint */
@@ -1338,6 +1359,8 @@ body[data-fit="fur"] #taya-ask .small.err{color:#F0A989}
 <div id="boot" aria-hidden="true"><div class="beam"></div></div>
 <div id="chyron" aria-live="polite"><span class="live"></span><img class="tface" src="assets/taya/head-happy.webp" alt=""><span id="chyron-text"></span></div>
 <div id="taya-actor" aria-hidden="true"><div class="clip"><div class="inner taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></div></div></div>
+<div id="taya-form" aria-hidden="true"><svg class="rib" aria-hidden="true"></svg><img class="fig" src="assets/taya/full-happy.webp" alt=""></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="tayaCloth" x="-30%" y="-15%" width="160%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.011 0.034" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
 <div id="taya-guide" role="status" aria-live="polite"></div>
 <div id="taya-quick" role="status" aria-live="polite"></div>
 <div class="taya-dock" id="taya-dock" aria-live="polite"><div class="bub" id="taya-bub"></div><button class="face" type="button" id="taya-dockbtn" aria-label="Ask Taya what to wear"><span class="imgs taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></span></button></div>
@@ -2546,31 +2569,38 @@ const Guide = (function(){
     const r = el.getBoundingClientRect(), bw = bubble.offsetWidth, bh = bubble.offsetHeight, m = 14, vwid = document.documentElement.clientWidth;
     let x, y;
     if (bubbleSide === "right" && r.right + 14 + bw < vwid - m){ x = r.right + 14; y = r.top + r.height / 2 - bh / 2; }
+    else if (bubbleSide === "right" && r.left - 14 - bw > m){ x = r.left - 14 - bw; y = r.top + r.height / 2 - bh / 2; }
     else if (bubbleSide === "above" && r.top - bh - 12 > m){ x = Math.min(Math.max(m, r.left + r.width / 2 - bw / 2), vwid - bw - m); y = r.top - bh - 12; }
     else if (bubbleSide === "left" && r.left - 14 - bw > m){ x = r.left - 14 - bw; y = r.top + r.height / 2 - bh / 2; }
     else { x = Math.min(Math.max(m, r.left + r.width / 2 - bw / 2), vwid - bw - m); y = r.bottom + 12; }
     bubble.style.transform = "none";
     bubble.style.left = x + "px"; bubble.style.top = Math.max(m, Math.min(y, innerHeight - bh - m)) + "px";
   }
-  let skip = null;
-  function talk(text, el, side, mood){
+  let skip = null, timerEl = null;
+  function talk(text, el, side, mood, ms){
     bubble.innerHTML = "<b>Taya</b>";
     bubble.appendChild(document.createTextNode(text));
+    const x = document.createElement("button"); x.type = "button"; x.className = "g-x"; x.setAttribute("aria-label", "Close"); x.innerHTML = "&times;";
+    x.onclick = () => skip && skip();
     const acts = document.createElement("div"); acts.className = "g-acts";
-    acts.innerHTML = '<button type="button" class="ok">Got it</button><button type="button" class="mute">Hush, Taya</button>';
-    acts.querySelector(".ok").onclick = () => skip && skip();
+    acts.innerHTML = '<button type="button" class="mute">Hush, Taya</button>';
     acts.querySelector(".mute").onclick = () => { MEM.set("tourOff", "1"); skip && skip(); };
-    bubble.appendChild(acts);
+    const time = document.createElement("div"); time.className = "g-time";
+    timerEl = document.createElement("i"); timerEl.style.animationDuration = (ms || 6200) + "ms"; time.appendChild(timerEl);
+    bubble.appendChild(x); bubble.appendChild(acts); bubble.appendChild(time);
     bubbleFor = el; bubbleSide = side; bubble.classList.add("on"); placeBubble();
     face(mood || "happy"); Taya.set(mood || "happy");
   }
   function hush(){ bubble.classList.remove("on"); bubbleFor = null; }
-  // hold for ms, but leave early on "Got it", or if the anchor leaves the screen
+  // the stitched timer under the text decides how long she talks; it pauses while you hover or tab into it.
+  // She also leaves early on the close button, or if what she is talking about leaves the screen.
   function hold(ms, el){
-    const y0 = scrollY;
+    const y0 = scrollY, t = timerEl;
     return new Promise(res => {
-      let done = false; const fin = () => { if (done) return; done = true; skip = null; clearInterval(iv); clearTimeout(to); res(); };
-      skip = fin; const to = setTimeout(fin, ms);
+      let done = false; const fin = () => { if (done) return; done = true; skip = null; clearInterval(iv); clearTimeout(safety); res(); };
+      skip = fin;
+      if (t) t.addEventListener("animationend", fin, { once: true });
+      const safety = setTimeout(fin, ms * 3);          // never stuck if the animation is cancelled
       const iv = setInterval(() => { const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight || (el === document.body && (heroIn || Math.abs(scrollY - y0) > innerHeight * .6))) fin(); }, 250);
     });
   }
@@ -2608,8 +2638,8 @@ const Guide = (function(){
       const anchor = onair, drop = c => c.h / 2 + 62;
       await fly({ x: pill.left - 24, y: pill.top + pill.height / 2 }, { x: centre(anchor).x, y: centre(anchor).y + drop(centre(anchor)) }, { s0: .55, s1: 1, lift: 18, dur: 420 });
       stick(anchor, () => 0, drop);
-      talk("Quick one. Aitaya is your closet, your stylist (that\u2019s me) and tailors you can trust, all in one place. Launching soon in Nigeria.", actor, "left", "happy");
-      await hold(6500, document.body);
+      talk("Quick one. Aitaya is your closet, your stylist (that\u2019s me) and tailors you can trust, all in one place. Launching soon in Nigeria.", actor, "left", "happy", 7000);
+      await hold(7000, document.body);
       hush(); unstick();
       await toDock(centre(actor.querySelector(".inner")));
       return;
@@ -2617,6 +2647,74 @@ const Guide = (function(){
     await toDock(from);
   }
   const inBand = el => { const r = el.getBoundingClientRect(), h = document.documentElement.clientHeight; return r.top > h * .1 && r.bottom < h * .8; };
+  // ---- the garment: cloth streams out of the tag and settles into her ----
+  const form = document.getElementById("taya-form"), fig = form.querySelector(".fig"), rib = form.querySelector(".rib");
+  const disp = document.querySelector("#tayaCloth feDisplacementMap"), turb = document.querySelector("#tayaCloth feTurbulence");
+  ["happy", "wink"].forEach(m => { const i = new Image(); i.src = "assets/taya/full-" + m + ".webp"; });
+  let formLoop = 0;
+  function formAt(el, dxf){
+    cancelAnimationFrame(formLoop);
+    const loop = () => {
+      const r = el.getBoundingClientRect(), fw = form.offsetWidth, fh = form.offsetHeight;
+      const x = r.left + r.width / 2 + dxf(r) - fw / 2, y = r.top - fh + 12;
+      form.style.transform = `translate(${x}px, ${y}px)`;
+      placeBubble();
+      formLoop = requestAnimationFrame(loop);
+    };
+    loop();
+  }
+  function ribbon(){
+    // a broad length of her striped gele cloth, billowing up out of the tag in one soft S
+    const w = form.offsetWidth, h = form.offsetHeight, bw = Math.max(22, w * .34);
+    const d = `M ${w * .5} ${h + 12} C ${w * .2} ${h * .74}, ${w * .8} ${h * .52}, ${w * .5} ${h * .3} S ${w * .42} ${h * .1}, ${w * .5} ${h * .04}`;
+    rib.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    rib.innerHTML = '<g filter="url(#tayaCloth)">' + [["#2A1E14", bw + 3], ["#1E5F4A", bw], ["#F3EAD3", bw * .5], ["#1E5F4A", bw * .3], ["#DDC47F", bw * .08]]
+      .map(([c, sw]) => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="butt" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`).join("")
+      + `<path d="${d}" fill="none" stroke="#DDC47F" stroke-width="1.3" stroke-dasharray="4 4" opacity="0" class="st" transform="translate(${bw * .42},0)"/></g>`;
+  }
+  function ripple(from, to, ms){                 // the cloth displacement eases from one strength to another
+    return new Promise(res => {
+      const t0 = performance.now();
+      const tick = now => {
+        const k = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - k, 3);
+        disp.setAttribute("scale", (from + (to - from) * e).toFixed(1));
+        turb.setAttribute("baseFrequency", (0.011 + 0.006 * Math.sin(k * 6)).toFixed(4) + " " + (0.034 + 0.01 * Math.cos(k * 5)).toFixed(4));
+        if (k < 1) requestAnimationFrame(tick); else res();
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+  async function weave(mood){
+    fig.src = "assets/taya/full-" + (mood === "wink" ? "wink" : "happy") + ".webp";
+    ribbon();
+    form.classList.remove("idle"); form.classList.add("on");
+    fig.style.clipPath = "inset(100% 0 0 0)"; fig.classList.add("cloth");
+    const paths = [...rib.querySelectorAll("path:not(.st)")];
+    rib.style.opacity = "1";
+    disp.setAttribute("scale", "0"); ripple(0, 26, 380);
+    paths.forEach((p, i) => p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 620 + i * 40, easing: "cubic-bezier(.3,.7,.2,1)", fill: "forwards" }));
+    rib.querySelector(".st").animate([{ opacity: 0 }, { opacity: .9 }], { duration: 300, delay: 380, fill: "forwards" });
+    await wait(400);
+    const rp = ripple(46, 0, 1050);
+    fig.animate([{ clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0 0 0 0)" }], { duration: 700, easing: "cubic-bezier(.25,.8,.25,1)", fill: "forwards" });
+    fig.animate([{ transform: "scaleY(.5) skewX(-8deg)" }, { transform: "scaleY(1.06) skewX(3deg)", offset: .6 }, { transform: "scaleY(.98) skewX(-1deg)", offset: .82 }, { transform: "none" }],
+      { duration: 950, easing: "cubic-bezier(.3,.7,.3,1)" });
+    rib.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(1.12,1)" }], { duration: 460, delay: 380, easing: "ease-out", fill: "forwards" });
+    await rp;
+    fig.classList.remove("cloth"); fig.style.clipPath = "none";
+    fig.getAnimations().forEach(a => a.cancel());
+    form.classList.add("idle");
+  }
+  async function unweave(){
+    form.classList.remove("idle"); fig.classList.add("cloth");
+    const rp = ripple(0, 40, 520);
+    const an = fig.animate([{ clipPath: "inset(0 0 0 0)", transform: "none" }, { clipPath: "inset(100% 0 0 0)", transform: "scaleY(.6) skewX(6deg)" }],
+      { duration: 520, easing: "cubic-bezier(.5,0,.75,.4)", fill: "forwards" });
+    await Promise.all([rp, an.finished]);
+    form.classList.remove("on"); fig.classList.remove("cloth"); disp.setAttribute("scale", "0");
+    fig.getAnimations().forEach(a => a.cancel()); rib.getAnimations && rib.getAnimations().forEach(a => a.cancel());
+    rib.innerHTML = ""; cancelAnimationFrame(formLoop);
+  }
   async function explain(stop){
     const el = stop.el;
     // a queued stop only plays if you are still looking at it
@@ -2624,28 +2722,23 @@ const Guide = (function(){
     mark(stop.key);
     dock.classList.add("away");
     await wait(260);
-    // start hidden inside the tag, then rise out of it
-    inner.style.transform = "translateY(105%)";
-    const dx = c => Math.min(c.w / 2 - 20, 150), dy = c => -c.h / 2 - H / 2 + 14;
-    stick(el, dx, dy); actor.classList.add("on");
-    clip.style.overflow = "hidden";
-    face(stop.mood || "happy");
-    await rise(true);
-    inner.style.transform = "";
-    talk(stop.text, stop.key === "tape" ? actor : el, stop.key === "tape" ? "right" : (innerWidth > 760 ? "right" : "below"), stop.mood);
+    const dxf = r => Math.min(r.width / 2 - 34, 160);
+    formAt(el, dxf);
+    await weave(stop.mood);
+    const wide = innerWidth > 760;
+    talk(stop.text, wide ? form : el, wide ? "right" : "below", stop.mood, stop.ms || 6200);
     if (stop.after) stop.after();
     await hold(stop.ms || 6200, el);
     hush();
-    await rise(false);
-    unstick();
-    const from = centre(el); from.x += dx(from); from.y += dy(from);
-    inner.style.transform = "";
-    await toDock(from);
+    await unweave();
+    // her head slips out of the tag and floats home to the corner
+    const r = el.getBoundingClientRect();
+    await toDock({ x: r.left + r.width / 2 + dxf(r), y: r.top - 10, s: .7 });
   }
   async function run(job){
     if (busy){ pending = job; return; }
     busy = true;
-    try { await job(); } catch(e){ actor.classList.remove("on"); hush(); unstick(); }
+    try { await job(); } catch(e){ actor.classList.remove("on"); hush(); unstick(); cancelAnimationFrame(formLoop); form.classList.remove("on"); showDock(); }
     busy = false;
     const next = pending; pending = null;
     if (next) run(next);
