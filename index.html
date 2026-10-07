@@ -1244,6 +1244,68 @@ body[data-fit="fur"][data-role="stylist"]{--accent-fill:#D8A3BD;--accent-ink:#DD
   .ticker .nb:hover::before{opacity:1;transform:none}
   .ticker .nb:hover{transform:translateY(-1px)}
 }
+
+/* ================= Taya the guide ================= */
+#taya-actor{position:fixed;left:0;top:0;z-index:47;width:76px;height:72px;pointer-events:none;opacity:0;will-change:transform}
+#taya-actor.on{opacity:1}
+#taya-actor .clip{position:absolute;inset:-30px -14px 0 -14px;overflow:hidden}
+#taya-actor .inner{position:absolute;left:14px;right:14px;bottom:0;height:72px;filter:drop-shadow(0 5px 7px rgba(20,14,8,.35))}
+#taya-actor .inner .tm{position:absolute;inset:0;width:100%;height:100%}
+#taya-guide,#taya-quick{position:fixed;left:0;top:0;z-index:48;max-width:min(320px,calc(100vw - 28px));background:var(--t-panel);color:var(--t-ink);
+  border:1px solid var(--t-chip-edge);border-radius:16px;padding:11px 14px 10px;font-size:13.5px;line-height:1.5;
+  box-shadow:8px 10px 22px rgba(var(--t-shadow),.26),inset 1px 1px 3px var(--t-gloss);opacity:0;transform:translateY(6px) scale(.98);
+  transition:opacity .25s,transform .3s cubic-bezier(.2,.9,.3,1.3);pointer-events:none}
+#taya-guide.on,#taya-quick.on{opacity:1;transform:none;pointer-events:auto}
+#taya-guide::after,#taya-quick::after{content:"";position:absolute;inset:4px;border:1px dashed var(--t-seam);border-radius:12px;pointer-events:none}
+#taya-guide b,#taya-quick b{font-family:var(--script);font-weight:400;font-size:15px;color:var(--accent-ink);margin-right:6px}
+#taya-guide .g-acts{display:flex;gap:14px;margin-top:6px;position:relative;z-index:1}
+#taya-guide .g-acts button{background:none;border:0;padding:3px 0;font:700 12px var(--grotesk);color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+#taya-guide .g-acts button.mute{color:var(--t-muted);font-weight:500}
+.taya-dock .face{transition:transform .35s cubic-bezier(.2,.9,.3,1.3),opacity .25s}
+.taya-dock.away .face{transform:translateY(130%) scale(.8);opacity:0}
+.taya-dock.away .bub{opacity:0}
+.taya-perch.away .taya-bug{opacity:0;transform:translateY(10px) scale(.85)}
+.taya-perch .taya-bug{transition:opacity .2s,transform .3s}
+/* the tape: Taya walks a ring along a few niches so people see they are buttons */
+.ticker .nb.demo{color:var(--rust)}
+.ticker .nb.demo::before{opacity:1;transform:none;border-width:2px;background:color-mix(in srgb, var(--rust) 14%, transparent);animation:demoring .9s ease-out}
+@keyframes demoring{0%{box-shadow:0 0 0 0 rgba(166,75,38,.45)}100%{box-shadow:0 0 0 12px rgba(166,75,38,0)}}
+.ticker.demo-on .lane{animation-play-state:paused}
+/* a niche shakes the room instead of scrolling it */
+@keyframes roomshake{0%{transform:none}14%{transform:translate(-7px,2px) rotate(-.25deg)}30%{transform:translate(6px,-3px) rotate(.2deg)}
+  46%{transform:translate(-4px,1px)}62%{transform:translate(3px,-1px)}80%{transform:translate(-1px,0)}100%{transform:none}}
+@keyframes tapebounce{0%{transform:none}30%{transform:translateY(-6px) scaleY(1.04)}60%{transform:translateY(2px)}100%{transform:none}}
+main.shake{animation:roomshake .5s cubic-bezier(.36,.07,.19,.97)}
+.ticker.bounce{animation:tapebounce .5s cubic-bezier(.2,.9,.3,1.3)}
+@media (prefers-reduced-motion:reduce){main.shake,.ticker.bounce{animation:none}#taya-guide{transition:none}}
+.form-ok{color:var(--accent-ink)}
+.form-ok .fix,.taya-note .fix{background:none;border:0;padding:0;font:inherit;color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700}
+.form-ok.err{display:block;font-family:var(--grotesk);font-style:normal;font-size:13px;color:#8F3A26}
+body[data-fit="fur"] .form-ok.err{color:#F0A989}
+#taya-ask .small.err{color:#8F3A26;font-weight:500}
+body[data-fit="fur"] #taya-ask .small.err{color:#F0A989}
+
+
+/* Taya forms like a garment out of the act tags */
+#taya-form{position:fixed;left:0;top:0;z-index:47;pointer-events:none;opacity:0;--fh:172px;width:calc(var(--fh) * .726);height:var(--fh)}
+#taya-form.on{opacity:1}
+#taya-form .fig{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%;filter:drop-shadow(0 8px 10px rgba(20,14,8,.28))}
+#taya-form .fig.cloth{filter:url(#tayaCloth) drop-shadow(0 8px 10px rgba(20,14,8,.28))}
+#taya-form.idle .fig{animation:tsway 3.4s ease-in-out infinite}
+@keyframes tsway{0%,100%{transform:rotate(-.7deg) skewX(.7deg)}50%{transform:rotate(.7deg) skewX(-.7deg)}}
+#taya-form .rib{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+@media (max-width:760px){#taya-form{--fh:128px}}
+/* the text box is timed: a running stitch that is used up as she talks (pauses while you hover) */
+#taya-guide{padding-right:34px}
+#taya-guide .g-x{position:absolute;z-index:2;top:7px;right:8px;width:24px;height:24px;border-radius:50%;border:0;background:none;color:var(--t-muted);font-size:17px;line-height:1;cursor:pointer}
+#taya-guide .g-x:hover{color:var(--t-ink)}
+#taya-guide .g-time{position:relative;z-index:1;height:3px;margin:9px -20px 1px 0;border-radius:2px;background:var(--t-edge);overflow:hidden}
+#taya-guide .g-time i{display:block;height:100%;transform-origin:left center;
+  background:repeating-linear-gradient(90deg,var(--accent-ink) 0 7px,transparent 7px 11px);animation:gtime linear forwards}
+@keyframes gtime{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+#taya-guide:hover .g-time i,#taya-guide:focus-within .g-time i{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){#taya-form.idle .fig{animation:none}}
+
 /* Taya's caption takes the screen's lower third, so the wipe cue steps aside */
 .screen:has(.taya-cap.on) .wipe-cue{opacity:0}
 /* Taya's one-time tape hint */
@@ -1296,6 +1358,11 @@ body[data-fit="fur"][data-role="stylist"]{--accent-fill:#D8A3BD;--accent-ink:#DD
 </div>
 <div id="boot" aria-hidden="true"><div class="beam"></div></div>
 <div id="chyron" aria-live="polite"><span class="live"></span><img class="tface" src="assets/taya/head-happy.webp" alt=""><span id="chyron-text"></span></div>
+<div id="taya-actor" aria-hidden="true"><div class="clip"><div class="inner taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></div></div></div>
+<div id="taya-form" aria-hidden="true"><svg class="rib" aria-hidden="true"></svg><img class="fig" src="assets/taya/full-happy.webp" alt=""></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="tayaCloth" x="-30%" y="-15%" width="160%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.011 0.034" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
+<div id="taya-guide" role="status" aria-live="polite"></div>
+<div id="taya-quick" role="status" aria-live="polite"></div>
 <div class="taya-dock" id="taya-dock" aria-live="polite"><div class="bub" id="taya-bub"></div><button class="face" type="button" id="taya-dockbtn" aria-label="Ask Taya what to wear"><span class="imgs taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></span></button></div>
 <div id="taya-ask" role="dialog" aria-modal="false" aria-label="Ask Taya what to wear"><div class="ta-head"><span class="ta-face taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></span><div><b>Taya</b><span>Your stylist on Aitaya</span></div><button class="ta-x" type="button" id="taya-askx" aria-label="Close">&times;</button></div><div class="ta-body" id="taya-askbody"></div></div>
 
@@ -1629,6 +1696,73 @@ function hourLabel(){
 }
 const lookSrc = f => "assets/img/looks/" + f;
 
+
+/* ---------- email rules (mirrors api/_email.js; keep the lists in step) ---------- */
+const EMAIL_TYPOS = {"gmial.com":"gmail.com","gmal.com":"gmail.com","gamil.com":"gmail.com","gnail.com":"gmail.com","gmaill.com":"gmail.com","gmail.co":"gmail.com",
+  "gmail.con":"gmail.com","gmai.com":"gmail.com","gmail.cm":"gmail.com","gmail.om":"gmail.com","gmali.com":"gmail.com","gmaul.com":"gmail.com","gmil.com":"gmail.com",
+  "gimail.com":"gmail.com","gemail.com":"gmail.com","g.mail.com":"gmail.com","yahoo.co":"yahoo.com","yaho.com":"yahoo.com","yahooo.com":"yahoo.com","yahoo.con":"yahoo.com",
+  "yhoo.com":"yahoo.com","yahho.com":"yahoo.com","yaoo.com":"yahoo.com","hotmial.com":"hotmail.com","hotmail.co":"hotmail.com","hotmai.com":"hotmail.com",
+  "hotmal.com":"hotmail.com","hotmail.con":"hotmail.com","homail.com":"hotmail.com","outlok.com":"outlook.com","outlook.co":"outlook.com","outloo.com":"outlook.com",
+  "outlook.con":"outlook.com","icloud.co":"icloud.com","iclod.com":"icloud.com","icoud.com":"icloud.com","icloud.con":"icloud.com"};
+const EMAIL_BAD_TLD = {con:"com",cmo:"com",ocm:"com",comm:"com",coom:"com",vom:"com",xom:"com",cpm:"com",clm:"com",cim:"com",ccom:"com"};
+const EMAIL_KNOWN = ["gmail.com","yahoo.com","hotmail.com","outlook.com","icloud.com","live.com","ymail.com","aol.com","protonmail.com","proton.me","mail.com",
+  "email.com","yahoo.co.uk","hotmail.co.uk","msn.com","me.com","zoho.com","gmx.com"];
+const EMAIL_DISPOSABLE = ["mailinator.com","10minutemail.com","guerrillamail.com","guerrillamail.net","sharklasers.com","yopmail.com","temp-mail.org","tempmail.com",
+  "tempmail.net","tempmailo.com","throwawaymail.com","trashmail.com","getnada.com","dispostable.com","maildrop.cc","fakeinbox.com","mintemail.com","emailondeck.com",
+  "tempail.com","moakt.com","mohmal.com","burnermail.io","mailnesia.com","spamgourmet.com","mytemp.email","tempr.email","discard.email","mailcatch.com","inboxkitten.com","33mail.com"];
+const EMAIL_PLACEHOLDER = ["example.com","example.org","example.net","test.com","email.email","domain.com","yourdomain.com","sample.com"];
+const emailOK = new Set();          // domains a visitor has told us are really theirs
+function lev(a, b){
+  const m = a.length, n = b.length; if (Math.abs(m - n) > 2) return 3;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  for (let i = 1; i <= m; i++){
+    const cur = [i];
+    for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    prev = cur;
+  }
+  return prev[n];
+}
+/* returns { ok, fix, msg }: fix is a corrected address to offer, msg is what Taya says */
+function checkEmail(raw){
+  const v = String(raw || "").trim();
+  const bad = msg => ({ ok:false, fix:null, msg });
+  if (!v) return bad("");
+  const at = v.lastIndexOf("@");
+  if (at < 1) return bad("That email needs an @ and a domain, like name@gmail.com.");
+  const local = v.slice(0, at), dom = v.slice(at + 1).toLowerCase();
+  if (v.length > 254 || local.length > 64 || !/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+$/.test(local) || /^\.|\.$|\.\./.test(local))
+    return bad("The part before the @ has something odd in it.");
+  const labels = dom.split(".");
+  if (labels.length < 2 || labels.some(l => !l || l.length > 63 || !/^[a-z0-9-]+$/.test(l) || /^-|-$/.test(l)))
+    return bad("The part after the @ isn’t a full domain yet.");
+  const tld = labels[labels.length - 1];
+  if (!/^([a-z]{2,24}|xn--[a-z0-9-]{2,59})$/.test(tld)) return bad("The ending after the last dot doesn’t look right.");
+  const offer = d => ({ ok:false, fix: local + "@" + d, msg:"Did you mean " });
+  if (EMAIL_TYPOS[dom]) return offer(EMAIL_TYPOS[dom]);
+  if (EMAIL_BAD_TLD[tld]) return offer(dom.slice(0, -tld.length) + EMAIL_BAD_TLD[tld]);
+  if (EMAIL_DISPOSABLE.includes(dom)) return bad("Please use an inbox you’ll actually check.");
+  if (EMAIL_PLACEHOLDER.includes(dom) || /^(your|you|name|email|test)@email\.com$/i.test(v)) return bad("That looks like a placeholder address.");
+  if (!EMAIL_KNOWN.includes(dom) && !emailOK.has(dom)){
+    const near = EMAIL_KNOWN.find(k => lev(dom, k) <= 2 && dom.length >= 6);
+    if (near) return Object.assign(offer(near), { maybe: dom });
+  }
+  return { ok:true, fix:null, msg:"" };
+}
+/* writes Taya's verdict into a message element, with tap-to-fix and "it's correct" buttons */
+function emailVerdict(el, r, input, recheck){
+  el.textContent = r.msg;
+  if (r.fix){
+    const b = document.createElement("button"); b.type = "button"; b.className = "fix"; b.textContent = r.fix;
+    b.addEventListener("click", () => { input.value = r.fix; recheck(); input.focus(); });
+    el.appendChild(b); el.appendChild(document.createTextNode("?"));
+    if (r.maybe){
+      const k = document.createElement("button"); k.type = "button"; k.className = "fix"; k.style.marginLeft = "8px"; k.textContent = "No, mine is right";
+      k.addEventListener("click", () => { emailOK.add(r.maybe); recheck(); input.focus(); });
+      el.appendChild(k);
+    }
+  }
+}
+
 /* ---------- waitlist (both forms) ---------- */
 const WAITLIST_ENDPOINT = "/api/waitlist";
 function bindWaitlist(zone){
@@ -1639,7 +1773,14 @@ function bindWaitlist(zone){
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = input.value.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ input.focus(); return; }
+    const chk = checkEmail(email);
+    if (!chk.ok){
+      okLine.classList.add("err"); okLine.style.display = "block";
+      emailVerdict(okLine, chk.msg ? chk : { msg:"Type your email first." }, input, () => form.requestSubmit());
+      if (window.Taya) Taya.flash("thinking", 1600);
+      input.focus(); return;
+    }
+    okLine.classList.remove("err");
     const label = btn.textContent; btn.disabled = true; btn.textContent = "Joining\u2026";
     if (!WAITLIST_ENDPOINT){
       okLine.textContent = "Preview mode. The live site saves this to your waitlist.";
@@ -1657,6 +1798,7 @@ function bindWaitlist(zone){
       else if (!res.ok){ success = false; message = (data && data.message) || "Something went wrong. Try again shortly."; }
     } catch (err){ success = false; message = "Couldn\u2019t connect. Check your internet and try again."; }
     okLine.textContent = message;
+    okLine.classList.toggle("err", !success);
     if (success){ zone.classList.add("done-state"); openGreenRoom(); }
     else { okLine.style.display = "block"; btn.disabled = false; btn.textContent = label; }
   });
@@ -1969,13 +2111,13 @@ const Taya = window.Taya = (function(){
     capT = setTimeout(() => { box.classList.remove("on"); if (!document.body.classList.contains("dozing")) set("neutral"); }, ms);
   }
   function flash(m, ms = 1300){ set(m); clearTimeout(moodT); moodT = setTimeout(() => { if (!document.body.classList.contains("dozing")) set("neutral"); }, ms); }
-  // picture-in-picture: when the TV leaves the screen, she follows you
-  new IntersectionObserver(([en]) => {
-    heroVisible = en.isIntersecting;
-    dock.classList.toggle("on", !heroVisible);
+  // where she sits: on the TV ("perch") or in the corner ("dock"); the guide below moves her between them
+  function place(where){
+    heroVisible = where === "perch";
+    dock.classList.toggle("on", where === "dock");
     if (heroVisible) bub.classList.remove("on"); else cap.classList.remove("on");
-  }, { threshold: 0.15 }).observe(document.getElementById("hero-set"));
-  return { set, say, flash, hop, get mood(){ return mood; } };
+  }
+  return { set, say, flash, hop, place, get mood(){ return mood; }, get onTV(){ return heroVisible; } };
 })();
 
 /* the TV ornament explains each channel */
@@ -2045,31 +2187,27 @@ document.addEventListener("visibilitychange", () => {
     : tayaTitle;
 });
 
-/* email helper: catches typos, confirms a good address */
+/* email helper: Taya reads the address as it is typed */
 (function(){
   const input = document.getElementById("waitlist-email");
   const box = document.getElementById("taya-note"), text = document.getElementById("tn-text");
   const face = box && box.querySelector(".taya-face");
   if (!input || !box) return;
-  const FIX = {"gmial.com":"gmail.com","gmal.com":"gmail.com","gamil.com":"gmail.com","gnail.com":"gmail.com","gmaill.com":"gmail.com","gmail.co":"gmail.com","gmail.con":"gmail.com",
-    "yahoo.co":"yahoo.com","yaho.com":"yahoo.com","yahooo.com":"yahoo.com","yahoo.con":"yahoo.com","hotmial.com":"hotmail.com","hotmail.co":"hotmail.com",
-    "outlok.com":"outlook.com","outlook.co":"outlook.com","icloud.co":"icloud.com","iclod.com":"icloud.com"};
   const DEF = "Drop your email and I’ll keep your seat.";
-  function check(){
-    const v = input.value.trim(), at = v.lastIndexOf("@"), dom = at > 0 ? v.slice(at + 1).toLowerCase() : "";
+  let typed = false;
+  function check(final){
+    const v = input.value.trim();
     if (!v){ text.textContent = DEF; tayaFace(face, "neutral"); return; }
-    if (FIX[dom]){
-      const fixed = v.slice(0, at + 1) + FIX[dom];
-      text.textContent = "Did you mean ";
-      const b = document.createElement("button"); b.type = "button"; b.className = "fix"; b.textContent = fixed;
-      b.addEventListener("click", () => { input.value = fixed; check(); input.focus(); });
-      text.appendChild(b); text.appendChild(document.createTextNode("?"));
-      tayaFace(face, "thinking"); return;
-    }
-    if (/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)){ text.textContent = "That works. I’ll mail you when it’s your turn."; tayaFace(face, "happy"); return; }
-    text.textContent = DEF; tayaFace(face, "neutral");
+    const r = checkEmail(v);
+    if (r.ok){ text.textContent = "That works. I’ll mail you when it’s your turn."; tayaFace(face, "happy"); return; }
+    if (r.fix){ emailVerdict(text, r, input, () => check(true)); tayaFace(face, "thinking"); return; }
+    // only complain about an unfinished address once they pause or leave the box
+    if (final){ emailVerdict(text, r, input, () => check(true)); tayaFace(face, "thinking"); }
+    else { text.textContent = DEF; tayaFace(face, "neutral"); }
   }
-  input.addEventListener("input", check); input.addEventListener("blur", check);
+  let t;
+  input.addEventListener("input", () => { typed = true; clearTimeout(t); check(false); t = setTimeout(() => check(true), 1400); });
+  input.addEventListener("blur", () => { if (typed) check(true); });
 })();
 
 /* green room: bring your squad */
@@ -2181,12 +2319,16 @@ const tayaAsk = (function(){
     f.addEventListener("submit", async e => {
       e.preventDefault();
       const inp = f.querySelector("input"), btn = f.querySelector("button"), email = inp.value.trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ note.textContent = "That email doesn’t look right yet."; tayaFace(face, "thinking"); inp.focus(); return; }
+      const chk = checkEmail(email);
+      if (!chk.ok){ note.classList.add("err"); emailVerdict(note, chk.msg ? chk : { msg:"Type your email first." }, inp, () => f.requestSubmit()); tayaFace(face, "thinking"); inp.focus(); return; }
+      note.classList.remove("err");
       btn.disabled = true; btn.textContent = "Saving…";
       try {
         const res = await fetch(WAITLIST_ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ email }) });
         if (res.ok || res.status === 409){ close(); document.querySelectorAll(".hero-zone#form-zone,#form-zone-2").forEach(z => z.classList.add("done-state")); openGreenRoom(); return; }
-        note.textContent = "The line is busy. Try again in a moment."; tayaFace(face, "surprised");
+        const data = await res.json().catch(() => null);
+        note.classList.add("err");
+        note.textContent = (data && data.message) || "The line is busy. Try again in a moment."; tayaFace(face, "thinking");
       } catch(err){ note.textContent = "Couldn’t connect. Check your internet and try again."; tayaFace(face, "surprised"); }
       btn.disabled = false; btn.textContent = "Save my seat";
     });
@@ -2315,59 +2457,354 @@ document.querySelectorAll(".ticker .nb").forEach(b => {
     changeChannel(); blip();
     if (window.setNicheMood) window.setNicheMood(i, b.textContent.replace("\u2726","").trim());
     flashNow("Tuned \u00b7 " + b.textContent.replace("\u2726","").trim());
-    document.getElementById("hero-set").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block:"center" });
+    roomShake();
   });
 });
 
 
-/* Taya and the niche tape: one hint per visitor, only when it helps.
-   It fires when a mouse lingers on the tape without clicking, or after the tape has been fully on screen
-   for six seconds at least fifteen seconds into the visit. Never again once shown, or once a niche is tried. */
+/* a niche restyles the room where you are: the page shakes a little instead of jumping to the top */
+function roomShake(){
+  if (reduceMotion) return;
+  const m = document.querySelector("main"), t = document.querySelector(".ticker");
+  [m, t].forEach(el => { if (!el) return; el.classList.remove(el === m ? "shake" : "bounce"); void el.offsetWidth; el.classList.add(el === m ? "shake" : "bounce"); });
+  setTimeout(() => { m && m.classList.remove("shake"); t && t.classList.remove("bounce"); }, 600);
+}
+
+/* Taya and the niche tape: she reacts to every niche, and points the tape out when people haven't found it */
+const NICHE_LINES = {
+  "Adire": "Adire. Indigo resist-dye, the Abeokuta way.",
+  "Agbada": "Agbada. Big sleeves, bigger entrance.",
+  "Gothic Ankara": "Gothic Ankara. Wax print in a darker mood.",
+  "Aso-Ebi": "Aso-ebi. The whole family in one fabric.",
+  "Streetwear": "Streetwear. Lagos traffic approved.",
+  "Minimalist": "Minimalist. Clean lines, nothing extra.",
+  "Cottagecore": "Cottagecore. Soft florals and gathered sleeves.",
+  "Layering": "Layering. Harmattan mornings, sorted.",
+  "Aso-Oke": "Aso-oke. Handwoven and heavy with history.",
+  "Boubou": "Boubou. Flowing and breezy, made for the heat.",
+  "Afro-Punk": "Afro-punk. Loud prints, louder attitude.",
+  "50s Suits": "Fifties suits. Sharp shoulders, nipped waist.",
+  "Contemporary": "Contemporary. Today’s cut, Nigerian roots."
+};
 (function(){
   const tape = document.querySelector(".ticker"); if (!tape) return;
-  const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
-  let tried = MEM.get("nicheTried", "") === "1", hinted = MEM.get("tapeHint", "") === "1";
-  const wrap = document.createElement("div"); wrap.className = "tape-hint-wrap";
-  wrap.innerHTML = '<div class="tape-hint" role="status"><span class="th-face taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></span><p></p>'
-    + '<button type="button" class="th-try">Show me</button><button type="button" class="th-x" aria-label="Dismiss">&times;</button></div>';
-  tape.after(wrap);
-  const face = wrap.querySelector(".taya-face"), p = wrap.querySelector("p");
-  let hideT = null, hoverT = null, seen = 0, inView = false, timer = null;
-  const t0 = Date.now();
-  function hide(){ wrap.classList.remove("on"); clearTimeout(hideT); }
-  function busy(){ return document.body.classList.contains("taya-open") || document.body.classList.contains("dozing")
-    || document.getElementById("greenroom").classList.contains("on"); }
-  function show(){
-    if (hinted || tried || busy()) return;
-    hinted = true; MEM.set("tapeHint", "1"); clearInterval(timer);
-    p.innerHTML = "<b>Taya</b>"; p.appendChild(document.createTextNode("Psst. Every word on this tape restyles the room. " + (fine ? "Click" : "Tap") + " one."));
-    tayaFace(face, "wink"); wrap.classList.add("on");
-    hideT = setTimeout(hide, 9000);
-  }
-  wrap.querySelector(".th-x").addEventListener("click", hide);
-  wrap.querySelector(".th-try").addEventListener("click", () => {
-    hide();
-    const all = [...tape.querySelectorAll(".nb")].slice(0, 13);
-    all[Math.floor(Math.random() * all.length)].click();
-  });
-  if (fine){
-    tape.addEventListener("pointerenter", () => { clearTimeout(hoverT); hoverT = setTimeout(show, 1500); });
-    tape.addEventListener("pointerleave", () => clearTimeout(hoverT));
-  }
-  new IntersectionObserver(([en]) => { inView = en.intersectionRatio > 0.95; }, { threshold: [0, 0.95, 1] }).observe(tape);
-  if (!hinted && !tried) timer = setInterval(() => {
-    if (inView && !document.hidden) seen += 500;
-    if (seen >= 6000 && Date.now() - t0 > 15000) show();
-  }, 500);
-  addEventListener("scroll", () => { if (wrap.classList.contains("on") && !inView) hide(); }, { passive: true });
   tape.querySelectorAll(".nb").forEach(b => b.addEventListener("click", () => {
-    hide(); clearTimeout(hoverT); clearInterval(timer);
-    if (!tried){
-      tried = true; MEM.set("nicheTried", "1");
-      const n = b.textContent.replace("✦", "").trim();
-      setTimeout(() => Taya.say(n + ". The whole room just changed cloth.", { mood: "surprised", ms: 4000 }), 900);
-    }
+    MEM.set("nicheTried", "1");
+    const n = b.textContent.replace("✦", "").trim();
+    Taya.hop();
+    setTimeout(() => Guide.quick((NICHE_LINES[n] || n + ".") + " The room just changed cloth.", b, "surprised"), 380);
   }));
+})();
+/* walks the hover ring along three niches in the middle of the screen, so the tape reads as buttons */
+function tapeDemo(){
+  const tape = document.querySelector(".ticker"); if (!tape || reduceMotion) return;
+  const mid = innerWidth / 2;
+  const nbs = [...tape.querySelectorAll(".nb")].filter(b => { const r = b.getBoundingClientRect(); return r.left > 40 && r.right < innerWidth - 40; })
+    .sort((a, b) => Math.abs(a.getBoundingClientRect().left - mid) - Math.abs(b.getBoundingClientRect().left - mid)).slice(0, 3)
+    .sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left);
+  tape.classList.add("demo-on");
+  const seq = nbs.concat(nbs);              // walk across twice
+  seq.forEach((b, i) => {
+    setTimeout(() => { nbs.forEach(x => x.classList.remove("demo")); b.classList.add("demo"); }, 250 + i * 900);
+  });
+  setTimeout(() => { nbs.forEach(x => x.classList.remove("demo")); tape.classList.remove("demo-on"); }, 250 + seq.length * 900 + 300);
+}
+
+/* ================= Taya, the moving guide =================
+   Top of the page: she sits on the TV. Scroll past it and she jumps to "Launching soon", pops out with a
+   one-line summary, then settles bottom right. Each act tag she rises out of, explains in one line, and
+   flies back to the corner. One showing per act per week, never while you type, chat or read the green room,
+   and one tap on "Hush" quiets the tour for good. */
+const Guide = (function(){
+  const actor = document.getElementById("taya-actor"), inner = actor.querySelector(".inner");
+  const clip = actor.querySelector(".clip");
+  const bubble = document.getElementById("taya-guide");
+  const dock = document.getElementById("taya-dock"), dockBtn = document.getElementById("taya-dockbtn");
+  const perch = document.querySelector(".taya-perch"), bug = document.getElementById("taya-bug");
+  const heroSet = document.getElementById("hero-set");
+  const W = 76, H = 72;
+  let pos = "perch", busy = false, follow = 0, pending = null, heroIn = true, launched = false;
+  let seen = {}; try { seen = JSON.parse(MEM.get("tour", "") || "{}") || {}; } catch(e){}
+  const WEEK = 7 * 864e5, muted = () => MEM.get("tourOff", "") === "1";
+  const fresh = k => !seen[k] || Date.now() - seen[k] > WEEK;
+  const mark = k => { seen[k] = Date.now(); MEM.set("tour", JSON.stringify(seen)); };
+  const blocked = () => document.body.classList.contains("taya-open") || document.body.classList.contains("dozing")
+    || document.getElementById("greenroom").classList.contains("on") || document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const centre = el => { const r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width, h: r.height }; };
+  function setActor(x, y, s = 1, rot = 0){ actor.style.transform = `translate(${x - W / 2}px, ${y - H / 2}px) scale(${s}) rotate(${rot}deg)`; }
+  function face(m){ tayaFace(inner, m); }
+  // an arc flight between two screen points, sampled from a quadratic curve so it reads as a hop, not a slide
+  function fly(a, b, o = {}){
+    const s0 = o.s0 || 1, s1 = o.s1 || 1, dur = o.dur || 760, lift = o.lift == null ? -110 : o.lift;
+    const cx = (a.x + b.x) / 2, cy = Math.min(a.y, b.y) + lift;
+    const frames = [];
+    for (let i = 0; i <= 10; i++){
+      const t = i / 10, u = 1 - t;
+      const x = u * u * a.x + 2 * u * t * cx + t * t * b.x, y = u * u * a.y + 2 * u * t * cy + t * t * b.y;
+      const sc = s0 + (s1 - s0) * t, rot = Math.sin(t * Math.PI) * (b.x > a.x ? 10 : -10);
+      frames.push({ transform: `translate(${x - W / 2}px, ${y - H / 2}px) scale(${sc}) rotate(${rot}deg)` });
+    }
+    actor.classList.add("on");
+    const an = actor.animate(frames, { duration: dur, easing: "cubic-bezier(.45,.05,.3,1)", fill: "forwards" });
+    return an.finished.then(() => { setActor(b.x, b.y, s1); an.cancel(); });
+  }
+  function rise(up){                       // she comes out of (or ducks back into) whatever she is anchored to
+    const an = inner.animate(up
+      ? [{ transform: "translateY(105%)" }, { transform: "translateY(-8%)", offset: .7 }, { transform: "translateY(0)" }]
+      : [{ transform: "translateY(0)" }, { transform: "translateY(105%)" }],
+      { duration: up ? 520 : 320, easing: up ? "cubic-bezier(.2,.9,.3,1.2)" : "ease-in", fill: "forwards" });
+    return an.finished;
+  }
+  function stick(el, dx, dy){             // keep her on an element while the page scrolls under her
+    cancelAnimationFrame(follow);
+    const loop = () => { const c = centre(el); setActor(c.x + dx(c), c.y + dy(c)); placeBubble(); follow = requestAnimationFrame(loop); };
+    loop();
+  }
+  function unstick(){ cancelAnimationFrame(follow); follow = 0; }
+  let bubbleFor = null, bubbleSide = "below";
+  function placeBubble(){
+    const el = bubbleFor;
+    if (!el || !bubble.classList.contains("on")) return;
+    const r = el.getBoundingClientRect(), bw = bubble.offsetWidth, bh = bubble.offsetHeight, m = 14, vwid = document.documentElement.clientWidth;
+    let x, y;
+    if (bubbleSide === "right" && r.right + 14 + bw < vwid - m){ x = r.right + 14; y = r.top + r.height / 2 - bh / 2; }
+    else if (bubbleSide === "right" && r.left - 14 - bw > m){ x = r.left - 14 - bw; y = r.top + r.height / 2 - bh / 2; }
+    else if (bubbleSide === "above" && r.top - bh - 12 > m){ x = Math.min(Math.max(m, r.left + r.width / 2 - bw / 2), vwid - bw - m); y = r.top - bh - 12; }
+    else if (bubbleSide === "left" && r.left - 14 - bw > m){ x = r.left - 14 - bw; y = r.top + r.height / 2 - bh / 2; }
+    else { x = Math.min(Math.max(m, r.left + r.width / 2 - bw / 2), vwid - bw - m); y = r.bottom + 12; }
+    bubble.style.transform = "none";
+    bubble.style.left = x + "px"; bubble.style.top = Math.max(m, Math.min(y, innerHeight - bh - m)) + "px";
+  }
+  let skip = null, timerEl = null;
+  function talk(text, el, side, mood, ms){
+    bubble.innerHTML = "<b>Taya</b>";
+    bubble.appendChild(document.createTextNode(text));
+    const x = document.createElement("button"); x.type = "button"; x.className = "g-x"; x.setAttribute("aria-label", "Close"); x.innerHTML = "&times;";
+    x.onclick = () => skip && skip();
+    const acts = document.createElement("div"); acts.className = "g-acts";
+    acts.innerHTML = '<button type="button" class="mute">Hush, Taya</button>';
+    acts.querySelector(".mute").onclick = () => { MEM.set("tourOff", "1"); skip && skip(); };
+    const time = document.createElement("div"); time.className = "g-time";
+    timerEl = document.createElement("i"); timerEl.style.animationDuration = (ms || 6200) + "ms"; time.appendChild(timerEl);
+    bubble.appendChild(x); bubble.appendChild(acts); bubble.appendChild(time);
+    bubbleFor = el; bubbleSide = side; bubble.classList.add("on"); placeBubble();
+    face(mood || "happy"); Taya.set(mood || "happy");
+  }
+  function hush(){ bubble.classList.remove("on"); bubbleFor = null; }
+  // the stitched timer under the text decides how long she talks; it pauses while you hover or tab into it.
+  // She also leaves early on the close button, or if what she is talking about leaves the screen.
+  function hold(ms, el){
+    const y0 = scrollY, t = timerEl;
+    return new Promise(res => {
+      let done = false; const fin = () => { if (done) return; done = true; skip = null; clearInterval(iv); clearTimeout(safety); res(); };
+      skip = fin;
+      if (t) t.addEventListener("animationend", fin, { once: true });
+      const safety = setTimeout(fin, ms * 3);          // never stuck if the animation is cancelled
+      const iv = setInterval(() => { const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight || (el === document.body && (heroIn || Math.abs(scrollY - y0) > innerHeight * .6))) fin(); }, 250);
+    });
+  }
+  const vw = () => document.documentElement.clientWidth, vh = () => document.documentElement.clientHeight;
+  const dockPoint = () => { const cs = getComputedStyle(dock), f = dockBtn.offsetWidth;
+    return { x: vw() - parseFloat(cs.right) - f / 2, y: vh() - parseFloat(cs.bottom) - f / 2 - 4 }; };
+  const dockScale = () => dockBtn.offsetWidth / 66;
+  const perchPoint = () => { const r = perch.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.bottom - bug.offsetHeight / 2 - 4 }; };
+  const perchScale = () => bug.offsetWidth / W;
+  function showDock(){ dock.classList.remove("away"); Taya.place("dock"); }
+  function showPerch(){ perch.classList.remove("away"); Taya.place("perch"); }
+  async function toDock(from){
+    Taya.place("dock"); dock.classList.add("away");
+    await wait(30);
+    if (!reduceMotion) await fly(from, dockPoint(), { s0: from.s || 1, s1: dockScale(), lift: -90, dur: 720 });
+    actor.classList.remove("on"); showDock(); pos = "dock";
+  }
+  async function toPerch(){
+    if (reduceMotion){ dock.classList.remove("on"); showPerch(); pos = "perch"; return; }
+    const from = dockPoint(), to = perchPoint(); dock.classList.add("away");
+    perch.classList.add("away"); Taya.place("perch");
+    await fly(from, to, { s0: dockScale(), s1: perchScale(), lift: -140, dur: 760 });
+    actor.classList.remove("on"); showPerch(); dock.classList.remove("away"); pos = "perch";
+  }
+  async function leaveTV(){
+    const from = perchPoint(); from.s = perchScale();
+    perch.classList.add("away");
+    const onair = document.querySelector(".onair");
+    if (!launched && onair && fresh("launch") && !muted() && !blocked() && !reduceMotion){
+      launched = true; mark("launch");
+      const pill = onair.getBoundingClientRect();
+      face("happy");
+      // jump off the TV up to "Launching soon", shrink in beside it, then pop out under the header and speak
+      await fly(from, { x: pill.left - 24, y: pill.top + pill.height / 2 }, { s0: from.s, s1: .55, lift: -60, dur: 680 });
+      const anchor = onair, drop = c => c.h / 2 + 62;
+      await fly({ x: pill.left - 24, y: pill.top + pill.height / 2 }, { x: centre(anchor).x, y: centre(anchor).y + drop(centre(anchor)) }, { s0: .55, s1: 1, lift: 18, dur: 420 });
+      stick(anchor, () => 0, drop);
+      talk("Quick one. Aitaya is your closet, your stylist (that\u2019s me) and tailors you can trust, all in one place. Launching soon in Nigeria.", actor, "left", "happy", 7000);
+      await hold(7000, document.body);
+      hush(); unstick();
+      await toDock(centre(actor.querySelector(".inner")));
+      return;
+    }
+    await toDock(from);
+  }
+  const inBand = el => { const r = el.getBoundingClientRect(), h = document.documentElement.clientHeight; return r.top > h * .1 && r.bottom < h * .8; };
+  // ---- the garment: cloth streams out of the tag and settles into her ----
+  const form = document.getElementById("taya-form"), fig = form.querySelector(".fig"), rib = form.querySelector(".rib");
+  const disp = document.querySelector("#tayaCloth feDisplacementMap"), turb = document.querySelector("#tayaCloth feTurbulence");
+  ["happy", "wink"].forEach(m => { const i = new Image(); i.src = "assets/taya/full-" + m + ".webp"; });
+  let formLoop = 0;
+  function formAt(el, dxf){
+    cancelAnimationFrame(formLoop);
+    const loop = () => {
+      const r = el.getBoundingClientRect(), fw = form.offsetWidth, fh = form.offsetHeight;
+      const x = r.left + r.width / 2 + dxf(r) - fw / 2, y = r.top - fh + 12;
+      form.style.transform = `translate(${x}px, ${y}px)`;
+      placeBubble();
+      formLoop = requestAnimationFrame(loop);
+    };
+    loop();
+  }
+  function ribbon(){
+    // a broad length of her striped gele cloth, billowing up out of the tag in one soft S
+    const w = form.offsetWidth, h = form.offsetHeight, bw = Math.max(22, w * .34);
+    const d = `M ${w * .5} ${h + 12} C ${w * .2} ${h * .74}, ${w * .8} ${h * .52}, ${w * .5} ${h * .3} S ${w * .42} ${h * .1}, ${w * .5} ${h * .04}`;
+    rib.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    rib.innerHTML = '<g filter="url(#tayaCloth)">' + [["#2A1E14", bw + 3], ["#1E5F4A", bw], ["#F3EAD3", bw * .5], ["#1E5F4A", bw * .3], ["#DDC47F", bw * .08]]
+      .map(([c, sw]) => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="butt" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`).join("")
+      + `<path d="${d}" fill="none" stroke="#DDC47F" stroke-width="1.3" stroke-dasharray="4 4" opacity="0" class="st" transform="translate(${bw * .42},0)"/></g>`;
+  }
+  function ripple(from, to, ms){                 // the cloth displacement eases from one strength to another
+    return new Promise(res => {
+      const t0 = performance.now();
+      const tick = now => {
+        const k = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - k, 3);
+        disp.setAttribute("scale", (from + (to - from) * e).toFixed(1));
+        turb.setAttribute("baseFrequency", (0.011 + 0.006 * Math.sin(k * 6)).toFixed(4) + " " + (0.034 + 0.01 * Math.cos(k * 5)).toFixed(4));
+        if (k < 1) requestAnimationFrame(tick); else res();
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+  async function weave(mood){
+    fig.src = "assets/taya/full-" + (mood === "wink" ? "wink" : "happy") + ".webp";
+    ribbon();
+    form.classList.remove("idle"); form.classList.add("on");
+    fig.style.clipPath = "inset(100% 0 0 0)"; fig.classList.add("cloth");
+    const paths = [...rib.querySelectorAll("path:not(.st)")];
+    rib.style.opacity = "1";
+    disp.setAttribute("scale", "0"); ripple(0, 26, 380);
+    paths.forEach((p, i) => p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 620 + i * 40, easing: "cubic-bezier(.3,.7,.2,1)", fill: "forwards" }));
+    rib.querySelector(".st").animate([{ opacity: 0 }, { opacity: .9 }], { duration: 300, delay: 380, fill: "forwards" });
+    await wait(400);
+    const rp = ripple(46, 0, 1050);
+    fig.animate([{ clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0 0 0 0)" }], { duration: 700, easing: "cubic-bezier(.25,.8,.25,1)", fill: "forwards" });
+    fig.animate([{ transform: "scaleY(.5) skewX(-8deg)" }, { transform: "scaleY(1.06) skewX(3deg)", offset: .6 }, { transform: "scaleY(.98) skewX(-1deg)", offset: .82 }, { transform: "none" }],
+      { duration: 950, easing: "cubic-bezier(.3,.7,.3,1)" });
+    rib.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(1.12,1)" }], { duration: 460, delay: 380, easing: "ease-out", fill: "forwards" });
+    await rp;
+    fig.classList.remove("cloth"); fig.style.clipPath = "none";
+    fig.getAnimations().forEach(a => a.cancel());
+    form.classList.add("idle");
+  }
+  async function unweave(){
+    form.classList.remove("idle"); fig.classList.add("cloth");
+    const rp = ripple(0, 40, 520);
+    const an = fig.animate([{ clipPath: "inset(0 0 0 0)", transform: "none" }, { clipPath: "inset(100% 0 0 0)", transform: "scaleY(.6) skewX(6deg)" }],
+      { duration: 520, easing: "cubic-bezier(.5,0,.75,.4)", fill: "forwards" });
+    await Promise.all([rp, an.finished]);
+    form.classList.remove("on"); fig.classList.remove("cloth"); disp.setAttribute("scale", "0");
+    fig.getAnimations().forEach(a => a.cancel()); rib.getAnimations && rib.getAnimations().forEach(a => a.cancel());
+    rib.innerHTML = ""; cancelAnimationFrame(formLoop);
+  }
+  async function explain(stop){
+    const el = stop.el;
+    // a queued stop only plays if you are still looking at it
+    if (!inBand(el) || muted() || blocked() || heroIn || !fresh(stop.key)) return;
+    mark(stop.key);
+    dock.classList.add("away");
+    await wait(260);
+    const dxf = r => Math.min(r.width / 2 - 34, 160);
+    formAt(el, dxf);
+    await weave(stop.mood);
+    const wide = innerWidth > 760;
+    talk(stop.text, wide ? form : el, wide ? "right" : "below", stop.mood, stop.ms || 6200);
+    if (stop.after) stop.after();
+    await hold(stop.ms || 6200, el);
+    hush();
+    await unweave();
+    // her head slips out of the tag and floats home to the corner
+    const r = el.getBoundingClientRect();
+    await toDock({ x: r.left + r.width / 2 + dxf(r), y: r.top - 10, s: .7 });
+  }
+  async function run(job){
+    if (busy){ pending = job; return; }
+    busy = true;
+    try { await job(); } catch(e){ actor.classList.remove("on"); hush(); unstick(); cancelAnimationFrame(formLoop); form.classList.remove("on"); showDock(); }
+    busy = false;
+    const next = pending; pending = null;
+    if (next) run(next);
+    else if (heroIn && pos !== "perch") run(toPerch);
+    else if (!heroIn && pos === "perch") run(leaveTV);
+  }
+  // the TV leaving and returning
+  new IntersectionObserver(([en]) => {
+    heroIn = en.isIntersecting;
+    if (heroIn && pos !== "perch") run(toPerch);
+    else if (!heroIn && pos === "perch") run(leaveTV);
+  }, { threshold: 0.15 }).observe(heroSet);
+  // the stops: each act tag, and the niche tape
+  const LINES = {
+    "Act I": "Act one is where you tell me who you are. Pick a seat and I’ll rearrange the whole page for you.",
+    "Act II": "Act two is what you get. Six channels in one wardrobe, and I’m channel two.",
+    "Act III": "Act three is the Runway. See a look you love and I’ll rebuild it from your own closet.",
+    "Act IV": "Act four: real screens from our beta, then a vote. Pick a fabric and watch this room change.",
+    "Act V": "Act five is the makers. Tailors, brands and stylists earn here, and money waits safely until the work is delivered.",
+    "Act VI": "Act six, goodnight. Save your seat before the set goes dark."
+  };
+  const stops = [];
+  document.querySelectorAll(".interstitial .tag").forEach(tag => {
+    const key = (tag.textContent.match(/^Act\s+[IVX]+/) || [""])[0];
+    if (LINES[key]) stops.push({ el: tag, key, text: LINES[key], mood: key === "Act VI" ? "wink" : "happy" });
+  });
+  const tapeEl = document.querySelector(".ticker");
+  if (tapeEl){
+    const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
+    stops.push({ el: tapeEl, key: "tape", mood: "wink", ms: 6500, after: tapeDemo,
+      get text(){ return "See this tape? Every word is a style. " + (fine ? "Click" : "Tap") + " one and I’ll redress the whole room."; } });
+  }
+  const timers = new Map();
+  const io = new IntersectionObserver(ens => ens.forEach(en => {
+    const stop = stops.find(s => s.el === en.target); if (!stop) return;
+    clearTimeout(timers.get(stop));
+    if (!en.isIntersecting) return;
+    timers.set(stop, setTimeout(() => {
+      if (muted() || !fresh(stop.key) || blocked() || heroIn) return;
+      if (stop.key === "tape" && MEM.get("nicheTried", "") === "1") return;
+      if (!inBand(stop.el)) return;
+      if (reduceMotion){ mark(stop.key); Taya.say(stop.text, { mood: stop.mood, ms: 6000 }); if (stop.after) stop.after(); return; }
+      run(() => explain(stop));
+    }, 650));
+  }), { rootMargin: "-18% 0px -30% 0px", threshold: 1 });
+  stops.forEach(s => io.observe(s.el));
+  addEventListener("resize", () => { if (!busy) actor.classList.remove("on"); }, { passive: true });
+  // a short, button-free note right above something you just did (used by the niche tape); its own bubble,
+  // so it never fights the tour for space
+  const qb = document.getElementById("taya-quick");
+  let qT = 0, qLoop = 0;
+  function quick(text, el, mood){
+    if (reduceMotion){ Taya.say(text, { mood, ms: 3800 }); return; }
+    qb.innerHTML = "<b>Taya</b>"; qb.appendChild(document.createTextNode(text));
+    qb.classList.add("on"); Taya.flash(mood || "happy", 3200);
+    const place = () => {
+      const r = el.getBoundingClientRect(), bw = qb.offsetWidth, bh = qb.offsetHeight, m = 14, w = document.documentElement.clientWidth;
+      qb.style.transform = "none";
+      qb.style.left = Math.min(Math.max(m, r.left + r.width / 2 - bw / 2), w - bw - m) + "px";
+      qb.style.top = (r.top - bh - 12 > m ? r.top - bh - 12 : r.bottom + 12) + "px";
+      qLoop = requestAnimationFrame(place);
+    };
+    cancelAnimationFrame(qLoop); place();
+    clearTimeout(qT); qT = setTimeout(() => { cancelAnimationFrame(qLoop); qb.classList.remove("on"); }, 3400);
+  }
+  return { stops, run, quick };
 })();
 
 /* ---------- the vote that redresses the room ---------- */
@@ -2511,7 +2948,8 @@ let mgLastY = scrollY, mg = 0;
   }
   function show(w){
     window.__tayaWx = w;
-    txt.innerHTML = "<b>" + deg(w) + "</b> in " + esc(w.city) + " &middot; " + esc(w.advice)
+    const where = w.city && w.city !== "your area" ? "in " + esc(w.city) : "where you are";
+    txt.innerHTML = "<b>" + deg(w) + "</b> " + where + " &middot; " + esc(w.advice)
       + (w.source === "ip" ? ' <button type="button" class="wx-fix">Not here?</button>' : "");
     box.classList.add("on");
     const fix = txt.querySelector(".wx-fix");
@@ -2562,14 +3000,18 @@ let mgLastY = scrollY, mg = 0;
       const w = await get("?lat=" + saved.lat + "&lon=" + saved.lon + "&city=" + encodeURIComponent(saved.city || "") + "&cc=" + encodeURIComponent(saved.cc || ""));
       if (w){ show(w); return; }
     }
-    try {
-      if (navigator.permissions && navigator.geolocation){
-        const p = await navigator.permissions.query({ name: "geolocation" });
-        if (p.state === "granted"){ const w = await fromDevice(); if (w){ remember(w); show(w); return; } }
-      }
-    } catch(e){}
+    // precise location is the only honest answer: network guesses put Abuja phones in Lagos or Port Harcourt.
+    // So the device is asked once, automatically, after the intro; the network guess is only a fallback.
+    let state = "prompt";
+    try { if (navigator.permissions) state = (await navigator.permissions.query({ name: "geolocation" })).state; } catch(e){}
+    if (navigator.geolocation && state !== "denied" && (state === "granted" || MEM.get("geoAsked", "") !== "1")){
+      txt.innerHTML = "Taya is checking your sky\u2026"; box.classList.add("on");
+      if (state !== "granted"){ MEM.set("geoAsked", "1"); await new Promise(r => setTimeout(r, returning ? 900 : 2600)); }
+      const w = await Promise.race([fromDevice(), new Promise(r => setTimeout(() => r(null), 20000))]);
+      if (w){ remember(w); show(w); return; }
+    }
     const w = await get("");
-    if (w) show(w);
+    if (w) show(w); else box.classList.remove("on");
   })();
 })();
 

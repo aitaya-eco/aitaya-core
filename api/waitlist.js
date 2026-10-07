@@ -1,6 +1,7 @@
 // POST /api/waitlist  -> saves {email}
 // GET  /api/waitlist  -> { count }
 const { Pool } = require('pg')
+const { problem, syntax, acceptsMail } = require('./_email')
 
 let pool
 function getPool () {
@@ -30,7 +31,6 @@ async function ensureTable () {
   `)
 }
 
-const isValidEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)
 
 module.exports = async (req, res) => {
   try {
@@ -49,7 +49,11 @@ module.exports = async (req, res) => {
     const email = String((body && body.email) || '').trim().toLowerCase()
 
     if (!email) return res.status(400).json({ success: false, message: 'Email address is required.' })
-    if (!isValidEmail(email)) return res.status(400).json({ success: false, message: 'Please enter a valid email address.' })
+    const why = problem(email)
+    if (why) return res.status(422).json({ success: false, message: why })
+    if (!(await acceptsMail(syntax(email).domain))) {
+      return res.status(422).json({ success: false, message: 'That email domain doesn\u2019t receive mail. Check the spelling.' })
+    }
 
     await ensureTable()
 
