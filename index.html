@@ -1137,7 +1137,7 @@ body.taya-open .taya-dock,#greenroom.on ~ .taya-dock{opacity:0;pointer-events:no
 /* chyron */
 #chyron .tface{width:26px;height:25px;flex:none;margin:-6px 0 -4px -6px}
 /* guide card */
-.channel .ch-taya{float:right;width:92px;margin:-8px -8px 4px 10px;filter:drop-shadow(0 4px 6px rgba(var(--shadow-warm),.3))}
+
 .channel .ch-try{display:inline-flex;align-items:center;gap:8px;margin-top:12px;border:1.5px solid var(--accent);color:var(--accent);background:none;border-radius:999px;padding:7px 14px;font:700 12px var(--grotesk);letter-spacing:.06em;cursor:pointer}
 .channel .ch-try:hover{background:var(--accent);color:#F6F1E4}
 /* green room */
@@ -1306,6 +1306,74 @@ body[data-fit="fur"] #taya-ask .small.err{color:#F0A989}
 #taya-guide:hover .g-time i,#taya-guide:focus-within .g-time i{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){#taya-form.idle .fig{animation:none}}
 
+
+/* ================= Taya builds the act heading ================= */
+.build-host{position:relative;z-index:6}
+.tape-stage{position:relative;height:0;z-index:9}
+.act-build{position:absolute;left:0;bottom:0;pointer-events:none;--fh:172px;--fw:calc(var(--fh) * .726);visibility:hidden;contain:layout style}
+.act-build.on{visibility:visible}
+.act-build .ab-card{position:absolute;left:0;bottom:0;box-sizing:border-box;pointer-events:auto;
+  padding:0 calc(var(--fw) * .6 + 12px) 12px 30px;color:#33302A;
+  background:linear-gradient(180deg,#F2E7CC,#E8DAB8);border-radius:8px 16px 16px 8px;
+  box-shadow:5px 7px 16px rgba(var(--shadow-warm),.24), inset 1px 1px 2px rgba(255,255,245,.8);will-change:clip-path}
+.act-build .ab-card::after{content:"";position:absolute;inset:5px;z-index:1;border:1px dashed rgba(124,99,32,.38);border-radius:6px 13px 13px 6px;pointer-events:none;opacity:0;transition:opacity .3s}
+.act-build.lit .ab-card::after{opacity:1}
+.act-build .ab-tag{position:absolute !important;left:0;top:0;z-index:2;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--cocoa);font-weight:700;
+  padding:11px 20px 11px 30px;white-space:nowrap;will-change:transform}
+.act-build .ab-tag::before{content:"";position:absolute;left:11px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--bg);box-shadow:inset 1px 1px 2px rgba(74,58,38,.5)}
+.act-build .ab-body{position:relative;z-index:2;opacity:0;will-change:opacity,transform}
+.act-build .ab-text{margin:0;font-size:14.5px;line-height:1.5;color:inherit;max-width:44ch}
+.act-build .ab-text b{font-family:var(--script);font-weight:400;font-size:16px;color:var(--accent-ink);margin-right:6px}
+.act-build .ab-foot{display:flex;align-items:center;gap:14px;margin-top:7px}
+.act-build .ab-foot button{background:none;border:0;padding:3px 0;font:500 12px var(--grotesk);color:#675E4E;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.act-build .ab-x{position:absolute;z-index:3;top:6px;right:calc(var(--fw) * .6 + 2px);width:26px;height:26px;border-radius:50%;border:0;background:none;color:#675E4E;font-size:18px;line-height:1;cursor:pointer;opacity:0;pointer-events:auto}
+.act-build.lit .ab-x{opacity:1;transition:opacity .3s}
+.act-build .ab-time{height:3px;margin-top:8px;border-radius:2px;background:rgba(124,99,32,.18);overflow:hidden}
+.act-build .ab-time i{display:block;height:100%;transform-origin:left center;background:repeating-linear-gradient(90deg,var(--accent-ink) 0 7px,transparent 7px 11px)}
+.act-build .ab-time i.run{animation:gtime linear forwards}
+.act-build:hover .ab-time i,.act-build:focus-within .ab-time i{animation-play-state:paused}
+.act-build .ab-fig{position:absolute;bottom:3px;width:var(--fw);height:var(--fh);z-index:3}
+.act-build .ab-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%;filter:drop-shadow(0 8px 10px rgba(20,14,8,.28));clip-path:inset(100% 0 0 0)}
+.act-build .ab-fig img.cloth{filter:url(#tayaCloth) drop-shadow(0 8px 10px rgba(20,14,8,.28))}
+.act-build.idle .ab-fig img{animation:tsway 3.4s ease-in-out infinite}
+.act-build .ab-rib{position:absolute;left:0;bottom:0;overflow:visible;pointer-events:none;z-index:2}
+body[data-fit="fur"] .act-build .ab-card{background:linear-gradient(180deg,#3A332A,#332C23);color:#F3EBD8}
+body[data-fit="fur"] .act-build .ab-tag{color:#E8DAB8}
+body[data-fit="fur"] .act-build .ab-foot button,body[data-fit="fur"] .act-build .ab-x{color:#CDBFA3}
+body[data-fit="fur"] .act-build .ab-card::after{border-color:rgba(221,196,127,.38)}
+body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:760px){.act-build{--fh:128px}.act-build .ab-text{font-size:13.5px}}
+@media (prefers-reduced-motion:reduce){.act-build.idle .ab-fig img{animation:none}}
+
+/* ================= role tips come from the weather chip ================= */
+#chyron #chyron-say{display:none;font-size:12.5px;letter-spacing:.01em;text-transform:none;font-weight:500;line-height:1.45;color:var(--ink)}
+#chyron #chyron-say b{font-family:var(--script);font-weight:400;font-size:15px;letter-spacing:0;color:var(--accent-ink);margin-right:6px}
+#chyron.talk{max-width:min(88vw,380px);align-items:center;padding-bottom:12px}
+#chyron.talk #chyron-text,#chyron.talk .live{display:none}
+#chyron.talk #chyron-say{display:block}
+#chyron .c-time{position:absolute;left:16px;right:16px;bottom:5px;height:2px;border-radius:2px;overflow:hidden;background:rgba(124,99,32,.16);display:none}
+#chyron.talk .c-time{display:block}
+#chyron .c-time i{display:block;height:100%;transform-origin:left center;background:repeating-linear-gradient(90deg,var(--accent-ink) 0 6px,transparent 6px 10px)}
+#chyron .c-time i.run{animation:gtime linear forwards}
+#chyron .tface{transition:transform .35s cubic-bezier(.2,.9,.3,1.3)}
+#chyron.talk .tface{transform:scale(1.25) translateY(-1px)}
+#chyron.talk,#chyron.sizing{overflow:hidden}
+@media (max-width:640px){#chyron.talk{max-width:calc(100vw - 100px)}}
+
+/* ================= CH 02: Taya lives in her card ================= */
+.channel .ch-taya{float:right;position:relative;display:block;width:108px;aspect-ratio:360/344;margin:-12px -10px 4px 10px;
+  filter:drop-shadow(0 5px 6px rgba(var(--shadow-warm),.3));animation:chfloat 4.2s ease-in-out infinite;will-change:transform}
+.channel .ch-taya .h{position:absolute;inset:0;width:100%;height:100%;transition:opacity .07s linear}
+.channel .ch-taya .b,.channel .ch-taya .w{opacity:0}
+.channel .ch-taya.blink .b,.channel .ch-taya.wink .w{opacity:1}
+.channel .ch-taya.blink .h.o,.channel .ch-taya.wink .h.o{opacity:0}
+.channel .ch-taya .th{position:absolute;left:80.18%;top:62.22%;width:20.56%;transform-origin:4.4% 5.5%;animation:thsway 2.9s ease-in-out infinite}
+@keyframes chfloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(-1.4deg)}}
+@keyframes thsway{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(9deg)}}
+#guide.still .ch-taya,#guide.still .ch-taya .th{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.channel .ch-taya,.channel .ch-taya .th{animation:none}}
+
 /* Taya's caption takes the screen's lower third, so the wipe cue steps aside */
 .screen:has(.taya-cap.on) .wipe-cue{opacity:0}
 /* Taya's one-time tape hint */
@@ -1357,7 +1425,8 @@ body[data-fit="fur"] #taya-ask .small.err{color:#F0A989}
   <div class="plate"><div class="ring"></div><b>Aitaya</b><span>Test transmission</span></div>
 </div>
 <div id="boot" aria-hidden="true"><div class="beam"></div></div>
-<div id="chyron" aria-live="polite"><span class="live"></span><img class="tface" src="assets/taya/head-happy.webp" alt=""><span id="chyron-text"></span></div>
+<div id="chyron" aria-live="polite"><span class="live"></span><img class="tface" src="assets/taya/head-happy.webp" alt=""><span id="chyron-text"></span><span id="chyron-say"></span><span class="c-time"><i></i></span></div>
+<div class="sr-only" id="taya-live" aria-live="polite"></div>
 <div id="taya-actor" aria-hidden="true"><div class="clip"><div class="inner taya-face"><img class="tm on" src="assets/taya/head-neutral.webp" alt=""><img class="tm" src="assets/taya/head-neutral.webp" alt=""></div></div></div>
 <div id="taya-form" aria-hidden="true"><svg class="rib" aria-hidden="true"></svg><img class="fig" src="assets/taya/full-happy.webp" alt=""></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="tayaCloth" x="-30%" y="-15%" width="160%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.011 0.034" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
@@ -1828,7 +1897,7 @@ function renderGuide(role){
     : channels;
   guide.innerHTML = ordered.map(([n,t,d,roles]) => `
     <article class="channel furred ${role && roles.includes(role) ? "spot" : ""}">
-      <div class="ch">CH &middot; ${n}</div>${n === "02" ? '<img class="ch-taya" src="assets/taya/head-happy.webp" alt="Taya" loading="lazy">' : ""}
+      <div class="ch">CH &middot; ${n}</div>${n === "02" ? '<span class="ch-taya" role="img" aria-label="Taya"><img class="h o" src="assets/taya/head-happy-bare.webp" alt="" loading="lazy"><img class="h b" src="assets/taya/head-blink-bare.webp" alt="" loading="lazy"><img class="h w" src="assets/taya/head-wink-bare.webp" alt="" loading="lazy"><img class="th" src="assets/taya/thread.webp" alt="" loading="lazy"></span>' : ""}
       <h3>${t}</h3>
       <p>${d}</p>${n === "02" ? '<button type="button" class="ch-try" data-ask="1">Ask Taya what to wear</button>' : ""}
     </article>`).join("");
@@ -2154,6 +2223,46 @@ if (returning) setTimeout(() => Taya.say(MEM.get("joined", "") === "1"
   ? "Welcome back. You’re already on my list."
   : "Welcome back. Your seat is still open.", { mood: "wink", ms: 5200 }), 2600);
 
+/* the weather chip opens into a short timed Taya note, then closes back into the weather.
+   Only the role picker uses it. The size change is animated from the measured before and after boxes. */
+const chipSay = (function(){
+  const box = document.getElementById("chyron"), say = document.getElementById("chyron-say");
+  const bar = box.querySelector(".c-time i"), faceImg = box.querySelector(".tface");
+  let t = 0, onlyForTalk = false, token = 0;
+  function resize(change){
+    const a = box.getBoundingClientRect();
+    change();
+    const b = box.getBoundingClientRect();
+    if (reduceMotion || !a.width) return;
+    box.classList.add("sizing");
+    box.animate([{ width: a.width + "px", height: a.height + "px" }, { width: b.width + "px", height: b.height + "px" }],
+      { duration: 380, easing: "cubic-bezier(.3,.7,.2,1)" }).finished.then(() => box.classList.remove("sizing"), () => box.classList.remove("sizing"));
+  }
+  function close(){
+    const me = token;
+    say.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" }).finished.then(() => {
+      if (me !== token) return;
+      resize(() => { box.classList.remove("talk"); if (onlyForTalk){ box.classList.remove("on"); onlyForTalk = false; } });
+      faceImg.src = "assets/taya/head-happy.webp";
+      say.getAnimations().forEach(a => a.cancel());
+    });
+  }
+  return function(text, ms){
+    token++; clearTimeout(t);
+    say.getAnimations().forEach(a => a.cancel());
+    resize(() => {
+      if (!box.classList.contains("on")){ box.classList.add("on"); onlyForTalk = true; }
+      say.innerHTML = "<b>Taya</b>"; say.appendChild(document.createTextNode(text));
+      box.classList.add("talk");
+    });
+    faceImg.src = "assets/taya/head-happy.webp";
+    say.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, delay: 120, easing: "ease-out", fill: "backwards" });
+    bar.classList.remove("run"); void bar.offsetWidth; bar.style.animationDuration = ms + "ms"; bar.classList.add("run");
+    Taya.flash("happy", ms);
+    t = setTimeout(close, ms);
+  };
+})();
+
 /* she reacts when you pick who is watching */
 const tayaRoleLines = {
   creator: "Creator it is. I’ll plan your fits and your campus will judge them.",
@@ -2164,10 +2273,28 @@ const tayaRoleLines = {
 document.addEventListener("click", e => {
   const r = e.target.closest(".rolechip[data-role], .role[data-role]");
   if (r && tayaRoleLines[r.dataset.role] && !e.target.closest("#taya-ask")) setTimeout(() => {
-    if (pickedRole === r.dataset.role) Taya.say(tayaRoleLines[r.dataset.role], { mood: "happy" });
+    if (pickedRole === r.dataset.role) chipSay(tayaRoleLines[r.dataset.role], 4500);
   }, 60);
   if (e.target.closest("[data-ask]")) tayaAsk.open();
 });
+
+/* CH 02: Taya blinks every few seconds and now and then winks, only while the guide is on screen */
+(function(){
+  const g = document.getElementById("guide"); if (!g) return;
+  let vis = false, t = 0, n = 0;
+  function beat(kind, hold){ const c = g.querySelector(".ch-taya"); if (!c) return; c.classList.add(kind); setTimeout(() => c.classList.remove(kind), hold); }
+  function loop(){
+    clearTimeout(t); if (!vis) return;
+    t = setTimeout(() => {
+      n++;
+      if (n % 4 === 0) beat("wink", 700);
+      else { beat("blink", 130); if (n % 3 === 1) setTimeout(() => beat("blink", 120), 260); }
+      loop();
+    }, 2400 + Math.random() * 2600);
+  }
+  new IntersectionObserver(([en]) => { vis = en.isIntersecting; g.classList.toggle("still", !vis); loop(); }, { threshold: .05 }).observe(g);
+  g.addEventListener("mouseover", e => { const ch = e.target.closest(".channel"); if (ch && ch.querySelector(".ch-taya") && !ch.contains(e.relatedTarget)) beat("wink", 650); });
+})();
 
 /* she has opinions about the vote */
 document.querySelectorAll(".vote .opt").forEach(o => o.addEventListener("click", () => {
@@ -2637,7 +2764,7 @@ const Guide = (function(){
       await fly(from, { x: pill.left - 24, y: pill.top + pill.height / 2 }, { s0: from.s, s1: .55, lift: -60, dur: 680 });
       const anchor = onair, drop = c => c.h / 2 + 62;
       await fly({ x: pill.left - 24, y: pill.top + pill.height / 2 }, { x: centre(anchor).x, y: centre(anchor).y + drop(centre(anchor)) }, { s0: .55, s1: 1, lift: 18, dur: 420 });
-      stick(anchor, () => 0, drop);
+      { const c = centre(anchor); setActor(c.x, c.y + drop(c)); }
       talk("Quick one. Aitaya is your closet, your stylist (that\u2019s me) and tailors you can trust, all in one place. Launching soon in Nigeria.", actor, "left", "happy", 7000);
       await hold(7000, document.body);
       hush(); unstick();
@@ -2715,30 +2842,149 @@ const Guide = (function(){
     fig.getAnimations().forEach(a => a.cancel()); rib.getAnimations && rib.getAnimations().forEach(a => a.cancel());
     rib.innerHTML = ""; cancelAnimationFrame(formLoop);
   }
+  // ---- Taya builds the heading ----
+  const live = document.getElementById("taya-live");
+  let tapeStage = null;
+  function ensureBuild(stop){
+    if (stop.build) return stop.build;
+    let host;
+    if (stop.key === "tape"){
+      tapeStage = tapeStage || Object.assign(document.createElement("div"), { className: "tape-stage build-host" });
+      stop.el.after(tapeStage); host = tapeStage;
+    } else host = stop.el.parentElement;
+    const b = document.createElement("div"); b.className = "act-build"; b.setAttribute("aria-hidden", "true");
+    b.innerHTML = '<svg class="ab-rib"></svg><div class="ab-card felted"><span class="ab-tag"></span><div class="ab-body"><p class="ab-text"></p>'
+      + '<div class="ab-foot"><button type="button" class="ab-mute" tabindex="-1">Hush, Taya</button></div><div class="ab-time"><i></i></div></div>'
+      + '<button type="button" class="ab-x" aria-label="Close" tabindex="-1">&times;</button></div><div class="ab-fig"><img alt=""></div>';
+    host.appendChild(b);
+    stop.build = { host, b, card: b.querySelector(".ab-card"), tag: b.querySelector(".ab-tag"), body: b.querySelector(".ab-body"),
+      text: b.querySelector(".ab-text"), timer: b.querySelector(".ab-time i"), fig: b.querySelector(".ab-fig"), img: b.querySelector(".ab-fig img"),
+      rib: b.querySelector(".ab-rib"), x: b.querySelector(".ab-x"), mute: b.querySelector(".ab-mute") };
+    return stop.build;
+  }
+  const poly = pts => "polygon(" + pts.map(([x, y]) => x.toFixed(1) + "px " + y.toFixed(1) + "px").join(",") + ")";
+  // measured once at the start; afterwards everything is positioned inside the page and scrolls with it
+  function layout(stop, B){
+    const host = B.host, hr = host.getBoundingClientRect(), vwid = document.documentElement.clientWidth;
+    const fw = parseFloat(getComputedStyle(B.b).getPropertyValue("--fh")) * .726;
+    let tx, ty, tw, th, label;
+    if (stop.key === "tape"){
+      const tr = stop.el.getBoundingClientRect();
+      tw = 170; th = 34; tx = Math.max(16, vwid / 2 - tw / 2 - hr.left); ty = -tr.height - th; label = "The niche tape";
+    } else {
+      tx = stop.el.offsetLeft; ty = stop.el.offsetTop; tw = stop.el.offsetWidth; th = stop.el.offsetHeight; label = stop.el.textContent;
+    }
+    const cw = Math.min(500, vwid - 24 - fw * .4);
+    // the card starts where the tag is, but never runs off the screen
+    const leftVp = Math.min(Math.max(12, hr.left + tx), vwid - 12 - cw - fw * .4);
+    const left = leftVp - hr.left, ox = tx - left;
+    B.tag.textContent = label;
+    B.card.style.width = cw + "px";
+    B.body.style.paddingTop = (th + 2) + "px";
+    const ch = Math.max(B.card.offsetHeight, th + 10);
+    const W = cw + fw * .4, H = Math.max(ch, parseFloat(getComputedStyle(B.b).getPropertyValue("--fh")) + 6);
+    Object.assign(B.b.style, { left: left + "px", bottom: (host.offsetHeight - (ty + th)) + "px", width: W + "px", height: H + "px",
+      transform: stop.key === "tape" ? "none" : "rotate(-1.6deg)", transformOrigin: (ox + tw / 2) + "px " + (H - th / 2) + "px" });
+    B.fig.style.left = (cw - fw * .6) + "px";
+    const sliver = stop.key === "tape";
+    const s0 = sliver ? [[ox, ch], [ox + tw, ch], [ox + tw, ch - 3], [ox + tw * .9, ch - 3], [ox, ch - 3]]
+                      : [[ox, ch], [ox + tw, ch], [ox + tw, ch - th], [ox + tw * .9, ch - th], [ox, ch - th]];
+    const s1 = [[0, ch], [cw * .86, ch], [cw * .86, ch * .5], [cw * .48, 0], [0, 0]];
+    const s2 = [[0, ch], [cw, ch], [cw, 0], [cw, 0], [0, 0]];
+    // the cloth runs from the tag's tip along the diagonal to where she stands
+    const fx = cw - fw * .6 + fw / 2, sx = ox + tw - 8, sy = H - th / 2;
+    const d = `M ${sx} ${sy} C ${cw * .55} ${H - th * .7 - 6}, ${fx - fw * .7} ${H - 14}, ${fx} ${H - parseFloat(getComputedStyle(B.b).getPropertyValue("--fh")) * .42}`;
+    const bw = Math.max(18, fw * .3);
+    B.rib.setAttribute("width", W); B.rib.setAttribute("height", H); B.rib.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    B.rib.innerHTML = '<g filter="url(#tayaCloth)">' + [["#2A1E14", bw + 3], ["#1E5F4A", bw], ["#F3EAD3", bw * .5], ["#1E5F4A", bw * .3], ["#DDC47F", bw * .08]]
+      .map(([c, sw]) => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`).join("") + "</g>";
+    return { s0, s1, s2, ox, ch, th, sliver };
+  }
+  const EASE = "cubic-bezier(.3,.7,.2,1)";
+  async function buildIn(stop, B, L){
+    B.img.src = "assets/taya/full-" + (stop.mood === "wink" ? "wink" : "happy") + ".webp";
+    try { await B.img.decode(); } catch(e){}          // decoded before the first frame, so the build never hitches
+    B.b.classList.remove("idle", "lit"); B.b.classList.add("on");
+    B.card.style.clipPath = poly(L.s0);
+    B.tag.style.transform = `translate(${L.ox}px, ${L.ch - L.th}px)`; B.tag.style.opacity = L.sliver ? "0" : "1";
+    B.body.style.opacity = "0";
+    const card = B.card.animate([{ clipPath: poly(L.s0) }, { clipPath: poly(L.s1), offset: .55 }, { clipPath: poly(L.s2) }], { duration: 860, easing: EASE, fill: "forwards" });
+    B.tag.animate([{ transform: `translate(${L.ox}px, ${L.ch - L.th}px)`, opacity: L.sliver ? 0 : 1 }, { transform: "translate(0,0)", opacity: 1 }],
+      { duration: 640, delay: 140, easing: EASE, fill: "forwards" });
+    B.rib.style.opacity = "1";
+    [...B.rib.querySelectorAll("path")].forEach((p, i) => p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 640 + i * 30, delay: 120, easing: EASE, fill: "forwards" }));
+    disp.setAttribute("scale", "0"); ripple(0, 24, 420);
+    await wait(470);
+    // she forms where the cloth arrives
+    B.img.classList.add("cloth");
+    const rp = ripple(46, 0, 1050);
+    B.img.animate([{ clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0 0 0 0)" }], { duration: 720, easing: "cubic-bezier(.25,.8,.25,1)", fill: "forwards" });
+    B.img.animate([{ transform: "scaleY(.5) skewX(-8deg)" }, { transform: "scaleY(1.05) skewX(3deg)", offset: .6 }, { transform: "scaleY(.985) skewX(-1deg)", offset: .82 }, { transform: "none" }],
+      { duration: 950, easing: "cubic-bezier(.3,.7,.3,1)" });
+    B.rib.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 520, delay: 260, easing: "ease-out", fill: "forwards" });
+    B.body.animate([{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: 240, easing: EASE, fill: "forwards" });
+    await Promise.all([rp, card.finished]);
+    B.img.classList.remove("cloth"); B.img.style.clipPath = "none";
+    B.img.getAnimations().forEach(a => a.cancel());
+    B.b.classList.add("idle", "lit");
+  }
+  async function buildOut(stop, B, L){
+    B.b.classList.remove("idle", "lit");
+    B.body.animate([{ opacity: 1 }, { opacity: 0, transform: "translateY(4px)" }], { duration: 220, easing: "ease-in", fill: "forwards" });
+    B.img.classList.add("cloth");
+    const rp = ripple(0, 40, 560);
+    const fig = B.img.animate([{ clipPath: "inset(0 0 0 0)", transform: "none" }, { clipPath: "inset(100% 0 0 0)", transform: "scaleY(.6) skewX(6deg)" }],
+      { duration: 560, easing: "cubic-bezier(.5,0,.75,.4)", fill: "forwards" });
+    await wait(140);
+    B.tag.getAnimations().forEach(a => a.cancel());
+    B.tag.style.transform = "translate(0,0)";
+    const tg = B.tag.animate([{ transform: "translate(0,0)", opacity: 1 }, { transform: `translate(${L.ox}px, ${L.ch - L.th}px)`, opacity: L.sliver ? 0 : 1 }],
+      { duration: 600, easing: EASE, fill: "forwards" });
+    B.card.getAnimations().forEach(a => a.cancel());
+    const card = B.card.animate([{ clipPath: poly(L.s2) }, { clipPath: poly(L.s1), offset: .45 }, { clipPath: poly(L.s0) }], { duration: 640, easing: EASE, fill: "forwards" });
+    await Promise.all([rp, fig.finished, card.finished, tg.finished]);
+    B.b.classList.remove("on");
+    [B.card, B.tag, B.body, B.img, B.rib].forEach(n => n.getAnimations().forEach(a => a.cancel()));
+    B.rib.querySelectorAll("path").forEach(p => p.getAnimations().forEach(a => a.cancel()));
+    B.img.classList.remove("cloth"); B.img.style.clipPath = ""; disp.setAttribute("scale", "0");
+  }
+  // the stitched timer decides how long she talks; hovering pauses it; she also leaves if you scroll away
+  function holdBuild(stop, B, ms){
+    return new Promise(res => {
+      let done = false;
+      const fin = () => { if (done) return; done = true; clearInterval(iv); clearTimeout(safety); B.x.onclick = B.mute.onclick = null; res(); };
+      B.timer.classList.remove("run"); void B.timer.offsetWidth;
+      B.timer.style.animationDuration = ms + "ms"; B.timer.classList.add("run");
+      B.timer.addEventListener("animationend", fin, { once: true });
+      B.x.onclick = fin; B.mute.onclick = () => { MEM.set("tourOff", "1"); fin(); };
+      const safety = setTimeout(fin, ms * 3);
+      const iv = setInterval(() => { const r = stop.el.getBoundingClientRect(); if (r.bottom < -40 || r.top > innerHeight + 40) fin(); }, 300);
+    });
+  }
   async function explain(stop){
     const el = stop.el;
     // a queued stop only plays if you are still looking at it
     if (!inBand(el) || muted() || blocked() || heroIn || !fresh(stop.key)) return;
     mark(stop.key);
+    const B = ensureBuild(stop);
+    B.host.classList.add("build-host");
+    B.text.innerHTML = "<b>Taya</b>"; B.text.appendChild(document.createTextNode(stop.text));
+    live.textContent = stop.text;
+    const L = layout(stop, B);
     dock.classList.add("away");
-    await wait(260);
-    const dxf = r => Math.min(r.width / 2 - 34, 160);
-    formAt(el, dxf);
-    await weave(stop.mood);
-    const wide = innerWidth > 760;
-    talk(stop.text, wide ? form : el, wide ? "right" : "below", stop.mood, stop.ms || 6200);
+    face(stop.mood || "happy"); Taya.set(stop.mood || "happy");
+    await buildIn(stop, B, L);
     if (stop.after) stop.after();
-    await hold(stop.ms || 6200, el);
-    hush();
-    await unweave();
-    // her head slips out of the tag and floats home to the corner
-    const r = el.getBoundingClientRect();
-    await toDock({ x: r.left + r.width / 2 + dxf(r), y: r.top - 10, s: .7 });
+    await holdBuild(stop, B, stop.ms || 6200);
+    const fr = B.fig.getBoundingClientRect();
+    await buildOut(stop, B, L);
+    // her head slips out of the folded tag and floats home to the corner
+    await toDock({ x: fr.left + fr.width / 2, y: fr.top + fr.height * .35, s: .8 });
   }
   async function run(job){
     if (busy){ pending = job; return; }
     busy = true;
-    try { await job(); } catch(e){ actor.classList.remove("on"); hush(); unstick(); cancelAnimationFrame(formLoop); form.classList.remove("on"); showDock(); }
+    try { await job(); } catch(e){ actor.classList.remove("on"); hush(); unstick(); document.querySelectorAll(".act-build.on").forEach(b => b.classList.remove("on")); showDock(); }
     busy = false;
     const next = pending; pending = null;
     if (next) run(next);
