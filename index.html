@@ -7,10 +7,19 @@
 <meta name="description" content="Aitaya is a fashion ecosystem in your pocket: your closet, a stylist and trusted tailors in one place. Launching soon in Nigeria. Join the waitlist.">
 <meta property="og:title" content="Aitaya · Coming Soon">
 <meta property="og:description" content="Your closet, stylist and tailor in one place. Join the waitlist at aitaya.ng">
-<meta property="og:image" content="https://aitaya.ng/assets/brand/lockup_ivory_clean.png">
+<meta property="og:image" content="https://aitaya.ng/assets/brand/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Aitaya logo: Taya's agbada beside the Aitaya wordmark">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://aitaya.ng/assets/brand/og-card.png">
 <meta property="og:url" content="https://aitaya.ng">
-<link rel="icon" href="assets/brand/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon_32.png">
+<link rel="icon" href="assets/brand/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#1E5F4A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=GFS+Didot:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -235,21 +244,21 @@ body[data-fit="fur"] .lamps{
 #dust{position:fixed;inset:0;z-index:-3;pointer-events:none}
 .bigmark{position:fixed;inset:0;z-index:-2;pointer-events:none;display:flex;align-items:center;justify-content:center}
 .bigmark{--mg:0}
+.bigmark .pane,.bigmark .glow{
+  position:absolute;width:min(74vmin,760px);aspect-ratio:240/244;
+  -webkit-mask:url("assets/brand/mark-silhouette.svg") center/contain no-repeat;
+          mask:url("assets/brand/mark-silhouette.svg") center/contain no-repeat;
+}
 .bigmark .pane{
-  position:absolute;width:min(74vmin,760px);aspect-ratio:1;
-  filter:brightness(calc(1 + var(--mg) * .55)) saturate(calc(1 + var(--mg) * .5));
   -webkit-backdrop-filter:blur(5px) saturate(1.2) brightness(1.04);
   backdrop-filter:blur(5px) saturate(1.2) brightness(1.04);
-  background:rgba(221,196,127,calc(.10 + var(--mg) * .26));
-  -webkit-mask-image:url("assets/brand/mark_emerald_transparent.png");
-          mask-image:url("assets/brand/mark_emerald_transparent.png");
-  -webkit-mask-size:contain;mask-size:contain;
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  -webkit-mask-position:center;mask-position:center;
+  background:rgba(221,196,127,.10);
 }
-.bigmark img{width:min(74vmin,760px);opacity:calc(.05 + var(--mg) * .17);mix-blend-mode:multiply}
-body[data-fit="fur"] .bigmark img{filter:invert(.92) sepia(.35) saturate(.5) hue-rotate(20deg);opacity:.07;mix-blend-mode:normal}
-body[data-fit="ivory"] .bigmark img{opacity:.045}
+.bigmark .glow{background:rgba(236,208,140,.42);opacity:var(--mg);will-change:opacity}
+.bigmark .ink{position:absolute;width:min(74vmin,760px);opacity:.055}
+body[data-fit="fur"] .bigmark .ink{opacity:.07}
+body[data-fit="ivory"] .bigmark .ink{opacity:.045}
+@media (max-width:900px){.bigmark .pane{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(221,196,127,.12)}}
 @media (prefers-reduced-motion:reduce){.signal svg{animation:none}.gridpulse{animation:none;opacity:.3}}
 
 img{max-width:100%;display:block}
@@ -396,8 +405,15 @@ header.site .bar{
   backdrop-filter:blur(12px) saturate(1.15);
   box-shadow:6px 8px 20px rgba(var(--shadow-warm),.16), inset 1px 1px 3px rgba(var(--hi),.8);
 }
-.brand-mini img{height:26px;width:auto}
-body[data-fit="fur"] .brand-mini img{filter:invert(.92) sepia(.3) saturate(.6) hue-rotate(100deg)}
+/* the logo (kit v1.1): one inline symbol, coloured by room. Emerald on light rooms, ivory on the dark mohair
+   room and the charcoal footer. Gold stays gold. Never filtered, stretched or recoloured outside these. */
+.lg{display:block;--lg-ink:#1E5F4A;--lg-v:#F3EFE6;--lg-gold:#DDC47F}
+.lg-h{aspect-ratio:753/244;height:auto}
+.lg-m{aspect-ratio:240/244;height:auto}
+body[data-fit="fur"] .lg,footer .lg,.lg.on-dark{--lg-ink:#F3EFE6;--lg-v:#153E31}
+.brand-mini{display:flex;align-items:center}
+.brand-mini .lg-h{width:124px}
+.brand-mini .lg-ms{display:none;width:30px;aspect-ratio:240/244;height:auto}
 .nowline{font-size:10px;color:var(--bronze);letter-spacing:.28em}
 .hdr-right{display:flex;align-items:center;gap:var(--s2)}
 .hum,.pwr{
@@ -415,11 +431,14 @@ body[data-fit="fur"] .brand-mini img{filter:invert(.92) sepia(.3) saturate(.6) h
 .pwr{width:32px;height:32px;border-radius:50%;color:var(--bronze);font-size:13px;line-height:1}
 .pwr:hover{color:var(--accent);transform:rotate(-12deg)}
 .onair{display:flex;align-items:center;gap:10px;font-size:10.5px;color:var(--accent);white-space:nowrap}
-.onair .dot{width:7px;height:7px;border-radius:50%;background:#B3402E;animation:pulse 2.4s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(179,64,46,.4)}70%{box-shadow:0 0 0 8px rgba(179,64,46,0)}100%{box-shadow:0 0 0 0 rgba(179,64,46,0)}}
+.onair .dot{width:7px;height:7px;border-radius:50%;background:#B3402E;position:relative;flex:none}
+.onair .dot::after,#chyron .live::after,#greenroom .onair-badge i::after{content:"";position:absolute;inset:0;border-radius:50%;
+  background:currentColor;color:rgba(179,64,46,.55);animation:pulse 2.4s ease-out infinite;will-change:transform,opacity}
+@keyframes pulse{0%{transform:scale(1);opacity:.9}70%{transform:scale(3.2);opacity:0}100%{transform:scale(3.2);opacity:0}}
 @media (max-width:720px){
   .nowline{display:none}
-  .brand-mini img{height:21px}
+  .brand-mini .lg-h{display:none}
+  .brand-mini .lg-ms{display:block}
   header.site .bar{padding:8px var(--s2)}
   .hdr-right{gap:10px}
   .onair span:not(.dot){display:none}
@@ -471,7 +490,7 @@ body[data-fit="fur"] .brand-mini img{filter:invert(.92) sepia(.3) saturate(.6) h
 }
 #chyron.on{display:flex}
 #chyron b{color:var(--bronze);font-weight:700}
-#chyron .live{width:6px;height:6px;border-radius:50%;background:#B3402E;flex:none;animation:pulse 2.4s infinite}
+#chyron .live{width:6px;height:6px;border-radius:50%;background:#B3402E;flex:none;position:relative}
 @media (max-width:1180px){#chyron{left:50%;transform:translateX(-50%)}}
 
 /* ================= picture controls ================= */
@@ -529,7 +548,8 @@ body[data-fit="fur"] .brand-mini img{filter:invert(.92) sepia(.3) saturate(.6) h
   font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:#F6F1E4;
   background:#8F3A26;padding:8px 15px;border-radius:999px;margin-bottom:var(--s3);
 }
-#greenroom .onair-badge i{width:7px;height:7px;border-radius:50%;background:#F6C86A;animation:pulse 2.4s infinite}
+#greenroom .onair-badge i{width:7px;height:7px;border-radius:50%;background:#F6C86A;position:relative}
+#greenroom .onair-badge i::after{color:rgba(246,200,106,.6)}
 #greenroom h2{font-family:var(--didot);font-weight:400;font-size:clamp(24px,3vw,34px);line-height:1.16;color:var(--ink)}
 #greenroom h2 em{font-style:italic;color:var(--accent)}
 #greenroom .slot{
@@ -569,7 +589,6 @@ body[data-fit="fur"] .brand-mini img{filter:invert(.92) sepia(.3) saturate(.6) h
   color:var(--ink-soft);text-decoration:underline;text-underline-offset:4px;
 }
 #greenroom .gr-wordmark{width:min(180px,52%);margin:0 auto var(--s3)}
-body[data-fit="fur"] #greenroom .gr-wordmark{filter:invert(.92) sepia(.3) saturate(.6) hue-rotate(100deg)}
 
 /* ---------- boot & off ---------- */
 #boot{position:fixed;inset:0;z-index:100;background:#0C0F0D;display:flex;align-items:center;justify-content:center;transition:opacity .5s ease}
@@ -632,9 +651,9 @@ body[data-fit="fur"] #greenroom .gr-wordmark{filter:invert(.92) sepia(.3) satura
 }
 .screen.emerald{background:radial-gradient(ellipse 90% 80% at 50% 42%, #256B54, var(--emerald-deep) 78%)}
 .screen .soon{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#F3EFE6}
-.screen .soon b{font-family:var(--didot);font-style:italic;font-weight:500;font-size:clamp(22px,2.4vw,30px);letter-spacing:.04em;animation:breathe 4.5s ease-in-out infinite}
+.screen .soon b{font-family:var(--didot);font-style:italic;font-weight:500;font-size:clamp(22px,2.4vw,30px);letter-spacing:.04em;text-shadow:0 0 18px rgba(221,196,127,.3);animation:breathe 4.5s ease-in-out infinite}
 .screen .soon span{font-size:9.5px;letter-spacing:.3em;color:var(--gold)}
-@keyframes breathe{0%,100%{opacity:.92}50%{opacity:1;text-shadow:0 0 24px rgba(221,196,127,.4)}}
+@keyframes breathe{0%,100%{opacity:.86}50%{opacity:1}}
 .screen .static{
   position:absolute;inset:0;z-index:4;opacity:0;pointer-events:none;border-radius:inherit;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -677,7 +696,7 @@ body[data-fit="fur"] #greenroom .gr-wordmark{filter:invert(.92) sepia(.3) satura
 }
 @keyframes cue{0%,100%{opacity:.55}50%{opacity:1}}
 .screen.cleaned .wipe-cue{display:none}
-.dvd{position:absolute;z-index:5;width:20%;opacity:0;pointer-events:none;filter:drop-shadow(0 0 10px rgba(221,196,127,.5));transition:opacity 1.5s ease}
+.dvd{position:absolute;z-index:5;left:0;top:0;width:20%;opacity:0;pointer-events:none;transition:opacity 1.5s ease;will-change:transform}
 body.dozing .screen{filter:brightness(.38) saturate(.8);transition:filter 2.5s ease}
 body.dozing .dvd{opacity:.9}
 
@@ -716,7 +735,6 @@ body.dozing .dvd{opacity:.9}
 .hero-zone:last-child{border-bottom:0;padding-bottom:0}
 .hero-zone:first-child{padding-top:0}
 .wordmark{width:min(280px,72%);height:auto;margin-bottom:var(--s1)}
-body[data-fit="fur"] .wordmark{filter:invert(.92) sepia(.3) saturate(.6) hue-rotate(100deg)}
 .brandline{display:flex;align-items:center;flex-wrap:wrap;gap:6px 26px;margin-bottom:var(--s1)}
 .brandline .wordmark{margin-bottom:0}
 .itire{
@@ -894,7 +912,7 @@ body[data-fit="fur"] .interstitial .tag{background:linear-gradient(180deg,#3A332
     radial-gradient(110% 96% at 50% 50%, transparent 60%, rgba(5,10,8,.4) 100%);
 }
 .rw-phone .prog{position:absolute;top:12px;left:14px;right:14px;height:2px;background:rgba(243,239,230,.25);border-radius:2px;z-index:3}
-.rw-phone .prog i{display:block;height:100%;width:0;background:var(--gold);border-radius:2px}
+.rw-phone .prog i{display:block;height:100%;width:100%;background:var(--gold);border-radius:2px;transform:scaleX(0);transform-origin:left center}
 .rw-rail{position:absolute;right:9px;bottom:15%;z-index:3;display:flex;flex-direction:column;gap:12px;align-items:center}
 .rw-btn{
   width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,239,230,.4);
@@ -1052,7 +1070,7 @@ button.role:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 footer{background:var(--charcoal);color:#F3EFE6}
 footer .signoff{text-align:center;font-size:9.5px;letter-spacing:.3em;color:rgba(243,239,230,.4);padding:var(--s3) var(--s2) 0;text-transform:uppercase}
 footer .inner{max-width:1160px;margin:0 auto;padding:var(--s5) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:var(--s4);align-items:flex-end;justify-content:space-between}
-footer img{height:36px;width:auto}
+footer .lg-h{width:130px}
 footer .fi{font-family:var(--script);color:var(--gold);font-size:15px;margin-top:var(--s2)}
 footer small{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(243,239,230,.5)}
 
@@ -1271,13 +1289,9 @@ body[data-fit="fur"][data-role="stylist"]{--accent-fill:#D8A3BD;--accent-ink:#DD
 .ticker .nb.demo::before{opacity:1;transform:none;border-width:2px;background:color-mix(in srgb, var(--rust) 14%, transparent);animation:demoring .9s ease-out}
 @keyframes demoring{0%{box-shadow:0 0 0 0 rgba(166,75,38,.45)}100%{box-shadow:0 0 0 12px rgba(166,75,38,0)}}
 .ticker.demo-on .lane{animation-play-state:paused}
-/* a niche shakes the room instead of scrolling it */
-@keyframes roomshake{0%{transform:none}14%{transform:translate(-7px,2px) rotate(-.25deg)}30%{transform:translate(6px,-3px) rotate(.2deg)}
-  46%{transform:translate(-4px,1px)}62%{transform:translate(3px,-1px)}80%{transform:translate(-1px,0)}100%{transform:none}}
-@keyframes tapebounce{0%{transform:none}30%{transform:translateY(-6px) scaleY(1.04)}60%{transform:translateY(2px)}100%{transform:none}}
-main.shake{animation:roomshake .5s cubic-bezier(.36,.07,.19,.97)}
-.ticker.bounce{animation:tapebounce .5s cubic-bezier(.2,.9,.3,1.3)}
-@media (prefers-reduced-motion:reduce){main.shake,.ticker.bounce{animation:none}#taya-guide{transition:none}}
+/* a niche shakes the room instead of scrolling it (roomShake() animates main and the tape with WAAPI) */
+main{display:block}
+@media (prefers-reduced-motion:reduce){#taya-guide{transition:none}}
 .form-ok{color:var(--accent-ink)}
 .form-ok .fix,.taya-note .fix{background:none;border:0;padding:0;font:inherit;color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700}
 .form-ok.err{display:block;font-family:var(--grotesk);font-style:normal;font-size:13px;color:#8F3A26}
@@ -1395,6 +1409,7 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="lg-h" viewBox="0 0 753 244"><g transform="translate(0.00,0.00) scale(1.00000) translate(-8,-6)"><path style="fill:var(--lg-ink)" d="M 128.00 235.00 C 123.50 236.00, 118.00 238.00, 114.00 247.00 C 105.00 226.00, 96.00 200.00, 92.00 170.00 C 88.00 146.00, 86.00 124.00, 86.00 106.00 C 76.00 136.00, 52.00 162.00, 18.00 178.00 C 21.00 130.00, 30.00 86.00, 46.00 55.00 C 64.00 42.00, 84.00 33.00, 104.00 27.00 C 112.00 18.00, 119.00 12.00, 128.00 12.00 C 137.00 12.00, 144.00 18.00, 152.00 27.00 C 172.00 33.00, 192.00 42.00, 210.00 55.00 C 226.00 86.00, 235.00 130.00, 238.00 178.00 C 204.00 162.00, 180.00 136.00, 170.00 106.00 C 170.00 124.00, 168.00 146.00, 164.00 170.00 C 160.00 200.00, 151.00 226.00, 142.00 247.00 C 138.00 238.00, 132.50 236.00, 128.00 235.00 Z"/><path style="fill:var(--lg-v)" d="M 117 28 C 120 60, 124 92, 128 120 C 132 92, 136 60, 139 28 C 135 32, 121 32, 117 28 Z"/><path fill="none" style="stroke:var(--lg-gold)" stroke-width="3" stroke-linejoin="round" d="M 117 28 C 120 60, 124 92, 128 120 C 132 92, 136 60, 139 28"/><path fill="none" style="stroke:var(--lg-gold)" stroke-width="3" stroke-linecap="round" d="M 18 178 C 13 192, 18 206, 30 208 C 42 210, 45 195, 35 192 C 28 190, 26 199, 32 202"/><circle cx="128" cy="120" r="16" style="fill:var(--lg-gold)"/><circle cx="122.24" cy="114.24" r="3.04" style="fill:var(--lg-ink)"/><circle cx="133.76" cy="114.24" r="3.04" style="fill:var(--lg-ink)"/><circle cx="122.24" cy="125.76" r="3.04" style="fill:var(--lg-ink)"/><circle cx="133.76" cy="125.76" r="3.04" style="fill:var(--lg-ink)"/></g><g transform="translate(281.48,52.80) scale(0.14186) translate(-46.0,821.0)"><path style="fill:var(--lg-ink)" d="M108 -262 174 -275 199 -339 220 -397 240 -454 257 -510 273 -565 286 -618 297 -669 305 -714 320 -712 317 -724H326L318 -726L322 -738L327 -748L333 -757L340 -765L347 -772L350 -785L355 -794L361 -802L369 -810L378 -816L388 -821L391 -815L382 -810L371 -800L363 -789L360 -780L371 -784H379L387 -782L394 -778L400 -771L404 -762L405 -757L403 -747L401 -743L394 -737L385 -734L376 -733L367 -736L362 -739L353 -746L349 -753L341 -740L337 -732L334 -722H331L349 -650L374 -556L406 -445L433 -362L467 -265L495 -194L531 -114L560 -56L582 -16L596 8L568 2L542 -5L513 -16L494 -26L475 -16L454 -8L429 0L391 8L405 -16L415 -42L423 -70L426 -84L430 -114L432 -145L430 -194L427 -229L421 -278L368 -274L320 -269L224 -257L183 -139L137 -22L116 -31L119 -25L106 -18L91 -14L82 -13H67L46 -16L68 -27L90 -43L75 -50L120 -147L162 -246L117 -237L110 -238L107 -239L102 -244L101 -251L102 -254L105 -260ZM234 -284 325 -296 417 -304 405 -362 391 -423 328 -680 316 -602 299 -519 286 -466 271 -408 253 -348ZM359 -762 363 -754 365 -751 372 -748 377 -747H383L387 -749L390 -751L391 -754L390 -758L388 -763L385 -766L380 -769H373L365 -766ZM888.0 -509 890.0 -311 893.0 -239 897.0 -172 904.0 -112 911.0 -68 920.0 -28 931.0 8 906.0 2 876.0 -6 858.0 -14 841.0 -22 825.0 -14 806.0 -6 777.0 2 752.0 8 763.0 -29 772.0 -71 779.0 -117 785.0 -181 789.0 -237 792.0 -312 794.0 -409 795.0 -531ZM885.0 -657 884.0 -649 881.0 -641 876.0 -633 870.0 -627 863.0 -622 856.0 -618 847.0 -616H839.0L830.0 -617L822.0 -621L815.0 -625L808.0 -631L803.0 -638L800.0 -646L798.0 -654L797.0 -663L799.0 -671L802.0 -679L806.0 -687L812.0 -693L819.0 -698L827.0 -702L836.0 -704H844.0L853.0 -703L861.0 -699L868.0 -695L874.0 -689L880.0 -682L883.0 -674L885.0 -666ZM1259.0 -629V-522H1304.0L1351.0 -520L1390.0 -517L1436.0 -513L1442.0 -510L1445.0 -508L1447.0 -502V-499L1445.0 -492L1443.0 -490L1436.0 -487H1433.0L1388.0 -492L1350.0 -494L1303.0 -496H1260.0L1263.0 -313L1267.0 -245L1271.0 -183L1277.0 -125L1284.0 -73L1293.0 -25L1302.0 8L1277.0 2L1254.0 -4L1229.0 -14L1212.0 -22L1196.0 -14L1177.0 -6L1156.0 0L1123.0 8L1132.0 -25L1141.0 -75L1147.0 -115L1153.0 -175L1157.0 -239L1161.0 -308L1164.0 -402L1165.0 -492L1111.0 -488L1098.0 -469L1091.0 -461L1081.0 -452L1090.0 -502L1091.0 -506L1095.0 -511L1101.0 -513L1165.0 -518L1166.0 -651ZM1972.0 -457 1973.0 -511 2065.0 -489 2068.0 -298 2071.0 -229 2075.0 -166 2081.0 -108 2088.0 -66 2097.0 -27 2108.0 8 2083.0 2 2061.0 -4 2041.0 -11 2019.0 -22 2003.0 -14 1984.0 -6 1962.0 0 1930.0 8 1942.0 -34 1917.0 -16 1903.0 -8 1889.0 -2 1865.0 6 1851.0 9 1835.0 11 1819.0 12 1804.0 11 1780.0 8 1755.0 0 1727.0 -12 1702.0 -29 1684.0 -44 1667.0 -61 1647.0 -87 1634.0 -109 1620.0 -140 1611.0 -164 1605.0 -190 1600.0 -216 1597.0 -242V-278L1600.0 -304L1605.0 -330L1611.0 -356L1623.0 -388L1634.0 -411L1652.0 -439L1667.0 -459L1684.0 -476L1702.0 -491L1727.0 -508L1748.0 -518L1769.0 -525L1795.0 -530L1819.0 -532L1842.0 -531L1865.0 -526L1888.0 -518L1910.0 -508L1931.0 -495L1951.0 -479ZM1829.0 -14 1853.0 -18 1866.0 -21 1885.0 -28 1898.0 -35 1916.0 -46 1928.0 -55 1939.0 -65 1951.0 -79 1959.0 -137 1966.0 -214 1970.0 -300 1972.0 -414 1959.0 -432 1944.0 -449 1928.0 -465 1910.0 -478 1891.0 -489 1872.0 -497 1853.0 -502 1829.0 -506V-486L1813.0 -473L1802.0 -461L1781.0 -437L1764.0 -409L1749.0 -379L1741.0 -354L1732.0 -321L1728.0 -295L1726.0 -260L1728.0 -225L1732.0 -199L1741.0 -166L1753.0 -134L1768.0 -104L1786.0 -77L1808.0 -53L1829.0 -34ZM2274.0 198 2264.0 192 2257.0 185 2252.0 177 2249.0 168V160L2251.0 152L2256.0 145L2263.0 140L2273.0 137H2278.0L2283.0 139L2287.0 141L2292.0 149L2294.0 157L2293.0 161L2290.0 165L2287.0 169L2283.0 171L2279.0 165L2282.0 163L2284.0 159V155L2281.0 150L2277.0 149L2271.0 150L2265.0 154L2263.0 159V163L2264.0 167L2269.0 175L2277.0 182L2285.0 186L2292.0 183L2309.0 185H2328.0L2341.0 183L2353.0 180L2372.0 172L2383.0 166L2395.0 157L2406.0 148L2417.0 137L2428.0 124L2446.0 97L2477.0 39L2511.0 -32L2493.0 -23L2446.0 -108L2403.0 -190L2358.0 -282L2311.0 -383L2258.0 -502L2380.0 -542L2416.0 -394L2449.0 -268L2483.0 -151L2518.0 -47L2541.0 -102L2566.0 -165L2590.0 -229L2612.0 -292L2636.0 -362L2657.0 -429L2679.0 -507H2678.0L2683.0 -530L2694.0 -561L2700.0 -539L2704.0 -515L2706.0 -511V-504L2679.0 -415L2650.0 -323L2609.0 -204L2565.0 -92L2542.0 -37L2521.0 7L2500.0 50L2479.0 91L2459.0 125L2448.0 140L2436.0 154L2424.0 167L2411.0 178L2398.0 187L2384.0 195L2368.0 202L2353.0 207L2338.0 210L2322.0 211H2306.0L2291.0 209L2285.0 206L2281.0 201ZM3231.0 -457 3232.0 -511 3324.0 -489 3327.0 -298 3330.0 -229 3334.0 -166 3340.0 -108 3347.0 -66 3356.0 -27 3367.0 8 3342.0 2 3320.0 -4 3300.0 -11 3278.0 -22 3262.0 -14 3243.0 -6 3221.0 0 3189.0 8 3201.0 -34 3176.0 -16 3162.0 -8 3148.0 -2 3124.0 6 3110.0 9 3094.0 11 3078.0 12 3063.0 11 3039.0 8 3014.0 0 2986.0 -12 2961.0 -29 2943.0 -44 2926.0 -61 2906.0 -87 2893.0 -109 2879.0 -140 2870.0 -164 2864.0 -190 2859.0 -216 2856.0 -242V-278L2859.0 -304L2864.0 -330L2870.0 -356L2882.0 -388L2893.0 -411L2911.0 -439L2926.0 -459L2943.0 -476L2961.0 -491L2986.0 -508L3007.0 -518L3028.0 -525L3054.0 -530L3078.0 -532L3101.0 -531L3124.0 -526L3147.0 -518L3169.0 -508L3190.0 -495L3210.0 -479ZM3088.0 -14 3112.0 -18 3125.0 -21 3144.0 -28 3157.0 -35 3175.0 -46 3187.0 -55 3198.0 -65 3210.0 -79 3218.0 -137 3225.0 -214 3229.0 -300 3231.0 -414 3218.0 -432 3203.0 -449 3187.0 -465 3169.0 -478 3150.0 -489 3131.0 -497 3112.0 -502 3088.0 -506V-486L3072.0 -473L3061.0 -461L3040.0 -437L3023.0 -409L3008.0 -379L3000.0 -354L2991.0 -321L2987.0 -295L2985.0 -260L2987.0 -225L2991.0 -199L3000.0 -166L3012.0 -134L3027.0 -104L3045.0 -77L3067.0 -53L3088.0 -34Z"/></g></symbol><symbol id="lg-m" viewBox="8 6 240 244"><path style="fill:var(--lg-ink)" d="M 128.00 235.00 C 123.50 236.00, 118.00 238.00, 114.00 247.00 C 105.00 226.00, 96.00 200.00, 92.00 170.00 C 88.00 146.00, 86.00 124.00, 86.00 106.00 C 76.00 136.00, 52.00 162.00, 18.00 178.00 C 21.00 130.00, 30.00 86.00, 46.00 55.00 C 64.00 42.00, 84.00 33.00, 104.00 27.00 C 112.00 18.00, 119.00 12.00, 128.00 12.00 C 137.00 12.00, 144.00 18.00, 152.00 27.00 C 172.00 33.00, 192.00 42.00, 210.00 55.00 C 226.00 86.00, 235.00 130.00, 238.00 178.00 C 204.00 162.00, 180.00 136.00, 170.00 106.00 C 170.00 124.00, 168.00 146.00, 164.00 170.00 C 160.00 200.00, 151.00 226.00, 142.00 247.00 C 138.00 238.00, 132.50 236.00, 128.00 235.00 Z"/><path style="fill:var(--lg-v)" d="M 117 28 C 120 60, 124 92, 128 120 C 132 92, 136 60, 139 28 C 135 32, 121 32, 117 28 Z"/><path fill="none" style="stroke:var(--lg-gold)" stroke-width="3" stroke-linejoin="round" d="M 117 28 C 120 60, 124 92, 128 120 C 132 92, 136 60, 139 28"/><path fill="none" style="stroke:var(--lg-gold)" stroke-width="3" stroke-linecap="round" d="M 18 178 C 13 192, 18 206, 30 208 C 42 210, 45 195, 35 192 C 28 190, 26 199, 32 202"/><circle cx="128" cy="120" r="16" style="fill:var(--lg-gold)"/><circle cx="122.24" cy="114.24" r="3.04" style="fill:var(--lg-ink)"/><circle cx="133.76" cy="114.24" r="3.04" style="fill:var(--lg-ink)"/><circle cx="122.24" cy="125.76" r="3.04" style="fill:var(--lg-ink)"/><circle cx="133.76" cy="125.76" r="3.04" style="fill:var(--lg-ink)"/></symbol><symbol id="lg-ms" viewBox="8 6 240 244"><path style="fill:var(--lg-ink)" d="M 128.00 235.00 C 123.50 236.00, 118.00 238.00, 114.00 247.00 C 105.00 226.00, 96.00 200.00, 92.00 170.00 C 88.00 146.00, 86.00 124.00, 86.00 106.00 C 76.00 136.00, 52.00 162.00, 18.00 178.00 C 21.00 130.00, 30.00 86.00, 46.00 55.00 C 64.00 42.00, 84.00 33.00, 104.00 27.00 C 112.00 18.00, 119.00 12.00, 128.00 12.00 C 137.00 12.00, 144.00 18.00, 152.00 27.00 C 172.00 33.00, 192.00 42.00, 210.00 55.00 C 226.00 86.00, 235.00 130.00, 238.00 178.00 C 204.00 162.00, 180.00 136.00, 170.00 106.00 C 170.00 124.00, 168.00 146.00, 164.00 170.00 C 160.00 200.00, 151.00 226.00, 142.00 247.00 C 138.00 238.00, 132.50 236.00, 128.00 235.00 Z"/><path style="fill:var(--lg-v)" d="M 113 28 C 117 60, 122 92, 128 112 C 134 92, 139 60, 143 28 C 138 33, 118 33, 113 28 Z"/><circle cx="128" cy="120" r="17" style="fill:var(--lg-gold)"/></symbol></defs></svg>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="furdisp">
     <feTurbulence type="turbulence" baseFrequency="0.09 0.18" numOctaves="3" seed="4" result="t"/>
@@ -1412,7 +1427,7 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
     <path d="M0,70 C60,110 120,30 180,70 S300,110 360,70 S480,30 540,70 S660,110 720,70 S840,30 900,70 S1020,110 1080,70 S1180,45 1200,70" transform="translate(1200,0)" fill="none" stroke="rgba(166,75,38,.22)" stroke-width="1"/>
   </svg>
 </div>
-<div class="bigmark" aria-hidden="true"><div class="pane"></div><img src="assets/brand/mark_emerald_transparent.png" alt=""></div>
+<div class="bigmark" aria-hidden="true"><div class="pane"></div><div class="glow"></div><svg class="lg lg-m ink" viewBox="8 6 240 244"><use href="#lg-m"/></svg></div>
 <canvas id="dust" aria-hidden="true"></canvas>
 
 <div id="tube-glare" aria-hidden="true"></div>
@@ -1438,7 +1453,7 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
 <div id="greenroom" role="dialog" aria-modal="true" aria-label="You are on the waitlist">
   <div class="card">
     <img class="gr-taya" src="assets/taya/full-love.webp" alt="Taya, the Aitaya stylist, with heart eyes">
-    <img class="gr-wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
+    <svg class="lg lg-h gr-wordmark" viewBox="0 0 753 244" role="img" aria-label="Aitaya"><use href="#lg-h"/></svg>
     <div class="onair-badge"><i></i>You&rsquo;re on the list</div>
     <h2>You&rsquo;re <em>in.</em></h2>
     <p class="gr-taya-line">I kept your seat.</p>
@@ -1469,7 +1484,7 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
 <header class="site">
   <div class="container">
     <div class="bar felted">
-      <div class="brand-mini"><img src="assets/brand/logo_primary_transparent.png" alt="Aitaya"></div>
+      <a class="brand-mini" href="#" aria-label="Aitaya, back to the top"><svg class="lg lg-h" viewBox="0 0 753 244" aria-hidden="true"><use href="#lg-h"/></svg><svg class="lg lg-ms" viewBox="8 6 240 244" aria-hidden="true"><use href="#lg-ms"/></svg></a>
       <div class="nowline caps" id="nowline" aria-live="polite">Home</div>
       <div class="hdr-right">
         <button class="hum" id="hum" aria-pressed="false" title="TV hum" aria-label="TV hum, off">
@@ -1493,7 +1508,7 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
       <div class="mat">
         <div class="screen" id="hero-screen">
           <img class="feedimg" id="channel-img" src="assets/img/looks/look-02-feed.jpg" alt="Aitaya app preview">
-          <img class="dvd" id="dvd" src="assets/brand/mark_ivory_transparent.png" alt="">
+          <svg class="dvd lg lg-m on-dark" id="dvd" viewBox="8 6 240 244" aria-hidden="true"><use href="#lg-m"/></svg>
           <div class="chip" id="channel-chip">CH 01</div>
           <div class="taya-cap" id="taya-cap" aria-live="polite"></div>
           <div class="grime"></div>
@@ -1520,7 +1535,7 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
     </div>
     <div class="hero-zone">
       <div class="brandline">
-        <img class="wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
+        <svg class="lg lg-h wordmark" viewBox="0 0 753 244" role="img" aria-label="Aitaya"><use href="#lg-h"/></svg>
         <div class="itire" aria-label="Pronounced I tire"><small>Say it like</small><b>&ldquo;I tire!&rdquo;</b></div>
       </div>
       <h1 class="thesis" id="hero-thesis">Your closet, stylist and tailor. <em>All in one place.</em></h1>
@@ -1610,7 +1625,7 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
         <div class="rw-cap"><b id="rw-title">Ceremony Blue</b><span id="rw-sub">@tunde.styles &middot; aso-oke</span></div>
       </div>
       <div class="rw-copy">
-        <img class="wordmark rw-wordmark" src="assets/brand/logo_primary_transparent.png" alt="Aitaya">
+        <svg class="lg lg-h wordmark rw-wordmark" viewBox="0 0 753 244" role="img" aria-label="Aitaya"><use href="#lg-h"/></svg>
         <p id="rw-copy-p">Scroll outfit videos, save the ones you love, and recreate them from what&rsquo;s already in your closet.</p>
         <div class="rw-tip">Tap the screen to see it full size</div>
       </div>
@@ -1719,7 +1734,7 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
   <div class="signoff" aria-hidden="true">Sign-off &middot; see you at launch</div>
   <div class="inner">
     <div>
-      <img src="assets/brand/logo_primary_ivory_transparent.png" alt="Aitaya">
+      <svg class="lg lg-h" viewBox="0 0 753 244" role="img" aria-label="Aitaya"><use href="#lg-h"/></svg>
       <div class="fi">&ldquo;I tire!&rdquo;</div>
     </div>
     <small>&copy; 2026 Aitaya &middot; aitaya.ng &middot; Made for the culture</small>
@@ -2018,14 +2033,19 @@ function rwShow(i){
   rwImg.src = lookSrc(f);
   rwTitle.textContent = t; rwSub.textContent = s; rwCount.textContent = c;
   rwLiked = false; rwLike.classList.remove("liked"); rwLike.innerHTML = "&#9825;";
-  if (!reduceMotion){
-    rwProg.style.transition = "none"; rwProg.style.width = "0";
-    void rwProg.offsetWidth;
-    rwProg.style.transition = "width 4.5s linear"; rwProg.style.width = "100%";
-  }
+  if (rwAnim) rwAnim.cancel();
   clearTimeout(rwTimer);
-  if (!reduceMotion) rwTimer = setTimeout(() => rwShow(rwIdx + 1), 4600);
+  if (reduceMotion || !rwOnScreen) return;          /* the reel only runs while you can see it */
+  rwAnim = rwProg.animate([{ transform:"scaleX(0)" }, { transform:"scaleX(1)" }], { duration:4500, easing:"linear", fill:"forwards" });
+  rwTimer = setTimeout(() => rwShow(rwIdx + 1), 4600);
 }
+let rwAnim = null, rwOnScreen = false;
+new IntersectionObserver(es => {
+  const on = es[es.length - 1].isIntersecting;
+  if (on === rwOnScreen) return;
+  rwOnScreen = on;
+  if (on) rwShow(rwIdx); else { clearTimeout(rwTimer); if (rwAnim) rwAnim.pause(); }
+}, { rootMargin:"120px 0px" }).observe(document.getElementById("rw-phone"));
 document.getElementById("rw-phone").addEventListener("click", (e) => {
   if (e.target.closest(".rw-btn")) return;
   openViewer(rwLooks.map(([f,t,sub]) => [f,t,sub]), rwIdx, "runway"); blip();
@@ -2138,8 +2158,7 @@ function changeChannel(dir = 1){
   };
   if (reduceMotion){ apply(); return; }
   channelStatic.classList.remove("on");
-  void channelStatic.offsetWidth;
-  channelStatic.classList.add("on");
+  requestAnimationFrame(() => channelStatic.classList.add("on"));   /* restart without forcing a layout */
   squelch();
   setTimeout(apply, 120);
 }
@@ -2164,7 +2183,7 @@ const Taya = window.Taya = (function(){
   const dockFace = dock.querySelector(".taya-face");
   let mood = "neutral", capT, moodT, heroVisible = true;
   function set(m){ mood = m; tayaFace(bug, m); tayaFace(dockFace, m); }
-  function hop(){ bug.classList.remove("flare"); void bug.offsetWidth; bug.classList.add("flare"); }
+  function hop(){ bug.classList.remove("flare"); requestAnimationFrame(() => bug.classList.add("flare")); }
   function fill(box, text, action){
     box.innerHTML = "<b>Taya</b>"; const t = document.createElement("span"); t.textContent = text; box.appendChild(t);
     if (action){ const a = document.createElement("button"); a.type = "button"; a.className = "cap-act"; a.textContent = action.label;
@@ -2590,11 +2609,18 @@ document.querySelectorAll(".ticker .nb").forEach(b => {
 
 
 /* a niche restyles the room where you are: the page shakes a little instead of jumping to the top */
+const shakeMain = document.querySelector("main"), shakeTape = document.querySelector(".ticker");
 function roomShake(){
   if (reduceMotion) return;
-  const m = document.querySelector("main"), t = document.querySelector(".ticker");
-  [m, t].forEach(el => { if (!el) return; el.classList.remove(el === m ? "shake" : "bounce"); void el.offsetWidth; el.classList.add(el === m ? "shake" : "bounce"); });
-  setTimeout(() => { m && m.classList.remove("shake"); t && t.classList.remove("bounce"); }, 600);
+  /* transform-only WAAPI animations: the compositor moves the room, nothing is laid out again */
+  if (shakeMain) shakeMain.animate([
+    { transform:"none" }, { transform:"translate(-7px,2px) rotate(-.25deg)", offset:.14 },
+    { transform:"translate(6px,-3px) rotate(.2deg)", offset:.3 }, { transform:"translate(-4px,1px)", offset:.46 },
+    { transform:"translate(3px,-1px)", offset:.62 }, { transform:"translate(-1px,0)", offset:.8 }, { transform:"none" }
+  ], { duration:500, easing:"cubic-bezier(.36,.07,.19,.97)" });
+  if (shakeTape) shakeTape.animate([
+    { transform:"none" }, { transform:"translateY(-6px)", offset:.3 }, { transform:"translateY(2px)", offset:.6 }, { transform:"none" }
+  ], { duration:500, easing:"cubic-bezier(.2,.9,.3,1.3)" });
 }
 
 /* Taya and the niche tape: she reacts to every niche, and points the tape out when people haven't found it */
@@ -3346,9 +3372,9 @@ function startDoze(){
   flashNow("The set dozes\u2026 it tires");
   if (reduceMotion) return;
   let x = 20, y = 20, vx = .55, vy = .42;
+  const W = dvdScreen.clientWidth, H = dvdScreen.clientHeight;      /* measured once, not every frame */
+  const w = W * .2, hh = w * 244 / 240;
   (function hop(){
-    const W = dvdScreen.clientWidth, H = dvdScreen.clientHeight;
-    const w = dvd.clientWidth || W*.2, hh = dvd.clientHeight || w*.9;
     x += vx; y += vy;
     if (x <= 0 || x + w >= W) vx *= -1;
     if (y <= 0 || y + hh >= H) vy *= -1;
@@ -3410,7 +3436,7 @@ function glareFade(){
   const k = Math.max(0, 1 - scrollY / (innerHeight * .9));
   glare.style.opacity = (0.25 + 0.75 * k).toFixed(3);
 }
-let mgLastT = performance.now(), mgPeak = 0, mgStopped = performance.now();
+let mgLastT = performance.now(), mgPeak = 0, mgStopped = performance.now(), mgLastV = "";
 const MG_HOLD = .5, MG_OUT = 2.3;      /* holds full brightness briefly, then eases down, fully dark at 2.3s */
 function markPulse(now){
   const dt = Math.min(.1, Math.max(.001, (now - mgLastT) / 1000));
@@ -3430,7 +3456,8 @@ function markPulse(now){
       mg = mgPeak * (1 - k * k);        /* eases out rather than dropping off a cliff */
     } else { mg = 0; mgPeak = 0; }
   }
-  bigmark.style.setProperty("--mg", mg.toFixed(3));
+  const v = mg.toFixed(3);
+  if (v !== mgLastV){ mgLastV = v; bigmark.style.setProperty("--mg", v); }   /* only touch the DOM on a change */
   window.__mg = mg;                      /* the stitched marks on the cloth glow with it */
 }
 let screenH = 0;
@@ -3620,7 +3647,7 @@ if (renderer && !reduceMotion){
 
   function drawStitches(x, bin, W, H, style, col){
     if (OUTLINE[style]){
-      const polys = traceContours(bin, W, H);
+      const polys = contoursOnce(bin, W, H);
       const sp = style === "pick" ? 15 : style === "knots" ? 11 : style === "couch" ? 9 : style === "chain" ? 13 : 9;
       const pts = walk(polys, sp);
       if (style === "couch"){                       /* laid thread, tacked down */
@@ -3685,7 +3712,7 @@ if (renderer && !reduceMotion){
     }
     /* fill grammars: worked column by column through the letterform */
     const step = style === "pad" ? 11 : style === "seed" ? 6 : 5;
-    const cols = columns(bin, W, H, step);
+    const cols = columnsOnce(bin, W, H, step);
     cols.forEach((c, i) => {
       const mid = (c.y0 + c.y1) / 2, len = c.y1 - c.y0;
       switch (style){
@@ -3730,67 +3757,67 @@ if (renderer && !reduceMotion){
     { st:"stem",        th:"#DDC47F", gl:"#A8E6C8" }   /* Contemporary  */
   ];
 
-  const markImg = new Image();
-  let markReady = false;
-  markImg.onload = () => { markReady = true; if (curMood) applyMood(curMood, curIdx); };
-  markImg.src = "assets/brand/mark_ivory_transparent.png";
+  /* ================= the lockup, stitched from the logo kit's own outlines =================
+     The wordmark is the kit's outlined Aitaya Ari, never retyped from a font, so the cloth no longer
+     waits for the font or restitches when it lands. The letters are rasterised once, their contours
+     traced once, and every niche reuses them: a niche change only re-strokes the thread. */
+  const MARK_D = "M 128.00 235.00 C 123.50 236.00, 118.00 238.00, 114.00 247.00 C 105.00 226.00, 96.00 200.00, 92.00 170.00 C 88.00 146.00, 86.00 124.00, 86.00 106.00 C 76.00 136.00, 52.00 162.00, 18.00 178.00 C 21.00 130.00, 30.00 86.00, 46.00 55.00 C 64.00 42.00, 84.00 33.00, 104.00 27.00 C 112.00 18.00, 119.00 12.00, 128.00 12.00 C 137.00 12.00, 144.00 18.00, 152.00 27.00 C 172.00 33.00, 192.00 42.00, 210.00 55.00 C 226.00 86.00, 235.00 130.00, 238.00 178.00 C 204.00 162.00, 180.00 136.00, 170.00 106.00 C 170.00 124.00, 168.00 146.00, 164.00 170.00 C 160.00 200.00, 151.00 226.00, 142.00 247.00 C 138.00 238.00, 132.50 236.00, 128.00 235.00 Z M 117 28 C 120 60, 124 92, 128 100.5 C 132 92, 136 60, 139 28 C 135 32, 121 32, 117 28 Z M 108.50 120 a 19.5 19.5 0 1 0 39.0 0 a 19.5 19.5 0 1 0 -39.0 0 Z M 112.00 120 a 16 16 0 1 0 32 0 a 16 16 0 1 0 -32 0 Z M 119.20 114.24 a 3.04 3.04 0 1 0 6.08 0 a 3.04 3.04 0 1 0 -6.08 0 Z M 130.72 114.24 a 3.04 3.04 0 1 0 6.08 0 a 3.04 3.04 0 1 0 -6.08 0 Z M 119.20 125.76 a 3.04 3.04 0 1 0 6.08 0 a 3.04 3.04 0 1 0 -6.08 0 Z M 130.72 125.76 a 3.04 3.04 0 1 0 6.08 0 a 3.04 3.04 0 1 0 -6.08 0 Z";
+  const WORD_D = "M108 -262 174 -275 199 -339 220 -397 240 -454 257 -510 273 -565 286 -618 297 -669 305 -714 320 -712 317 -724H326L318 -726L322 -738L327 -748L333 -757L340 -765L347 -772L350 -785L355 -794L361 -802L369 -810L378 -816L388 -821L391 -815L382 -810L371 -800L363 -789L360 -780L371 -784H379L387 -782L394 -778L400 -771L404 -762L405 -757L403 -747L401 -743L394 -737L385 -734L376 -733L367 -736L362 -739L353 -746L349 -753L341 -740L337 -732L334 -722H331L349 -650L374 -556L406 -445L433 -362L467 -265L495 -194L531 -114L560 -56L582 -16L596 8L568 2L542 -5L513 -16L494 -26L475 -16L454 -8L429 0L391 8L405 -16L415 -42L423 -70L426 -84L430 -114L432 -145L430 -194L427 -229L421 -278L368 -274L320 -269L224 -257L183 -139L137 -22L116 -31L119 -25L106 -18L91 -14L82 -13H67L46 -16L68 -27L90 -43L75 -50L120 -147L162 -246L117 -237L110 -238L107 -239L102 -244L101 -251L102 -254L105 -260ZM234 -284 325 -296 417 -304 405 -362 391 -423 328 -680 316 -602 299 -519 286 -466 271 -408 253 -348ZM359 -762 363 -754 365 -751 372 -748 377 -747H383L387 -749L390 -751L391 -754L390 -758L388 -763L385 -766L380 -769H373L365 -766ZM888.0 -509 890.0 -311 893.0 -239 897.0 -172 904.0 -112 911.0 -68 920.0 -28 931.0 8 906.0 2 876.0 -6 858.0 -14 841.0 -22 825.0 -14 806.0 -6 777.0 2 752.0 8 763.0 -29 772.0 -71 779.0 -117 785.0 -181 789.0 -237 792.0 -312 794.0 -409 795.0 -531ZM885.0 -657 884.0 -649 881.0 -641 876.0 -633 870.0 -627 863.0 -622 856.0 -618 847.0 -616H839.0L830.0 -617L822.0 -621L815.0 -625L808.0 -631L803.0 -638L800.0 -646L798.0 -654L797.0 -663L799.0 -671L802.0 -679L806.0 -687L812.0 -693L819.0 -698L827.0 -702L836.0 -704H844.0L853.0 -703L861.0 -699L868.0 -695L874.0 -689L880.0 -682L883.0 -674L885.0 -666ZM1259.0 -629V-522H1304.0L1351.0 -520L1390.0 -517L1436.0 -513L1442.0 -510L1445.0 -508L1447.0 -502V-499L1445.0 -492L1443.0 -490L1436.0 -487H1433.0L1388.0 -492L1350.0 -494L1303.0 -496H1260.0L1263.0 -313L1267.0 -245L1271.0 -183L1277.0 -125L1284.0 -73L1293.0 -25L1302.0 8L1277.0 2L1254.0 -4L1229.0 -14L1212.0 -22L1196.0 -14L1177.0 -6L1156.0 0L1123.0 8L1132.0 -25L1141.0 -75L1147.0 -115L1153.0 -175L1157.0 -239L1161.0 -308L1164.0 -402L1165.0 -492L1111.0 -488L1098.0 -469L1091.0 -461L1081.0 -452L1090.0 -502L1091.0 -506L1095.0 -511L1101.0 -513L1165.0 -518L1166.0 -651ZM1972.0 -457 1973.0 -511 2065.0 -489 2068.0 -298 2071.0 -229 2075.0 -166 2081.0 -108 2088.0 -66 2097.0 -27 2108.0 8 2083.0 2 2061.0 -4 2041.0 -11 2019.0 -22 2003.0 -14 1984.0 -6 1962.0 0 1930.0 8 1942.0 -34 1917.0 -16 1903.0 -8 1889.0 -2 1865.0 6 1851.0 9 1835.0 11 1819.0 12 1804.0 11 1780.0 8 1755.0 0 1727.0 -12 1702.0 -29 1684.0 -44 1667.0 -61 1647.0 -87 1634.0 -109 1620.0 -140 1611.0 -164 1605.0 -190 1600.0 -216 1597.0 -242V-278L1600.0 -304L1605.0 -330L1611.0 -356L1623.0 -388L1634.0 -411L1652.0 -439L1667.0 -459L1684.0 -476L1702.0 -491L1727.0 -508L1748.0 -518L1769.0 -525L1795.0 -530L1819.0 -532L1842.0 -531L1865.0 -526L1888.0 -518L1910.0 -508L1931.0 -495L1951.0 -479ZM1829.0 -14 1853.0 -18 1866.0 -21 1885.0 -28 1898.0 -35 1916.0 -46 1928.0 -55 1939.0 -65 1951.0 -79 1959.0 -137 1966.0 -214 1970.0 -300 1972.0 -414 1959.0 -432 1944.0 -449 1928.0 -465 1910.0 -478 1891.0 -489 1872.0 -497 1853.0 -502 1829.0 -506V-486L1813.0 -473L1802.0 -461L1781.0 -437L1764.0 -409L1749.0 -379L1741.0 -354L1732.0 -321L1728.0 -295L1726.0 -260L1728.0 -225L1732.0 -199L1741.0 -166L1753.0 -134L1768.0 -104L1786.0 -77L1808.0 -53L1829.0 -34ZM2274.0 198 2264.0 192 2257.0 185 2252.0 177 2249.0 168V160L2251.0 152L2256.0 145L2263.0 140L2273.0 137H2278.0L2283.0 139L2287.0 141L2292.0 149L2294.0 157L2293.0 161L2290.0 165L2287.0 169L2283.0 171L2279.0 165L2282.0 163L2284.0 159V155L2281.0 150L2277.0 149L2271.0 150L2265.0 154L2263.0 159V163L2264.0 167L2269.0 175L2277.0 182L2285.0 186L2292.0 183L2309.0 185H2328.0L2341.0 183L2353.0 180L2372.0 172L2383.0 166L2395.0 157L2406.0 148L2417.0 137L2428.0 124L2446.0 97L2477.0 39L2511.0 -32L2493.0 -23L2446.0 -108L2403.0 -190L2358.0 -282L2311.0 -383L2258.0 -502L2380.0 -542L2416.0 -394L2449.0 -268L2483.0 -151L2518.0 -47L2541.0 -102L2566.0 -165L2590.0 -229L2612.0 -292L2636.0 -362L2657.0 -429L2679.0 -507H2678.0L2683.0 -530L2694.0 -561L2700.0 -539L2704.0 -515L2706.0 -511V-504L2679.0 -415L2650.0 -323L2609.0 -204L2565.0 -92L2542.0 -37L2521.0 7L2500.0 50L2479.0 91L2459.0 125L2448.0 140L2436.0 154L2424.0 167L2411.0 178L2398.0 187L2384.0 195L2368.0 202L2353.0 207L2338.0 210L2322.0 211H2306.0L2291.0 209L2285.0 206L2281.0 201ZM3231.0 -457 3232.0 -511 3324.0 -489 3327.0 -298 3330.0 -229 3334.0 -166 3340.0 -108 3347.0 -66 3356.0 -27 3367.0 8 3342.0 2 3320.0 -4 3300.0 -11 3278.0 -22 3262.0 -14 3243.0 -6 3221.0 0 3189.0 8 3201.0 -34 3176.0 -16 3162.0 -8 3148.0 -2 3124.0 6 3110.0 9 3094.0 11 3078.0 12 3063.0 11 3039.0 8 3014.0 0 2986.0 -12 2961.0 -29 2943.0 -44 2926.0 -61 2906.0 -87 2893.0 -109 2879.0 -140 2870.0 -164 2864.0 -190 2859.0 -216 2856.0 -242V-278L2859.0 -304L2864.0 -330L2870.0 -356L2882.0 -388L2893.0 -411L2911.0 -439L2926.0 -459L2943.0 -476L2961.0 -491L2986.0 -508L3007.0 -518L3028.0 -525L3054.0 -530L3078.0 -532L3101.0 -531L3124.0 -526L3147.0 -518L3169.0 -508L3190.0 -495L3210.0 -479ZM3088.0 -14 3112.0 -18 3125.0 -21 3144.0 -28 3157.0 -35 3175.0 -46 3187.0 -55 3198.0 -65 3210.0 -79 3218.0 -137 3225.0 -214 3229.0 -300 3231.0 -414 3218.0 -432 3203.0 -449 3187.0 -465 3169.0 -478 3150.0 -489 3131.0 -497 3112.0 -502 3088.0 -506V-486L3072.0 -473L3061.0 -461L3040.0 -437L3023.0 -409L3008.0 -379L3000.0 -354L2991.0 -321L2987.0 -295L2985.0 -260L2987.0 -225L2991.0 -199L3000.0 -166L3012.0 -134L3027.0 -104L3045.0 -77L3067.0 -53L3088.0 -34Z";
+  const markPath = new Path2D(MARK_D), wordPath = new Path2D(WORD_D);
 
-  /* drawn at 2x then downsampled, so the stitches keep their edges */
-  const SS = 2, EMB_W = 340 * SS, EMB_H = 78 * SS, ICON = 46 * SS;
+  /* drawn at 2x then downsampled, so the stitches keep their edges; laid out as aitaya-horizontal */
+  const SS = 2, PAD = 3 * SS, EMB_H = 78 * SS;
+  const LK = (EMB_H - PAD * 2) / 244, EMB_W = Math.round(753 * LK + PAD * 2);
+  const wordAt = x => { x.translate(PAD, PAD); x.scale(LK, LK); x.translate(281.48, 52.8); x.scale(.14186, .14186); x.translate(-46, 821); };
+  const markAt = x => { x.translate(PAD, PAD); x.scale(LK, LK); x.translate(-8, -6); };
 
-  function embroidery(style, thread, mode){
-    const glowing = mode === "glow";
-    const col = glowing
-      ? { mid:thread, lt:shade(thread, .55), dk:shade(thread, .1) }
-      : { mid:thread, lt:shade(thread, .5), dk:shade(thread, -.6) };
-    const textX = ICON + 14 * SS, dy = 56 * SS;
-
-    /* rasterise the letters, then read them back as a bitmap */
+  let wordBin = null, wordShadow = null, polyCache = null;
+  const colCache = {};
+  function letters(){
+    if (wordBin) return;
     const m = document.createElement("canvas"); m.width = EMB_W; m.height = EMB_H;
-    const mx = m.getContext("2d");
-    mx.font = (46 * SS) + 'px "Aitaya Ari", Didot, serif';
-    mx.textBaseline = "alphabetic";
-    mx.fillStyle = "#fff";
-    mx.fillText("Aitaya", textX, dy);
+    const mx = m.getContext("2d", { willReadFrequently:true });
+    mx.fillStyle = "#fff"; mx.save(); wordAt(mx); mx.fill(wordPath); mx.restore();
     const src = mx.getImageData(0, 0, EMB_W, EMB_H).data;
-    const bin = new Uint8Array(EMB_W * EMB_H);
-    for (let i = 0, k = 3; i < bin.length; i++, k += 4) bin[i] = src[k] > 128 ? 1 : 0;
+    wordBin = new Uint8Array(EMB_W * EMB_H);
+    for (let i = 0, k = 3; i < wordBin.length; i++, k += 4) wordBin[i] = src[k] > 128 ? 1 : 0;
+    /* the thread's shadow on the cloth: shrunk and grown back, which blurs it for almost nothing */
+    const s = document.createElement("canvas"); s.width = EMB_W >> 2; s.height = EMB_H >> 2;
+    const sx = s.getContext("2d");
+    sx.drawImage(m, 0, 0, s.width, s.height);
+    sx.globalCompositeOperation = "source-in"; sx.fillStyle = "rgb(20,12,6)"; sx.fillRect(0, 0, s.width, s.height);
+    wordShadow = s;
+  }
+  const contoursOnce = (bin, W, H) => polyCache || (polyCache = traceContours(bin, W, H));
+  const columnsOnce = (bin, W, H, step) => colCache[step] || (colCache[step] = columns(bin, W, H, step));
+
+  /* one pass of thread per niche; the glow is the same stitches lit, so it is tinted, not re-stitched */
+  function embroidery(style, thread, glow){
+    letters();
+    const col = { mid:thread, lt:shade(thread, .5), dk:shade(thread, -.6) };
+    const st = document.createElement("canvas"); st.width = EMB_W; st.height = EMB_H;
+    const sx = st.getContext("2d");
+    drawStitches(sx, wordBin, EMB_W, EMB_H, style, col);
+    sx.save(); markAt(sx); sx.fillStyle = col.mid; sx.fill(markPath, "evenodd"); sx.restore();
 
     const f = document.createElement("canvas"); f.width = EMB_W; f.height = EMB_H;
     const fx = f.getContext("2d");
-    if (!glowing){
-      fx.globalAlpha = .42; fx.filter = "blur(" + (3 * SS) + "px)";
-      fx.drawImage(m, 2.5 * SS, 3 * SS);          /* the thread's shadow on the cloth */
-      fx.filter = "none"; fx.globalAlpha = 1;
-    }
-    drawStitches(fx, bin, EMB_W, EMB_H, style, col);
+    fx.globalAlpha = .42; fx.drawImage(wordShadow, 2.5 * SS, 3 * SS, EMB_W, EMB_H);
+    fx.save(); fx.translate(2 * SS, 2.4 * SS); markAt(fx); fx.globalAlpha = .4; fx.fillStyle = "rgb(20,12,6)"; fx.fill(markPath, "evenodd"); fx.restore();
+    fx.globalAlpha = .95; fx.drawImage(st, 0, 0); fx.globalAlpha = 1;
 
-    /* the icon mark beside the wordmark, same thread, lit by the same scroll */
-    if (markReady){
-      const ix = document.createElement("canvas"); ix.width = ICON; ix.height = ICON;
-      const ic = ix.getContext("2d");
-      ic.drawImage(markImg, 0, 0, ICON, ICON);
-      ic.globalCompositeOperation = "source-in";
-      ic.fillStyle = glowing ? shade(thread, .3) : col.mid;
-      ic.fillRect(0, 0, ICON, ICON);
-      fx.globalAlpha = glowing ? 1 : .95;
-      fx.drawImage(ix, 0, dy - ICON + 6 * SS);
-      fx.globalAlpha = 1;
-    }
-    return f;
+    const g = document.createElement("canvas"); g.width = EMB_W; g.height = EMB_H;
+    const gx = g.getContext("2d");
+    gx.drawImage(st, 0, 0);
+    gx.globalCompositeOperation = "source-in"; gx.fillStyle = shade(glow, .3); gx.fillRect(0, 0, EMB_W, EMB_H);
+    return { thread:f, glow:g };
   }
 
-  /* ---- woven cloth texture: bands, weft threads, selvage edges ---- */
-  function fabricTexture(palette, offset, emb){
-    /* The strand is 38 x 0.85 world units. A 512px tile across that width would
-       stretch anything drawn on it about 36x sideways, which is what turned the
-       wordmark into an illegible smear. Embroidered strands get a much wider
-       tile and the patch is drawn at a corrected width, so the letters read. */
-    const TW = emb ? 2048 : 512;
+  /* ---- woven cloth: bands, weft threads, selvage edges ---- */
+  function clothCanvas(palette, TW, bandScale){
     const c = document.createElement("canvas"); c.width = TW; c.height = 64;
-    const x = c.getContext("2d");
-    const bandScale = emb ? 2 : 1;
-    let px = 0, i = offset;
+    const x = c.getContext("2d", { willReadFrequently:true });
+    let px = 0, i = 0;
     while (px < TW){
       const w = (22 + ((i*29) % 46)) * bandScale;
       x.fillStyle = palette[i % palette.length];
@@ -3817,36 +3844,7 @@ if (renderer && !reduceMotion){
       d[k]+=n; d[k+1]+=n; d[k+2]+=n;
     }
     x.putImageData(id,0,0);
-
-    /* the maker's mark, stitched in */
-    let emissive = null;
-    if (emb){
-      const patch = embroidery(emb.st, emb.th, "thread");
-      /* correct for the strand's stretch so the mark keeps its true shape */
-      const pxPerUnitX = TW / 38, pxPerUnitY = 64 / .85;
-      const ht = 58;
-      const wt = (patch.width / patch.height) * ht * (pxPerUnitX / pxPerUnitY);
-      const py = (64 - ht) / 2;
-      const px0 = emb.at === "edge" ? 30
-                : emb.at === "right" ? (TW - wt - 30)
-                : (TW - wt) / 2;
-      x.globalAlpha = .95;
-      x.drawImage(patch, px0, py, wt, ht);
-      x.globalAlpha = 1;
-      const e = document.createElement("canvas"); e.width = TW; e.height = 64;
-      const ex = e.getContext("2d");
-      ex.fillStyle = "#000"; ex.fillRect(0, 0, TW, 64);
-      ex.drawImage(embroidery(emb.st, emb.gl, "glow"), px0, py, wt, ht);
-      emissive = new THREE.CanvasTexture(e);
-      emissive.colorSpace = THREE.SRGBColorSpace;
-      emissive.wrapS = THREE.RepeatWrapping;
-      emissive.repeat.x = 1;
-    }
-    const t = new THREE.CanvasTexture(c);
-    t.colorSpace = THREE.SRGBColorSpace;
-    t.wrapS = THREE.RepeatWrapping;
-    t.repeat.x = emb ? 1 : 2;
-    return { map:t, emissive };
+    return c;
   }
 
   /* ---- fur clouds: tufts growing at different corners of the room ---- */
@@ -3908,7 +3906,11 @@ if (renderer && !reduceMotion){
     });
   }
 
-  /* ---- the mood system: each niche re-dresses fur and fabric ---- */
+  /* ---- the mood system: each niche re-dresses fur and fabric ----
+     A tap changes the fur, the strand layout and the easing targets at once. The cloth is built in
+     three short steps between frames (plain cloth, then thread, then the stitched strands), cached
+     per niche and shared between strands through texture offsets, so a tap never blocks the page and
+     a niche you have seen before swaps in instantly. On desktop the rest are woven while the page is idle. */
   const MOODS = [
     /* Adire        */ { fur:"#3E4C7A", size:.45, speed:.5,  spread:1,   pal:["#2E3A63","#3E4C7A","#EFE8D6","#4E5F94"], amp:.9, fsp:.35, spreadY:.85, op:.36 },
     /* Agbada       */ { fur:"#1E5F4A", size:.7,  speed:.28, spread:1.2, pal:["#1E5F4A","#DDC47F","#153E31","#C9AC5F"], amp:.6, fsp:.22, spreadY:1,   op:.4  },
@@ -3926,33 +3928,116 @@ if (renderer && !reduceMotion){
   ];
   const cur = { size:.5, speed:.5, spread:1, amp:.8, fsp:.35, op:.38 };
   const tgt = Object.assign({}, cur);
-  let curMood = null, curIdx = 12;
-  function applyMood(m, idx){
-    curMood = m; if (typeof idx === "number") curIdx = idx;
-    Object.assign(tgt, { size:m.size, speed:m.speed, spread:m.spread, amp:m.amp, fsp:m.fsp, op:m.op });
-    layoutStrands(m);
-    const tex = tuftTexture(m.fur);
-    clouds.forEach(cl => { cl.material.map = tex; cl.material.needsUpdate = true; });
-    const sig = STITCH[curIdx % STITCH.length];
-    /* the top strand carries one at the far right; three others sit mid and edge */
-    const PLACE = isMobile ? { 0:"right", 2:"mid" } : { 0:"right", 1:"edge", 3:"mid", 4:"edge" };
+  let curIdx = 12;
+
+  const tufts = new Map();
+  const tuft = hex => { if (!tufts.has(hex)) tufts.set(hex, tuftTexture(hex)); return tufts.get(hex); };
+
+  /* where the stitched lockup sits along each embroidered strand (0 = left end, 1 = right end) */
+  const PLACE = isMobile ? { 0:.86, 2:.5 } : { 0:.86, 1:.13, 3:.5, 4:.07 };
+  const TW = 2048, HT = 58;
+  function tex(c){ const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.RepeatWrapping; return t; }
+  function cloneAt(t, off, rep){ const c = t.clone(); c.offset.x = off; c.repeat.x = rep; return c; }
+
+  function* weave(idx){
+    const m = MOODS[idx], sig = STITCH[idx];
+    const e = { idx, maps:[], emis:[], all:[], whole:false };
+    const plain = tex(clothCanvas(m.pal, 512, 1)); e.all.push(plain);
     strands.forEach((st, s) => {
-      const at = PLACE[s];
-      const emb = at ? { st:sig.st, th:sig.th, gl:sig.gl, at } : null;
-      const built = fabricTexture(m.pal, s * 2, emb);
-      st.mat.map = built.map;
-      st.mat.emissiveMap = built.emissive;
-      st.mat.emissive = new THREE.Color(built.emissive ? 0xffffff : 0x000000);
-      st.mat.emissiveIntensity = 0;
-      st.mat.needsUpdate = true;
+      if (PLACE[s] !== undefined) return;
+      const t = cloneAt(plain, (s * .173) % 1, 2); e.maps[s] = t; e.all.push(t);
+    });
+    yield e;                                   /* plain strands can change now */
+    const emb = embroidery(sig.st, sig.th, sig.gl);
+    yield;
+    const cloth = clothCanvas(m.pal, TW, 2);
+    const wt = (emb.thread.width / emb.thread.height) * HT * ((TW / 38) / (64 / .85));
+    const px0 = (TW - wt) / 2, py = (64 - HT) / 2;
+    cloth.getContext("2d").drawImage(emb.thread, px0, py, wt, HT);
+    const g = document.createElement("canvas"); g.width = TW; g.height = 64;
+    const gx = g.getContext("2d");
+    gx.fillStyle = "#000"; gx.fillRect(0, 0, TW, 64); gx.drawImage(emb.glow, px0, py, wt, HT);
+    const clothT = tex(cloth), glowT = tex(g); e.all.push(clothT, glowT);
+    strands.forEach((st, s) => {
+      const p = PLACE[s]; if (p === undefined) return;
+      const a = cloneAt(clothT, .5 - p, 1), b = cloneAt(glowT, .5 - p, 1);
+      e.maps[s] = a; e.emis[s] = b; e.all.push(a, b);
+    });
+    e.whole = true;
+    return e;
+  }
+
+  const woven = new Map(), KEEP = isMobile ? 4 : MOODS.length;
+  let job = null;
+  function wear(e){
+    strands.forEach((st, s) => {
+      if (e.maps[s]) st.mat.map = e.maps[s];
+      if (e.emis[s]) st.mat.emissiveMap = e.emis[s];
     });
   }
-  window.setNicheMood = (i) => applyMood(MOODS[i % MOODS.length], i % MOODS.length);
-  applyMood(MOODS[12], 12); /* the house cloth, until a niche is tapped */
-  /* the script face may land after first paint; restitch once it has */
-  if (document.fonts && document.fonts.load){
-    document.fonts.load('30px "Aitaya Ari"').then(() => applyMood(curMood, curIdx)).catch(() => {});
+  function keep(e){
+    woven.set(e.idx, e);
+    for (const [k, v] of woven){
+      if (woven.size <= KEEP) break;
+      if (k === curIdx) continue;
+      v.all.forEach(t => t.dispose()); woven.delete(k);
+    }
   }
+  const soon = typeof requestIdleCallback === "function"
+    ? fn => requestIdleCallback(fn, { timeout:1500 }) : fn => setTimeout(fn, 200);
+  function step(){
+    if (!job) return;
+    const r = job.gen.next();
+    if (r.done){
+      const e = r.value; keep(e);
+      if (e.idx === curIdx) wear(e);
+      job = null;
+      if (!isMobile) soon(prefetch);
+      return;
+    }
+    if (r.value && r.value.idx === curIdx) wear(r.value);
+    setTimeout(step, 0);
+  }
+  function start(idx, background){
+    if (job && job.idx === idx){ job.bg = background && job.bg; return; }
+    job = { idx, bg:background, gen:weave(idx) };
+    setTimeout(step, 0);
+  }
+  function prefetch(){
+    if (job || document.hidden) return;
+    for (let k = 1; k <= MOODS.length; k++){
+      const i = (curIdx + k) % MOODS.length;
+      if (!woven.has(i)){ start(i, true); return; }
+    }
+  }
+
+  function applyMood(m, idx){
+    curIdx = idx;
+    Object.assign(tgt, { size:m.size, speed:m.speed, spread:m.spread, amp:m.amp, fsp:m.fsp, op:m.op });
+    layoutStrands(m);
+    const t = tuft(m.fur);
+    clouds.forEach(cl => { cl.material.map = t; });
+    const have = woven.get(idx);
+    if (have){ woven.delete(idx); woven.set(idx, have); wear(have); }   /* seen before: instant */
+    else start(idx, false);
+  }
+  window.setNicheMood = (i) => applyMood(MOODS[i % MOODS.length], i % MOODS.length);
+
+  /* first paint: the house cloth's plain weave right away, the stitched strands a moment later */
+  (function(){
+    const first = weave(12).next().value;
+    const black = document.createElement("canvas"); black.width = black.height = 1;
+    const blackT = tex(black);
+    strands.forEach((st, s) => {
+      st.mat.map = first.maps[s] || first.maps[(s + 1) % STRANDS] || first.all[0];
+      if (PLACE[s] !== undefined){ st.mat.emissiveMap = blackT; st.mat.emissive = new THREE.Color(0xffffff); st.mat.emissiveIntensity = 0; }
+      st.mat.needsUpdate = true;               /* the only shader build; swaps after this are uniform changes */
+    });
+    clouds.forEach(cl => { cl.material.map = tuft(MOODS[12].fur); cl.material.needsUpdate = true; });
+    Object.assign(tgt, { size:MOODS[12].size, speed:MOODS[12].speed, spread:MOODS[12].spread, amp:MOODS[12].amp, fsp:MOODS[12].fsp, op:MOODS[12].op });
+    layoutStrands(MOODS[12]);
+    soon(() => start(12, false));
+  })();
 
   let mx = 0, my = 0;
   addEventListener("pointermove", e => {
@@ -3975,10 +4060,13 @@ if (renderer && !reduceMotion){
   (function frame(now){
     requestAnimationFrame(frame);
     if (paused || now - lastDraw < FRAME_MS) return;
+    /* easing runs on time, not frames: a niche lands in about a second even on a slow phone */
+    const dt = Math.min(.1, lastDraw ? (now - lastDraw) / 1000 : .03);
     lastDraw = now;
+    const kM = 1 - Math.exp(-dt * 3.2), kP = 1 - Math.exp(-dt * 2.4), kS = 1 - Math.exp(-dt * .7);
     const t = (now - t0)/1000;
     /* ease toward the current niche mood */
-    for (const k in tgt) cur[k] += (tgt[k] - cur[k]) * .04;
+    for (const k in tgt) cur[k] += (tgt[k] - cur[k]) * kM;
 
     clouds.forEach((cl, ci) => {
       const a = cl.geometry.attributes.position.array;
@@ -4010,9 +4098,9 @@ if (renderer && !reduceMotion){
       }
       st.geo.attributes.position.needsUpdate = true;
       if (normalTick === 0) st.geo.computeVertexNormals();   /* lighting only needs a refresh now and then */
-      st.mat.opacity += (cur.op + (rows ? 0 : .06) - st.mat.opacity) * .05;
-      st.mesh.position.y += (st.yTgt - st.mesh.position.y) * .025;
-      st.mesh.rotation.z += (st.rotTgt - st.mesh.rotation.z) * .025;
+      st.mat.opacity += (cur.op + (rows ? 0 : .06) - st.mat.opacity) * kP;
+      st.mesh.position.y += (st.yTgt - st.mesh.position.y) * kP;
+      st.mesh.rotation.z += (st.rotTgt - st.mesh.rotation.z) * kP;
     });
 
     const gl = window.__mg || 0;
@@ -4020,8 +4108,8 @@ if (renderer && !reduceMotion){
       if (st.mat.emissiveMap) st.mat.emissiveIntensity = .10 + gl * 2.2;
     });
     normalTick = (normalTick + 1) % 3;
-    scene.rotation.y += (mx*.1 - scene.rotation.y)*.02;
-    scene.rotation.x += (my*.05 - scene.rotation.x)*.02;
+    scene.rotation.y += (mx*.1 - scene.rotation.y) * kS;
+    scene.rotation.x += (my*.05 - scene.rotation.x) * kS;
     renderer.render(scene, camera);
   })(performance.now());
 }
