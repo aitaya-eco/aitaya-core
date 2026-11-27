@@ -1410,6 +1410,118 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
 .tape-hint .th-x{flex:none;width:30px;height:30px;border-radius:50%;border:0;background:none;color:var(--t-muted);font-size:18px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.tape-hint{transition:none}.ticker .nb::before{transition:none}}
 @media (prefers-reduced-motion:reduce){.taya-bug.flare{animation:none}.taya-dock,#taya-ask,.tm{transition:none}}
+
+/* ================= full-screen demo reel ================= */
+/* The set keeps its channel picture until someone asks for full screen. Then the
+   same tube is handed to a phone: still bulged, still scanned, still dusty at the
+   corners. It must never become a clean modern video player. */
+.screen-full{
+  position:absolute;left:10px;bottom:10px;z-index:7;
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 12px 7px 9px;border:0;border-radius:var(--r-pill,999px);
+  font-family:var(--ui,inherit);font-size:11.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;
+  color:#F6F0DC;background:rgba(12,15,13,.62);
+  box-shadow:0 2px 10px rgba(0,0,0,.4), inset 0 1px 0 rgba(246,240,220,.22);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  cursor:pointer;transition:background .18s ease, transform .12s ease;
+}
+.screen-full:hover{background:rgba(12,15,13,.78)}
+.screen-full:active{transform:scale(.97)}
+.screen-full:focus-visible{outline:2px solid var(--gold,#DDC47F);outline-offset:2px}
+.screen-full svg{flex:none}
+
+.fullset{
+  position:fixed;inset:0;z-index:120;display:flex;
+  align-items:center;justify-content:center;
+  padding:max(14px,env(safe-area-inset-left,0px)) 14px;
+  background:radial-gradient(120% 90% at 50% 10%, rgba(26,18,11,.86), rgba(8,7,6,.96));
+  opacity:0;transition:opacity .32s ease;
+}
+.fullset.on{opacity:1}
+/* `display:flex` above beats the user-agent [hidden]{display:none}, so without
+   this the closed overlay sits invisibly over the whole page and eats every
+   click on the site. It looks completely fine in a screenshot. */
+.fullset[hidden]{display:none}
+.reel-room{display:flex;flex-direction:column;align-items:center;gap:14px;max-height:100%}
+.reel-phone{
+  position:relative;width:min(300px,76vw);aspect-ratio:9/19.2;
+  border-radius:34px;padding:9px;
+  background:linear-gradient(170deg,#3B2E22,#241C14 60%,#120E0A);
+  box-shadow:0 20px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(246,240,220,.14);
+  flex:0 1 auto;
+}
+.reel-screen{
+  position:relative;width:100%;height:100%;border-radius:27px;overflow:hidden;
+  background:#0C0F0D;
+}
+.reel-screen img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .34s ease;
+}
+.reel-screen img.on{opacity:1}
+/* the tube: convex highlight, barrel vignette, scanlines. same recipe as the set */
+.reel-screen::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:
+    radial-gradient(62% 34% at 30% 5%, rgba(255,232,186,.17), transparent 62%),
+    radial-gradient(135% 115% at 50% 48%, transparent 58%, rgba(10,6,3,.52) 98%),
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.14) 0 1px, transparent 1px 3px);
+}
+.reel-cap{
+  margin:0;min-height:1.4em;width:min(320px,80vw);
+  font-family:var(--ui,inherit);font-size:14.5px;line-height:1.4;font-weight:600;
+  color:#F6F0DC;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.6);
+  opacity:0;transition:opacity .3s ease;
+}
+.reel-cap.on{opacity:1}
+.reel-static{
+  position:absolute;inset:0;z-index:4;opacity:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+.reel-static.burst{animation:reel-burst .26s steps(3) 1}
+@keyframes reel-burst{0%{opacity:.5}100%{opacity:0}}
+
+.reel-bar{display:flex;align-items:center;gap:11px;width:min(300px,76vw)}
+.reel-bar button{
+  flex:none;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:#F6F0DC;background:rgba(246,240,220,.12);
+  transition:background .18s ease;
+}
+.reel-bar button:hover{background:rgba(246,240,220,.22)}
+.reel-bar button:focus-visible{outline:2px solid var(--gold,#DDC47F);outline-offset:2px}
+.reel-prog{flex:1;height:4px;border-radius:999px;background:rgba(246,240,220,.16);overflow:hidden}
+.reel-prog i{display:block;height:100%;width:0;background:var(--gold,#DDC47F);transform-origin:left}
+.reel-time{
+  flex:none;font-family:var(--ui,inherit);font-size:11px;font-weight:700;
+  letter-spacing:.06em;color:rgba(246,240,220,.66);font-variant-numeric:tabular-nums;
+}
+.reel-x{
+  position:absolute;top:max(12px,env(safe-area-inset-top,0px));right:14px;
+  width:38px;height:38px;border-radius:50%;border:0;cursor:pointer;z-index:6;
+  display:flex;align-items:center;justify-content:center;
+  color:#F6F0DC;background:rgba(246,240,220,.12);
+}
+.reel-x:hover{background:rgba(246,240,220,.22)}
+.reel-x:focus-visible{outline:2px solid var(--gold,#DDC47F);outline-offset:2px}
+.reel-note{
+  font-family:var(--ui,inherit);font-size:11.5px;letter-spacing:.04em;
+  color:rgba(246,240,220,.6);text-align:center;max-width:min(320px,80vw);
+}
+.reel-note b{color:var(--gold,#DDC47F);font-weight:700}
+/* reduced motion: the beats as a readable list, no auto-advance, no transitions */
+.reel-list{display:none;list-style:none;margin:0;padding:0;gap:8px;max-width:min(420px,86vw);overflow:auto}
+.reel-list li{display:flex;gap:10px;align-items:flex-start;color:rgba(246,240,220,.82);
+  font-family:var(--ui,inherit);font-size:12.5px;line-height:1.45}
+.reel-list img{width:52px;border-radius:6px;flex:none}
+.reel-list b{color:var(--gold,#DDC47F);font-variant-numeric:tabular-nums;flex:none;min-width:34px}
+@media (prefers-reduced-motion:reduce){
+  .fullset{transition:none}
+  .reel-screen img,.reel-cap{transition:none}
+  .reel-phone,.reel-bar{display:none}
+  .reel-list{display:flex;flex-direction:column}
+}
 </style>
 </head>
 <body>
@@ -1518,6 +1630,10 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
           <div class="taya-cap" id="taya-cap" aria-live="polite"></div>
           <div class="grime"></div>
           <div class="wipe-cue">Wipe the screen</div>
+          <button class="screen-full" id="screen-full" type="button" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5"/><path d="M16 3h5v5"/><path d="M8 21H3v-5"/><path d="M16 21h5v-5"/></svg>
+            <span>View full screen</span>
+          </button>
           <div class="tear" id="hero-tear"></div>
           <div class="static" id="channel-static"></div>
         </div>
@@ -1745,6 +1861,35 @@ body:not([data-fit="fur"])[data-role="tailor"] .act-build{--accent-ink:#8B3C1C}
     <small>&copy; 2026 Aitaya &middot; aitaya.ng &middot; Made for the culture</small>
   </div>
 </footer>
+
+<!-- ================= full-screen demo reel ================= -->
+<div class="fullset" id="fullset" role="dialog" aria-modal="true" aria-label="Aitaya, fifty seconds" hidden>
+  <button class="reel-x" id="reel-x" type="button" aria-label="Close the reel">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
+  <div class="reel-room">
+    <div class="reel-phone">
+      <div class="reel-screen">
+        <img id="reel-a" alt="" decoding="async">
+        <img id="reel-b" alt="" decoding="async">
+        <div class="reel-static" id="reel-static" aria-hidden="true"></div>
+      </div>
+    </div>
+    <p class="reel-cap" id="reel-cap" aria-live="polite"></p>
+    <div class="reel-bar">
+      <button id="reel-play" type="button" aria-label="Play">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="reel-prog"><i id="reel-fill"></i></div>
+      <div class="reel-time" id="reel-time">0:00</div>
+      <button id="reel-sound" type="button" aria-pressed="false" aria-label="Room sound, off">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 9.5a4 4 0 0 1 0 5"/></svg>
+      </button>
+    </div>
+    <p class="reel-note" id="reel-note">Fifty seconds, one evening, no music. Turn on <b>room sound</b> to hear the street.</p>
+    <ol class="reel-list" id="reel-list"></ol>
+  </div>
+</div>
 
 <script>
 /* ================= EDIT ME: community + socials =================
@@ -3518,6 +3663,224 @@ const io = new IntersectionObserver((es) => {
   }});
 }, { threshold:.15, rootMargin:"0px 0px -6% 0px" });
 document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+/* ================= the fifty second reel =================
+   Told from inside one room on one evening. You never see the person; you hear
+   their evening. Beats and sound design are in claude/demo-reel-storyboard.md.
+   No music by decision, so nothing here is loaded or licensed: every sound is a
+   few oscillators and filtered noise through the same AudioContext as the hum.
+   The reel never autoplays and never makes a sound unless room sound is on. */
+(function(){
+  const scr = document.getElementById("fullset");
+  const openBtn = document.getElementById("screen-full");
+  if (!scr || !openBtn) return;
+
+  const BEATS = [
+    { at:0,  dur:5, img:null,                          cap:"",                                          room:"gen"    },
+    { at:5,  dur:6, img:"look-11-closet-new.jpg",      cap:"Everything you own.",                        room:"hangers"},
+    { at:11, dur:6, img:"look-13-stylist-schedule.jpg",cap:"So you ask.",                                room:"nepa"   },
+    { at:17, dur:6, img:"look-12-planner.jpg",         cap:"34 degrees in Kano. Leave the coat.",        room:"wind"   },
+    { at:23, dur:6, img:"look-04-analyse-fit.jpg",     cap:"It already knows what you have.",            room:"cloth"  },
+    { at:29, dur:6, img:"look-09-squad.jpg",           cap:"The aso-ebi is settled by Thursday.",        room:"voices" },
+    { at:35, dur:6, img:"look-07-storefront.jpg",      cap:"Your tailor is paid when it arrives.",       room:"treadle"},
+    { at:41, dur:5, img:"look-10-reel.jpg",            cap:"Someone wears it. Someone votes.",           room:"drums"  },
+    { at:46, dur:4, img:"look-01-welcome.jpg",         cap:"Aitaya. I tire!",                            room:"door"   }
+  ];
+  const TOTAL = 50;
+
+  const a1 = document.getElementById("reel-a"), a2 = document.getElementById("reel-b");
+  const capEl = document.getElementById("reel-cap"), fill = document.getElementById("reel-fill");
+  const timeEl = document.getElementById("reel-time"), stat = document.getElementById("reel-static");
+  const playBtn = document.getElementById("reel-play"), sndBtn = document.getElementById("reel-sound");
+  const closeBtn = document.getElementById("reel-x"), listEl = document.getElementById("reel-list");
+  const noteEl = document.getElementById("reel-note");
+
+  let open = false, playing = false, t0 = 0, held = 0, raf = 0, beat = -1, front = a1;
+
+  /* ---- the room, synthesised ---- */
+  function noise(sec, shape){
+    const a = audio(), b = a.createBuffer(1, Math.max(1, Math.floor(a.sampleRate*sec)), a.sampleRate);
+    const d = b.getChannelData(0); let last = 0;
+    for (let i = 0; i < d.length; i++){
+      const w = Math.random()*2-1;
+      last = (last + .02*w) / 1.02;                      /* brown-ish, for air rather than hiss */
+      d[i] = (shape === "white" ? w : last*3.2);
+    }
+    return b;
+  }
+  function band(type, freq, q){ const f = audio().createBiquadFilter(); f.type = type; f.frequency.value = freq; if (q) f.Q.value = q; return f; }
+  function burst(sec, freq, q, peak, kind){
+    const a = audio(), t = a.currentTime;
+    const s = a.createBufferSource(); s.buffer = noise(sec, kind || "white");
+    const g = a.createGain();
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + .012);
+    g.gain.exponentialRampToValueAtTime(.0001, t + sec);
+    s.connect(band("bandpass", freq, q || 6)).connect(g).connect(a.destination); s.start();
+  }
+  function thump(freq, sec, peak){
+    const a = audio(), t = a.currentTime;
+    const o = a.createOscillator(); o.type = "sine";
+    o.frequency.setValueAtTime(freq, t); o.frequency.exponentialRampToValueAtTime(freq*.55, t + sec);
+    const g = a.createGain(); g.gain.setValueAtTime(peak, t); g.gain.exponentialRampToValueAtTime(.0001, t + sec);
+    o.connect(g).connect(a.destination); o.start(); o.stop(t + sec + .05);
+  }
+  let genNode = null, fanNode = null;
+  function generator(on){
+    const a = audio();
+    if (on && !genNode){
+      const o = a.createOscillator(); o.type = "sawtooth"; o.frequency.value = 48;
+      const g = a.createGain(); g.gain.value = 0;
+      o.connect(band("lowpass", 130)).connect(g).connect(a.destination); o.start();
+      genNode = { o, g };
+      g.gain.linearRampToValueAtTime(.022, a.currentTime + .8);
+      /* three fast dips: it coughs, then settles */
+      [0, .26, .52].forEach((d, i) => {
+        g.gain.setValueAtTime(.022, a.currentTime + d);
+        g.gain.linearRampToValueAtTime(.004, a.currentTime + d + .06 + i*.01);
+        g.gain.linearRampToValueAtTime(.022, a.currentTime + d + .16);
+      });
+    } else if (!on && genNode){
+      genNode.g.gain.linearRampToValueAtTime(0, a.currentTime + .5);
+      const dead = genNode; genNode = null;
+      setTimeout(() => { try { dead.o.stop(); } catch(e){} }, 900);
+    }
+  }
+  function fan(on){
+    const a = audio();
+    if (on && !fanNode){
+      const s = a.createBufferSource(); s.buffer = noise(4, "brown"); s.loop = true;
+      const f = band("bandpass", 420, 1.1); const g = a.createGain(); g.gain.value = 0;
+      s.connect(f).connect(g).connect(a.destination); s.start();
+      fanNode = { s, g, f };
+      g.gain.linearRampToValueAtTime(.016, a.currentTime + 1);
+    } else if (!on && fanNode){
+      /* NEPA goes: pitch and level fall together, which is what a fan actually does */
+      const t = a.currentTime;
+      fanNode.f.frequency.linearRampToValueAtTime(90, t + 1.6);
+      fanNode.g.gain.linearRampToValueAtTime(0, t + 1.6);
+      const dead = fanNode; fanNode = null;
+      setTimeout(() => { try { dead.s.stop(); } catch(e){} }, 2000);
+    }
+  }
+  const ROOM = {
+    gen(){ generator(true); fan(true); },
+    hangers(){ burst(.16, 2600, 9, .05); setTimeout(() => burst(.13, 2200, 9, .034), 190); },
+    nepa(){ generator(false); fan(false); setTimeout(() => burst(.05, 1800, 12, .03), 2600); },
+    wind(){ const a = audio(), s = a.createBufferSource(); s.buffer = noise(6, "brown");
+            const f = band("lowpass", 300); const g = a.createGain(); g.gain.value = .02;
+            const l = a.createOscillator(); l.frequency.value = .18;
+            const ld = a.createGain(); ld.gain.value = 140; l.connect(ld).connect(f.frequency); l.start();
+            s.connect(f).connect(g).connect(a.destination); s.start();
+            g.gain.setValueAtTime(.02, a.currentTime); g.gain.linearRampToValueAtTime(0, a.currentTime + 5.6);
+            setTimeout(() => { try { s.stop(); l.stop(); } catch(e){} }, 6000);
+            setTimeout(() => thump(70, 1.1, .012), 2400); },
+    cloth(){ burst(.35, 1500, 2.2, .028, "brown"); setTimeout(() => burst(.2, 900, 4, .022), 900); },
+    voices(){ for (let i = 0; i < 7; i++) setTimeout(() => burst(.3 + Math.random()*.4, 300 + Math.random()*400, 7, .018, "brown"), i*620 + Math.random()*180); },
+    treadle(){ for (let i = 0; i < 14; i++) setTimeout(() => { thump(120, .1, .02); if (i%3===0) burst(.05, 3200, 14, .012); }, i*320 + (i%2?26:0)); },
+    drums(){ const hit = (f, p) => { thump(f, .22, p); burst(.05, 2400, 10, p*.5); };
+             [[0,98],[380,98],[640,131],[900,98],[1280,98],[1540,165],[1800,131],[2200,98],[2560,98],[2820,131]]
+               .forEach(([d, f], i) => setTimeout(() => hit(f, .03 - i*.0012), d)); },
+    door(){ thump(80, .5, .05); [420, 760, 1180].forEach((d, i) => setTimeout(() => thump(110, .14, .022 - i*.006), d)); }
+  };
+  function stopRoom(){ generator(false); fan(false); }
+
+  /* ---- frames ---- */
+  function show(i){
+    const b = BEATS[i]; if (!b) return;
+    if (b.img){
+      const back = front === a1 ? a2 : a1;
+      back.src = lookSrc(b.img); back.alt = b.cap || "Aitaya app screen";
+      back.classList.add("on"); front.classList.remove("on"); front = back;
+    } else { a1.classList.remove("on"); a2.classList.remove("on"); }
+    capEl.textContent = b.cap;
+    capEl.classList.toggle("on", !!b.cap);
+    if (!reduceMotion){ stat.classList.remove("burst"); requestAnimationFrame(() => stat.classList.add("burst")); }
+    if (humOn && ROOM[b.room]) { try { ROOM[b.room](); } catch(e){} }
+  }
+  const mmss = (s) => "0:" + String(Math.max(0, Math.min(TOTAL, Math.floor(s)))).padStart(2, "0");
+  function frame(now){
+    if (!playing) { raf = 0; return; }
+    const el = held + (now - t0) / 1000;
+    if (el >= TOTAL){ fill.style.width = "100%"; timeEl.textContent = mmss(TOTAL); pause(); held = 0; return; }
+    fill.style.width = (el / TOTAL * 100).toFixed(2) + "%";
+    timeEl.textContent = mmss(el);
+    let i = 0; for (let k = 0; k < BEATS.length; k++) if (el >= BEATS[k].at) i = k;
+    if (i !== beat){ beat = i; show(i); }
+    raf = requestAnimationFrame(frame);
+  }
+  function play(){
+    if (playing || reduceMotion) return;
+    playing = true; t0 = performance.now();
+    playBtn.setAttribute("aria-label", "Pause");
+    playBtn.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+  function pause(){
+    if (!playing) return;
+    held += (performance.now() - t0) / 1000; playing = false;
+    if (raf){ cancelAnimationFrame(raf); raf = 0; }
+    playBtn.setAttribute("aria-label", "Play");
+    playBtn.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+    stopRoom();
+  }
+
+  /* ---- reduced motion: the beats as a list, nothing moves on its own ---- */
+  function buildList(){
+    if (listEl.children.length) return;
+    listEl.innerHTML = BEATS.filter(b => b.img).map(b =>
+      '<li><b>' + mmss(b.at) + '</b><img src="' + lookSrc(b.img) + '" alt="" loading="lazy" decoding="async"><span>' + b.cap + '</span></li>'
+    ).join("");
+  }
+
+  /* ---- open / close ---- */
+  let lastFocus = null;
+  function openReel(){
+    if (open) return;
+    open = true; lastFocus = document.activeElement;
+    scr.hidden = false; document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => scr.classList.add("on"));
+    held = 0; beat = -1; fill.style.width = "0%"; timeEl.textContent = "0:00";
+    sndBtn.setAttribute("aria-pressed", String(humOn));
+    sndBtn.setAttribute("aria-label", humOn ? "Room sound, on" : "Room sound, off");
+    noteEl.hidden = humOn;
+    if (reduceMotion){ buildList(); show(1); }
+    else { show(0); setTimeout(play, 420); }
+    closeBtn.focus();
+  }
+  function closeReel(){
+    if (!open) return;
+    open = false; pause(); held = 0; beat = -1;
+    scr.classList.remove("on");
+    document.body.style.overflow = "";
+    setTimeout(() => { if (!open) scr.hidden = true; }, 340);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  openBtn.addEventListener("click", openReel);
+  closeBtn.addEventListener("click", closeReel);
+  playBtn.addEventListener("click", () => playing ? pause() : play());
+  sndBtn.addEventListener("click", () => {
+    if (!humOn) humToggle();                 /* one switch for the whole set, not a second one */
+    else { humToggle(); stopRoom(); }
+    sndBtn.setAttribute("aria-pressed", String(humOn));
+    sndBtn.setAttribute("aria-label", humOn ? "Room sound, on" : "Room sound, off");
+    noteEl.hidden = humOn;
+  });
+  scr.addEventListener("click", (e) => { if (e.target === scr) closeReel(); });
+  addEventListener("keydown", (e) => {
+    if (!open) return;
+    if (e.key === "Escape"){ closeReel(); return; }
+    if (e.key === " " || e.key === "k"){ e.preventDefault(); playing ? pause() : play(); return; }
+    if (e.key === "Tab"){                    /* keep focus inside the dialog */
+      const f = [...scr.querySelectorAll("button")].filter(x => x.offsetParent !== null);
+      if (!f.length) return;
+      const i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0){ e.preventDefault(); f[f.length-1].focus(); }
+      else if (!e.shiftKey && i === f.length-1){ e.preventDefault(); f[0].focus(); }
+    }
+  });
+  document.addEventListener("visibilitychange", () => { if (document.hidden && playing) pause(); });
+})();
 </script>
 
 <!-- ================= ambient dust + signal ribbon · three.js ================= -->
