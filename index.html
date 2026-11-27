@@ -3139,9 +3139,17 @@ const testcard = document.getElementById("testcard");
 if (boot){
   const cardMs = reduceMotion ? 0 : (returning ? 520 : 1500);
   const bootMs = reduceMotion ? 0 : 1250;
-  const skip = () => { if (testcard) testcard.classList.add("gone"); boot.classList.add("off"); };
+  /* The cloth waits for this. Parsing three.js is the single heaviest thing the
+     page does, and doing it while the test card and the beam are on screen puts
+     it right on top of the one animation nobody can scroll past. */
+  const introClear = () => {
+    if (window.__introDone) return;
+    window.__introDone = true;
+    dispatchEvent(new Event("aitaya:intro-done"));
+  };
+  const skip = () => { if (testcard) testcard.classList.add("gone"); boot.classList.add("off"); introClear(); };
   if (testcard) setTimeout(() => testcard.classList.add("gone"), cardMs);
-  setTimeout(() => boot.classList.add("off"), cardMs + bootMs);
+  setTimeout(() => { boot.classList.add("off"); introClear(); }, cardMs + bootMs);
   addEventListener("pointerdown", skip, { once:true });
   /* the set greets a returning viewer differently */
   setTimeout(() => {
@@ -3353,14 +3361,21 @@ addEventListener("keydown", e => { if (e.key === "Escape") greenroom.classList.r
 /* ---------- closing credits ---------- */
 const creditsEl = document.getElementById("credits");
 if (creditsEl){
-  const rollCredits = () => creditsEl.classList.add("in");
+  let rolled = false;
+  const rollCredits = () => { if (rolled) return; rolled = true; creditsEl.classList.add("in"); removeEventListener("scroll", nearBottom); };
   const cio = new IntersectionObserver((es) => {
     es.forEach(e => { if (e.isIntersecting){ rollCredits(); cio.disconnect(); } });
   }, { threshold:.1, rootMargin:"0px 0px -40px 0px" });
   cio.observe(creditsEl);
-  addEventListener("scroll", () => {
-    if (scrollY + innerHeight > document.body.scrollHeight - 120) rollCredits();
-  }, { passive:true });
+  /* Backstop for the observer. document.body.scrollHeight is a forced layout
+     read, and reading it on every scroll event flushed layout mid-scroll, which
+     is the most expensive thing that happened while scrolling fast. The height
+     is cached, refreshed on resize, and the listener takes itself off the moment
+     the credits roll. */
+  let pageH = document.body.scrollHeight;
+  addEventListener("resize", () => { pageH = document.body.scrollHeight; }, { passive:true });
+  function nearBottom(){ if (scrollY + innerHeight > pageH - 120) rollCredits(); }
+  addEventListener("scroll", nearBottom, { passive:true });
 }
 const crtOff = document.getElementById("crt-off");
 document.getElementById("pwr").addEventListener("click", () => {
@@ -3532,8 +3547,19 @@ document.querySelectorAll(".rv").forEach(el => io.observe(el));
 const THREE = await new Promise((resolve) => {
   const pull = () => import("./assets/vendor/three.module.js").then(resolve, () => {});
   const soon = () => (window.requestIdleCallback || ((f) => setTimeout(f, 200)))(pull, { timeout: 2000 });
-  if (document.readyState === "complete") soon();
-  else addEventListener("load", soon, { once: true });
+  /* Wait for the test card and the beam to finish before spending ~1.2MB of
+     parse on the main thread: on a first visit that intro runs for 2.75s, and
+     loading on `load` alone landed the parse in the middle of it. Capped so a
+     page with no boot overlay, or a skipped intro, still gets its cloth. */
+  const afterIntro = () => {
+    if (window.__introDone) return soon();
+    let fired = false;
+    const go = () => { if (!fired){ fired = true; soon(); } };
+    addEventListener("aitaya:intro-done", go, { once: true });
+    setTimeout(go, 4000);
+  };
+  if (document.readyState === "complete") afterIntro();
+  else addEventListener("load", afterIntro, { once: true });
 });
 
 const canvas = document.getElementById("dust");
